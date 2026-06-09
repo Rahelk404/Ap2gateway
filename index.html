@@ -1,9 +1,850 @@
+```html
 <!DOCTYPE html>
-<html>
+<html lang="en" class="scroll-smooth">
 <head>
-  <title>My News Site</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AP2 Gateway | Agent Payments Protocol</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" id="meta-description" content="AP2 Gateway is the independent educational hub for the Agent Payments Protocol (AP2), autonomous transactions, AI commerce, and developer resources.">
+    <meta name="keywords" content="AP2, Agent Payments Protocol, AI Commerce, Autonomous Payments, Web3, Machine to Machine payments, Developer SDK">
+    <meta name="author" content="AP2 Gateway">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" id="og-title" content="AP2 Gateway | Agent Payments Protocol">
+    <meta property="og:description" id="og-description" content="The knowledge hub for Agent Payments Protocol, AI Commerce, and autonomous financial systems.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ap2gateway.store">
+    <meta property="og:image" content="https://ap2gateway.store/og-image.jpg">
+    
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AP2 Gateway | Agent Payments Protocol">
+    <meta name="twitter:description" content="The knowledge hub for Agent Payments Protocol, AI Commerce, and autonomous financial systems.">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS (via CDN for standalone requirement) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        brand: {
+                            bg: '#050816',
+                            card: '#111827',
+                            primary: '#00E5FF',
+                            secondary: '#0EA5E9',
+                            accent: '#22C55E',
+                            text: '#F9FAFB',
+                            muted: '#9CA3AF'
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.6s ease-out forwards',
+                        'slide-up': 'slideUp 0.8s ease-out forwards',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS for specialized effects -->
+    <style>
+        body {
+            background-color: #050816;
+            color: #F9FAFB;
+            overflow-x: hidden;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #00E5FF, #0EA5E9);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .prose-custom p { margin-bottom: 1.5rem; line-height: 1.8; color: #D1D5DB; }
+        .prose-custom h2 { font-size: 1.875rem; font-weight: 700; color: #fff; margin-top: 2rem; margin-bottom: 1rem; }
+        .prose-custom h3 { font-size: 1.5rem; font-weight: 600; color: #fff; margin-top: 1.5rem; margin-bottom: 0.75rem; }
+        .prose-custom ul { list-style-type: disc; padding-left: 1.5rem; margin-bottom: 1.5rem; color: #D1D5DB; }
+        .prose-custom li { margin-bottom: 0.5rem; }
+        .prose-custom strong { color: #fff; }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #050816; }
+        ::-webkit-scrollbar-thumb { background: #1f2937; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #374151; }
+    </style>
 </head>
-<body>
-  <h1>Coming Soon</h1>
+<body class="antialiased selection:bg-brand-primary/30 selection:text-white">
+
+    <!-- Sticky Navigation -->
+    <nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-300 bg-transparent">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex items-center cursor-pointer group" onclick="navigate('home')">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-primary to-brand-secondary p-[2px] mr-3">
+                        <div class="w-full h-full bg-brand-bg rounded-[10px] flex items-center justify-center group-hover:bg-transparent transition-colors duration-300">
+                            <span id="logo-icon"></span>
+                        </div>
+                    </div>
+                    <span class="text-xl font-bold tracking-tight text-white">AP2 Gateway</span>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-1 lg:space-x-4">
+                    <button onclick="navigate('what-is-ap2')" class="px-3 py-2 text-sm text-gray-300 hover:text-white transition-colors">Protocol</button>
+                    <button onclick="navigate('developer')" class="px-3 py-2 text-sm text-gray-300 hover:text-white transition-colors">Developers</button>
+                    <button onclick="navigate('ecosystem')" class="px-3 py-2 text-sm text-gray-300 hover:text-white transition-colors">Ecosystem</button>
+                    <button onclick="navigate('docs')" class="px-3 py-2 text-sm text-gray-300 hover:text-white transition-colors">Resources</button>
+                    <div class="h-6 w-px bg-white/20 mx-2"></div>
+                    <button onclick="navigate('developer')" class="bg-brand-primary text-slate-900 hover:bg-brand-secondary hover:shadow-[0_0_15px_rgba(0,229,255,0.4)] px-5 py-2 rounded-lg text-sm font-medium transition-all duration-300">Start Building</button>
+                </div>
+
+                <!-- Mobile Menu Toggle -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-white p-2 focus:outline-none" aria-label="Toggle menu">
+                        <span id="menu-icon"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-brand-card/95 backdrop-blur-xl border-b border-white/10 px-4 py-6 shadow-2xl absolute w-full left-0 top-20 flex-col space-y-2">
+            <button onclick="navigate('home')" class="text-left px-4 py-3 text-lg border-b border-white/5 text-gray-300 active:bg-white/10 rounded w-full">Home</button>
+            <button onclick="navigate('what-is-ap2')" class="text-left px-4 py-3 text-lg border-b border-white/5 text-gray-300 active:bg-white/10 rounded w-full">What is AP2</button>
+            <button onclick="navigate('architecture')" class="text-left px-4 py-3 text-lg border-b border-white/5 text-gray-300 active:bg-white/10 rounded w-full">Architecture</button>
+            <button onclick="navigate('developer')" class="text-left px-4 py-3 text-lg border-b border-white/5 text-gray-300 active:bg-white/10 rounded w-full">Developer Hub</button>
+            <button onclick="navigate('ecosystem')" class="text-left px-4 py-3 text-lg border-b border-white/5 text-gray-300 active:bg-white/10 rounded w-full">Ecosystem</button>
+            <button onclick="navigate('security')" class="text-left px-4 py-3 text-lg border-b border-white/5 text-gray-300 active:bg-white/10 rounded w-full">Security</button>
+            <button onclick="navigate('faq')" class="text-left px-4 py-3 text-lg border-b border-white/5 text-gray-300 active:bg-white/10 rounded w-full">FAQ</button>
+            <button onclick="navigate('developer')" class="mt-4 bg-brand-primary text-slate-900 px-4 py-3 rounded text-center font-bold w-full">Start Building</button>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main id="app-content" class="min-h-screen pt-20">
+        <!-- Content will be injected here by JavaScript -->
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/10 bg-[#02040a] pt-16 pb-8 mt-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8 mb-12">
+                <div class="col-span-1 md:col-span-2 lg:col-span-2">
+                    <div class="flex items-center mb-6 cursor-pointer" onclick="navigate('home')">
+                        <span id="footer-logo-icon" class="mr-2"></span>
+                        <span class="text-2xl font-bold text-white">AP2 Gateway</span>
+                    </div>
+                    <p class="text-brand-muted text-sm mb-6 max-w-sm leading-relaxed">
+                        The independent knowledge hub for Agent Payments Protocol. Learn, build, and explore the future of autonomous machine-to-machine commerce.
+                    </p>
+                    <div class="p-4 bg-white/5 border border-white/10 rounded-lg text-xs text-brand-muted leading-relaxed italic border-l-4 border-l-brand-primary">
+                        AP2 Gateway is an independent educational and community resource. We are not affiliated with Google, AP2 Protocol maintainers, or any official organization.
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4 text-white">Platform</h4>
+                    <ul class="space-y-3 text-sm text-brand-muted">
+                        <li><button onclick="navigate('what-is-ap2')" class="hover:text-brand-primary transition-colors text-left">What is AP2</button></li>
+                        <li><button onclick="navigate('architecture')" class="hover:text-brand-primary transition-colors text-left">Architecture</button></li>
+                        <li><button onclick="navigate('ecosystem')" class="hover:text-brand-primary transition-colors text-left">Ecosystem Directory</button></li>
+                        <li><button onclick="navigate('security')" class="hover:text-brand-primary transition-colors text-left">Security Center</button></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold mb-4 text-white">Resources</h4>
+                    <ul class="space-y-3 text-sm text-brand-muted">
+                        <li><button onclick="navigate('developer')" class="hover:text-brand-primary transition-colors text-left">Developer Hub</button></li>
+                        <li><button onclick="navigate('docs')" class="hover:text-brand-primary transition-colors text-left">Documentation</button></li>
+                        <li><button onclick="navigate('faq')" class="hover:text-brand-primary transition-colors text-left">FAQ</button></li>
+                        <li><button onclick="navigate('glossary')" class="hover:text-brand-primary transition-colors text-left">Glossary</button></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold mb-4 text-white">Company</h4>
+                    <ul class="space-y-3 text-sm text-brand-muted">
+                        <li><button onclick="navigate('about')" class="hover:text-brand-primary transition-colors text-left">About Us</button></li>
+                        <li><button onclick="navigate('blog')" class="hover:text-brand-primary transition-colors text-left">Blog & News</button></li>
+                        <li><button onclick="navigate('contact')" class="hover:text-brand-primary transition-colors text-left">Contact</button></li>
+                        <li><button onclick="navigate('legal')" class="hover:text-brand-primary transition-colors text-left">Legal & Privacy</button></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
+                <p>&copy; <span id="current-year"></span> AP2 Gateway. An independent resource.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="hover:text-white transition-colors">Twitter</a>
+                    <a href="#" class="hover:text-white transition-colors">GitHub</a>
+                    <a href="#" class="hover:text-white transition-colors">Discord</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // --- 1. SVG ICONS LIBRARY (Replacing Lucide) ---
+        const icons = {
+            zap: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-brand-primary"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>`,
+            zapLarge: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-brand-primary"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>`,
+            menu: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>`,
+            x: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>`,
+            arrowRight: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>`,
+            arrowUpRight: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>`,
+            code: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>`,
+            terminal: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>`,
+            shield: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>`,
+            globe: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>`,
+            server: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>`,
+            fileText: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>`,
+            checkCircle: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-brand-accent mt-1 shrink-0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>`,
+            cpu: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>`,
+            lock: `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>`,
+            users: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>`,
+            wallet: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"></path><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"></path><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"></path></svg>`,
+            building: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><path d="M9 22v-4h6v4"></path><path d="M8 6h.01"></path><path d="M16 6h.01"></path><path d="M12 6h.01"></path><path d="M12 10h.01"></path><path d="M12 14h.01"></path><path d="M16 10h.01"></path><path d="M16 14h.01"></path><path d="M8 10h.01"></path><path d="M8 14h.01"></path></svg>`,
+            database: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>`,
+            arrowDown: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>`,
+            bookMarked: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path><polyline points="10 2 10 10 13 7 16 10 16 2"></polyline></svg>`
+        };
+
+        // Inject initial icons
+        document.getElementById('logo-icon').innerHTML = icons.zap;
+        document.getElementById('footer-logo-icon').innerHTML = icons.zapLarge;
+        document.getElementById('menu-icon').innerHTML = icons.menu;
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // --- 2. DATA CONSTANTS ---
+        const FAQS = [
+            { q: "What is the Agent Payments Protocol (AP2)?", a: "AP2 is an open standard designed to facilitate secure, autonomous financial transactions between AI agents, merchants, and traditional payment infrastructure. It provides the trust layer necessary for machines to buy and sell from each other." },
+            { q: "How is AP2 different from traditional payment gateways?", a: "Traditional gateways assume a human is at the keyboard authorizing the transaction. AP2 is built for machine-to-machine (M2M) commerce, utilizing cryptographic proofs, pre-authorized consent parameters, and agent identity verification without requiring real-time human intervention." },
+            { q: "Is AP2 affiliated with Google?", a: "No. AP2 Gateway is an independent educational resource. We are not affiliated with Google or any official AP2 standard maintaining body." },
+            { q: "How do users control what their AI agents spend?", a: "Users issue 'Consent Contracts' to their wallets. These define strict parameters: maximum spend per transaction, daily limits, approved merchant categories, and expiration dates. Agents cannot exceed these programmatic limits." },
+            { q: "What happens if an AI agent goes rogue?", a: "The AP2 Protocol operates on a Zero-Trust architecture. Even if an agent hallucinates or is compromised, the transaction will be rejected by the Wallet/Protocol layer if it violates the user's cryptographic Consent parameters." },
+            { q: "Can merchants integrate AP2 easily?", a: "Yes. AP2 is designed to sit on top of existing payment rails (Stripe, PayPal, Crypto). Merchants integrate the AP2 SDK to accept 'Payment Intents' generated by Agents, which are then routed to their standard processors." },
+            { q: "What blockchains does AP2 use?", a: "AP2 is chain-agnostic. While it utilizes cryptographic principles common in Web3, the actual settlement can occur on traditional fiat rails, Layer 2 networks, or stablecoin protocols." }
+        ];
+
+        const GLOSSARY_TERMS = [
+            { term: "Agent", def: "An autonomous AI software entity capable of making decisions and executing transactions on behalf of a user." },
+            { term: "Authentication", def: "The process of verifying the cryptographic identity of an Agent or Merchant on the AP2 network." },
+            { term: "Authorization", def: "The cryptographic proof that a user has granted an Agent permission to spend a specific amount." },
+            { term: "Consent", def: "The user-defined parameters and limits within which an Agent is legally and programmatically allowed to operate." },
+            { term: "Escrow", def: "A smart contract or protocol layer where funds are held temporarily until AP2 transaction verification is complete." },
+            { term: "Merchant", def: "An entity receiving funds in exchange for goods, services, or API access provided to an Agent." },
+            { term: "Payment Intent", def: "A structured, cryptographically signed request created by an Agent to initiate a transaction." },
+            { term: "Protocol", def: "The standardized set of rules (AP2) governing communication, security, and settlement." },
+            { term: "Risk Model", def: "Algorithmic evaluation of a transaction's parameters to prevent fraud, unauthorized spending, or agent hallucination." },
+            { term: "Settlement", def: "The final movement of funds from the user's funding source to the merchant's account." },
+            { term: "Trust Layer", def: "The combination of identity, cryptography, and risk modeling that makes autonomous transactions safe." },
+            { term: "Verification", def: "The step where the network confirms the Payment Intent matches the user's active Consent." },
+            { term: "Wallet", def: "A digital application holding user funds and cryptographic keys, interfacing directly with the AP2 protocol." }
+        ];
+
+        const DEV_CODE_EXAMPLE = `// 1. Initialize AP2 Client
+<span class="text-pink-500">import</span> { AP2Client, Intent } <span class="text-pink-500">from</span> <span class="text-yellow-300">'@ap2/protocol'</span>;
+
+<span class="text-pink-500">const</span> client = <span class="text-pink-500">new</span> AP2Client({ 
+  agentId: <span class="text-yellow-300">'did:ap2:agent:8f9a2...'</span>,
+  privateKey: process.env.AGENT_KEY,
+  environment: <span class="text-yellow-300">'production'</span> 
+});
+
+<span class="text-gray-500">// 2. Construct Payment Intent</span>
+<span class="text-pink-500">const</span> intent = <span class="text-pink-500">await</span> client.createIntent({
+  merchantId: <span class="text-yellow-300">'did:ap2:merchant:4b2c1...'</span>,
+  amount: 15.50,
+  currency: <span class="text-yellow-300">'USD'</span>,
+  description: <span class="text-yellow-300">'API Compute Credits - Tier 2'</span>,
+  userConsentToken: <span class="text-yellow-300">'ctx_99x3b...'</span> 
+});
+
+<span class="text-gray-500">// 3. Execute Transaction</span>
+<span class="text-pink-500">try</span> {
+  <span class="text-pink-500">const</span> receipt = <span class="text-pink-500">await</span> client.execute(intent);
+  <span class="text-cyan-400">console.log</span>(<span class="text-yellow-300">'Transaction Successful:'</span>, receipt.id);
+} <span class="text-pink-500">catch</span> (error) {
+  <span class="text-cyan-400">console.error</span>(<span class="text-yellow-300">'Agent exceeded authorized limits.'</span>);
+}`;
+
+        // --- 3. UI COMPONENTS (Functions returning HTML strings) ---
+        const PageHeader = (title, subtitle) => `
+            <div class="pt-32 pb-16 text-center px-4 max-w-4xl mx-auto animate-fade-in">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6 gradient-text">${title}</h1>
+                <p class="text-xl text-brand-muted">${subtitle}</p>
+            </div>
+        `;
+
+        const Card = (content, className="") => `
+            <div class="bg-brand-card p-6 rounded-2xl border border-gray-800 hover:border-brand-primary/50 transition-all duration-300 group ${className}">
+                ${content}
+            </div>
+        `;
+
+        const Button = (text, primary, onclick, icon="") => `
+            <button onclick="${onclick}" class="px-6 py-3 rounded-lg font-medium transition-all duration-300 flex items-center justify-center gap-2 ${primary ? 'bg-brand-primary text-slate-900 hover:bg-brand-secondary hover:shadow-[0_0_20px_rgba(0,229,255,0.4)]' : 'bg-white/10 text-white hover:bg-white/20 border border-white/10'}">
+                ${text} ${icon}
+            </button>
+        `;
+
+        // --- 4. VIEWS (Pages) ---
+        const views = {
+            home: () => `
+                <div class="animate-fade-in">
+                    <!-- Hero Section -->
+                    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+                        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-[500px] bg-brand-primary opacity-20 blur-[150px] rounded-full pointer-events-none"></div>
+                        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center animate-slide-up">
+                            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-secondary/10 text-brand-primary text-sm font-medium border border-brand-primary/20 mb-8">
+                                ${icons.zap} The Independent Resource for AI-Powered Payments
+                            </div>
+                            <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-8">
+                                Understanding the Future of <br class="hidden md:block"/>
+                                <span class="gradient-text">Agent Commerce</span>
+                            </h1>
+                            <p class="mt-4 max-w-2xl text-xl mx-auto text-brand-muted mb-10">
+                                Explore AP2, Agentic Payments, Security Models, Developer Resources, and Industry Insights. The comprehensive guide to autonomous transactions.
+                            </p>
+                            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                                ${Button('Learn AP2', true, "navigate('what-is-ap2')", icons.arrowRight)}
+                                ${Button('Developer Hub', false, "navigate('developer')", icons.code)}
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Stats Section -->
+                    <section class="py-12 border-y border-white/10 bg-white/[0.02]">
+                        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                                <div><div class="text-3xl font-bold text-brand-primary mb-2">$10B+</div><div class="text-sm uppercase tracking-wider text-brand-muted">Projected Volume</div></div>
+                                <div><div class="text-3xl font-bold text-brand-primary mb-2">500ms</div><div class="text-sm uppercase tracking-wider text-brand-muted">Avg Finality</div></div>
+                                <div><div class="text-3xl font-bold text-brand-primary mb-2">10k+</div><div class="text-sm uppercase tracking-wider text-brand-muted">Developer Active</div></div>
+                                <div><div class="text-3xl font-bold text-brand-primary mb-2">50+</div><div class="text-sm uppercase tracking-wider text-brand-muted">Agent Platforms</div></div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Features Grid -->
+                    <section class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div class="text-center mb-16">
+                            <h2 class="text-3xl font-bold mb-4">Explore the AP2 Ecosystem</h2>
+                            <p class="text-brand-muted">Everything you need to understand and build the trust layer for AI.</p>
+                        </div>
+                        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            <div onclick="navigate('what-is-ap2')" class="bg-brand-card p-8 rounded-2xl border border-gray-800 hover:border-brand-secondary cursor-pointer transition-all group">
+                                <div class="w-12 h-12 rounded-lg bg-brand-secondary/10 text-brand-secondary flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">${icons.bookMarked}</div>
+                                <h3 class="text-xl font-semibold mb-3">What is AP2</h3>
+                                <p class="text-brand-muted mb-4">Understand the core concepts of the Agent Payments Protocol.</p>
+                                <div class="flex items-center text-sm font-medium text-brand-primary">Explore <span class="ml-1">${icons.arrowUpRight}</span></div>
+                            </div>
+                            <div onclick="navigate('developer')" class="bg-brand-card p-8 rounded-2xl border border-gray-800 hover:border-brand-secondary cursor-pointer transition-all group">
+                                <div class="w-12 h-12 rounded-lg bg-brand-secondary/10 text-brand-secondary flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">${icons.terminal}</div>
+                                <h3 class="text-xl font-semibold mb-3">Developer Resources</h3>
+                                <p class="text-brand-muted mb-4">SDKs, API references, and quick start guides for builders.</p>
+                                <div class="flex items-center text-sm font-medium text-brand-primary">Explore <span class="ml-1">${icons.arrowUpRight}</span></div>
+                            </div>
+                            <div onclick="navigate('security')" class="bg-brand-card p-8 rounded-2xl border border-gray-800 hover:border-brand-secondary cursor-pointer transition-all group">
+                                <div class="w-12 h-12 rounded-lg bg-brand-secondary/10 text-brand-secondary flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">${icons.shield}</div>
+                                <h3 class="text-xl font-semibold mb-3">Security Center</h3>
+                                <p class="text-brand-muted mb-4">Deep dive into trust models, consent, and authorization.</p>
+                                <div class="flex items-center text-sm font-medium text-brand-primary">Explore <span class="ml-1">${icons.arrowUpRight}</span></div>
+                            </div>
+                            <div onclick="navigate('ecosystem')" class="bg-brand-card p-8 rounded-2xl border border-gray-800 hover:border-brand-secondary cursor-pointer transition-all group">
+                                <div class="w-12 h-12 rounded-lg bg-brand-secondary/10 text-brand-secondary flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">${icons.globe}</div>
+                                <h3 class="text-xl font-semibold mb-3">Ecosystem Directory</h3>
+                                <p class="text-brand-muted mb-4">Discover wallets, merchants, and agent platforms.</p>
+                                <div class="flex items-center text-sm font-medium text-brand-primary">Explore <span class="ml-1">${icons.arrowUpRight}</span></div>
+                            </div>
+                            <div onclick="navigate('architecture')" class="bg-brand-card p-8 rounded-2xl border border-gray-800 hover:border-brand-secondary cursor-pointer transition-all group">
+                                <div class="w-12 h-12 rounded-lg bg-brand-secondary/10 text-brand-secondary flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">${icons.server}</div>
+                                <h3 class="text-xl font-semibold mb-3">Architecture</h3>
+                                <p class="text-brand-muted mb-4">Visual flow of how autonomous transactions settle.</p>
+                                <div class="flex items-center text-sm font-medium text-brand-primary">Explore <span class="ml-1">${icons.arrowUpRight}</span></div>
+                            </div>
+                            <div onclick="navigate('docs')" class="bg-brand-card p-8 rounded-2xl border border-gray-800 hover:border-brand-secondary cursor-pointer transition-all group">
+                                <div class="w-12 h-12 rounded-lg bg-brand-secondary/10 text-brand-secondary flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">${icons.fileText}</div>
+                                <h3 class="text-xl font-semibold mb-3">Documentation</h3>
+                                <p class="text-brand-muted mb-4">Comprehensive technical specifications and guides.</p>
+                                <div class="flex items-center text-sm font-medium text-brand-primary">Explore <span class="ml-1">${icons.arrowUpRight}</span></div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Why AP2 Matters -->
+                    <section class="py-24 bg-[#0a0f25]">
+                        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-16 items-center">
+                            <div>
+                                <h2 class="text-3xl md:text-4xl font-bold mb-6">Why AP2 Matters</h2>
+                                <p class="text-brand-muted text-lg mb-8 leading-relaxed">
+                                    As AI agents transition from assistants to autonomous actors, they need the ability to transact. Traditional payment networks assume human authorization. AP2 introduces a cryptographic trust layer designed exclusively for machine-to-machine commerce.
+                                </p>
+                                <ul class="space-y-4">
+                                    <li class="flex items-start gap-3">${icons.checkCircle} <span class="text-white">Agent Commerce: Enabling AI to purchase APIs, compute, and services.</span></li>
+                                    <li class="flex items-start gap-3">${icons.checkCircle} <span class="text-white">Autonomous Purchasing: Delegated financial authority with strict boundaries.</span></li>
+                                    <li class="flex items-start gap-3">${icons.checkCircle} <span class="text-white">Payment Verification: Cryptographic proof of identity and intent.</span></li>
+                                    <li class="flex items-start gap-3">${icons.checkCircle} <span class="text-white">User Authorization: Smart consent contracts protecting user funds.</span></li>
+                                </ul>
+                            </div>
+                            <div class="relative">
+                                <div class="absolute inset-0 bg-gradient-to-r from-brand-primary/20 to-brand-secondary/20 blur-3xl rounded-full"></div>
+                                <div class="glass-panel p-8 rounded-2xl relative">
+                                    <div class="flex items-center justify-between mb-6 pb-6 border-b border-white/10">
+                                        <div class="flex items-center gap-3"><span class="text-brand-primary">${icons.cpu}</span> <span class="font-medium text-white">AI Agent Task</span></div>
+                                        <span class="text-xs bg-green-500/20 text-green-400 px-2 py-1 rounded">Active</span>
+                                    </div>
+                                    <div class="space-y-4 font-mono text-sm">
+                                        <div class="flex justify-between text-gray-400"><span>> Resolving dependency...</span> <span>Success</span></div>
+                                        <div class="flex justify-between text-gray-400"><span>> API Rate limit reached.</span> <span class="text-yellow-400">Warning</span></div>
+                                        <div class="flex justify-between"><span>> Initiating AP2 intent upgrade...</span> <span class="text-brand-primary">Pending</span></div>
+                                        <div class="bg-black/50 p-4 rounded mt-4 text-brand-primary">
+                                            [AP2 Protocol] Verifying User Consent... <br/>
+                                            [AP2 Protocol] Wallet Authorized.<br/>
+                                            [AP2 Protocol] Payment 0.05 USDC Settled.
+                                        </div>
+                                        <div class="flex justify-between text-gray-400"><span>> Resuming task...</span> <span class="text-green-400">Running</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            `,
+
+            'what-is-ap2': () => `
+                <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-24 animate-fade-in">
+                    ${PageHeader("What is Agent Payments Protocol?", "The foundational layer for autonomous machine-to-machine commerce.")}
+                    <div class="space-y-12 text-lg text-gray-300 leading-relaxed prose-custom">
+                        <section>
+                            <h2>The Problem AP2 Solves</h2>
+                            <p>Currently, AI agents are trapped behind the screen. An LLM can write code, but it cannot independently pay for the server to host that code. It can research flights, but it cannot purchase the ticket without a human pulling out a credit card.</p>
+                            <p>Traditional payment rails (credit cards, ACH) rely on <strong>human-in-the-loop authorization</strong> (passwords, 2FA, CVV codes). They possess no native mechanism to understand if software is authorized to spend on a human's behalf. AP2 bridges this gap.</p>
+                        </section>
+
+                        <div class="grid md:grid-cols-2 gap-6 my-8 not-prose">
+                            ${Card(`
+                                <div class="text-brand-secondary mb-4">${icons.lock}</div>
+                                <h3 class="text-xl font-bold text-white mb-2">Trust in AI Commerce</h3>
+                                <p class="text-sm text-gray-400">AP2 establishes verifiable trust. Merchants know they will be paid, and users know their agents cannot spend beyond predefined cryptographic limits.</p>
+                            `)}
+                            ${Card(`
+                                <div class="text-brand-primary mb-4 w-8 h-8">${icons.zapLarge}</div>
+                                <h3 class="text-xl font-bold text-white mb-2">Frictionless Execution</h3>
+                                <p class="text-sm text-gray-400">By utilizing pre-signed consent models, agents execute hundreds of micro-transactions seamlessly, unlocking true autonomous utility.</p>
+                            `)}
+                        </div>
+
+                        <section>
+                            <h2>How It Works (Simplified)</h2>
+                            <ol class="list-decimal pl-6 space-y-4">
+                                <li><strong>Consent Creation:</strong> A user utilizes their Digital Wallet to create a "Consent Contract". (e.g., "My DevAgent can spend up to $50/day on AWS and Vercel").</li>
+                                <li><strong>Delegation:</strong> The wallet issues a cryptographic token to the AI Agent representing this consent.</li>
+                                <li><strong>Intent & Negotiation:</strong> When the Agent needs to buy an API call, it generates a "Payment Intent" and presents its Consent Token to the Merchant.</li>
+                                <li><strong>Verification:</strong> The Merchant queries the AP2 Protocol. The protocol verifies the signature, checks limits, and ensures the agent hasn't gone rogue.</li>
+                                <li><strong>Settlement:</strong> Once verified, the protocol triggers settlement on the underlying financial rails.</li>
+                            </ol>
+                        </section>
+                    </div>
+                </div>
+            `,
+
+            architecture: () => `
+                <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-24 animate-fade-in">
+                    ${PageHeader("AP2 Architecture", "Deep dive into the flow of autonomous transactions.")}
+                    
+                    <div class="bg-[#0a0f25] border border-white/10 rounded-3xl p-8 mb-16 overflow-x-auto">
+                        <div class="min-w-[800px] flex flex-col items-center">
+                            <div class="flex justify-between w-full mb-8">
+                                <div class="text-center w-48">
+                                    <div class="w-16 h-16 bg-blue-500/20 rounded-full flex items-center justify-center mx-auto mb-3 border border-blue-500/50 text-blue-400">${icons.users}</div>
+                                    <h4 class="font-bold">Human User</h4>
+                                    <p class="text-xs text-gray-400 mt-2">Defines Rules & Limits</p>
+                                </div>
+                                <div class="flex items-center text-gray-600">${icons.arrowRight}</div>
+                                <div class="text-center w-48">
+                                    <div class="w-16 h-16 bg-purple-500/20 rounded-full flex items-center justify-center mx-auto mb-3 border border-purple-500/50 text-purple-400">${icons.wallet}</div>
+                                    <h4 class="font-bold">AP2 Wallet</h4>
+                                    <p class="text-xs text-gray-400 mt-2">Holds Funds & Signs Consent</p>
+                                </div>
+                            </div>
+
+                            <div class="flex flex-col items-center mb-8 relative w-full">
+                                <div class="text-gray-600 mb-4">${icons.arrowDown}</div>
+                                <div class="w-full max-w-2xl bg-white/5 border border-white/10 p-6 rounded-xl relative mx-auto">
+                                    <div class="absolute -top-3 left-6 bg-[#050816] px-2 text-xs text-brand-primary font-mono">AP2 Protocol Layer</div>
+                                    <div class="flex justify-around text-center">
+                                        <div><div class="mx-auto mb-2 text-gray-400 flex justify-center">${icons.lock}</div><div class="text-sm">Authentication</div></div>
+                                        <div><div class="mx-auto mb-2 text-gray-400 flex justify-center">${icons.shield}</div><div class="text-sm">Risk Engine</div></div>
+                                        <div><div class="mx-auto mb-2 text-gray-400 flex justify-center">${icons.fileText}</div><div class="text-sm">Verification</div></div>
+                                    </div>
+                                </div>
+                                <div class="text-gray-600 mt-4">${icons.arrowDown}</div>
+                            </div>
+
+                            <div class="flex justify-between w-full">
+                                <div class="text-center w-48">
+                                    <div class="w-16 h-16 bg-cyan-500/20 rounded-full flex items-center justify-center mx-auto mb-3 border border-cyan-500/50 text-cyan-400">${icons.cpu}</div>
+                                    <h4 class="font-bold">AI Agent</h4>
+                                    <p class="text-xs text-gray-400 mt-2">Executes Task & Intent</p>
+                                </div>
+                                <div class="flex items-center text-gray-600">${icons.arrowRight}</div>
+                                <div class="text-center w-48">
+                                    <div class="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-3 border border-green-500/50 text-green-400">${icons.building}</div>
+                                    <h4 class="font-bold">Merchant</h4>
+                                    <p class="text-xs text-gray-400 mt-2">Provides API/Service</p>
+                                </div>
+                                <div class="flex items-center text-gray-600">${icons.arrowRight}</div>
+                                <div class="text-center w-48">
+                                    <div class="w-16 h-16 bg-yellow-500/20 rounded-full flex items-center justify-center mx-auto mb-3 border border-yellow-500/50 text-yellow-400">${icons.database}</div>
+                                    <h4 class="font-bold">Settlement Layer</h4>
+                                    <p class="text-xs text-gray-400 mt-2">Stripe / Crypto / Bank</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-8">
+                        ${Card(`<h3 class="text-xl font-bold mb-2 text-brand-primary">Authentication</h3><p class="text-gray-400">Every entity (Agent, Merchant, Wallet) possesses a Decentralized Identifier (DID). Protocol ensures mutual TLS and signature verification before any data is exchanged.</p>`)}
+                        ${Card(`<h3 class="text-xl font-bold mb-2 text-brand-primary">Consent Management</h3><p class="text-gray-400">The core innovation. Users cryptographically sign parameter-bound policies. "Agent X can spend $Y at Merchant Z before Time T". These are evaluated synchronously.</p>`)}
+                        ${Card(`<h3 class="text-xl font-bold mb-2 text-brand-primary">Payment Intent</h3><p class="text-gray-400">A standardized payload containing order details, required scopes, and the agent's cryptographic proof of authority.</p>`)}
+                        ${Card(`<h3 class="text-xl font-bold mb-2 text-brand-primary">Risk Controls & Audit</h3><p class="text-gray-400">Real-time anomaly detection. If an agent normally buys $1/day of compute and suddenly requests a $500 transfer, the Risk Layer flags or blocks it.</p>`)}
+                    </div>
+                </div>
+            `,
+
+            developer: () => `
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24 animate-fade-in">
+                    ${PageHeader("Developer Hub", "SDKs, APIs, and tools to build autonomous payment flows.")}
+                    
+                    <div class="grid lg:grid-cols-3 gap-8">
+                        <div class="lg:col-span-1 space-y-4">
+                            <div class="bg-white/5 border border-white/10 rounded-xl p-4">
+                                <h3 class="text-lg font-bold mb-4 px-2 text-brand-primary">Quick Links</h3>
+                                <ul class="space-y-2">
+                                    ${['Getting Started', 'Installation Guide', 'Authentication', 'Creating Intents', 'Handling Webhooks', 'Testing & Sandbox'].map(link => `
+                                        <li class="px-2 py-2 hover:bg-white/5 rounded cursor-pointer text-gray-300 hover:text-white transition-colors">${link}</li>
+                                    `).join('')}
+                                </ul>
+                            </div>
+                            ${Card(`
+                                <h3 class="font-bold mb-2 text-white">AP2 SDKs</h3>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full text-xs border border-blue-500/30">Node.js</span>
+                                    <span class="px-3 py-1 bg-yellow-500/20 text-yellow-400 rounded-full text-xs border border-yellow-500/30">Python</span>
+                                    <span class="px-3 py-1 bg-blue-400/20 text-blue-300 rounded-full text-xs border border-blue-400/30">Go</span>
+                                    <span class="px-3 py-1 bg-red-500/20 text-red-400 rounded-full text-xs border border-red-500/30">Rust</span>
+                                </div>
+                            `)}
+                        </div>
+
+                        <div class="lg:col-span-2 space-y-8">
+                            <div>
+                                <h2 class="text-2xl font-bold mb-4 text-white">Quick Start: Node.js</h2>
+                                <p class="text-gray-400 mb-4">Install the official AP2 protocol package via npm or yarn.</p>
+                                <div class="bg-black border border-gray-800 rounded-lg p-4 font-mono text-sm text-gray-300 mb-6">
+                                    $ npm install @ap2/protocol @ap2/client
+                                </div>
+                                
+                                <h3 class="text-xl font-bold mb-4 text-white">Agent Implementation Example</h3>
+                                <p class="text-gray-400 mb-4">This example demonstrates how an AI agent uses its delegated keys to purchase API credits on behalf of a user.</p>
+                                <div class="bg-[#0d1117] border border-gray-800 rounded-lg overflow-hidden">
+                                    <div class="flex items-center px-4 py-2 bg-black/50 border-b border-gray-800 gap-2">
+                                        <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                                        <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                        <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                                        <span class="ml-4 text-xs text-gray-500 font-mono">agent-purchase.ts</span>
+                                    </div>
+                                    <pre class="p-4 overflow-x-auto text-sm font-mono leading-relaxed bg-[#0d1117] m-0"><code>${DEV_CODE_EXAMPLE}</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `,
+
+            security: () => `
+                <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-24 animate-fade-in">
+                    ${PageHeader("Security Center", "Trust models and threat mitigation in AP2.")}
+                    <div class="grid md:grid-cols-2 gap-8">
+                        ${Card(`<div class="flex gap-4"><div class="text-brand-primary mt-1 w-8">${icons.shield}</div><div><h3 class="text-xl font-bold mb-2 text-white">Zero-Trust Architecture</h3><p class="text-gray-400 text-sm leading-relaxed">AP2 assumes all networks and actors are hostile. Every intent requires active cryptographic verification against the user's root consent contract stored on the ledger/wallet.</p></div></div>`)}
+                        ${Card(`<div class="flex gap-4"><div class="text-brand-primary mt-1 w-8">${icons.lock}</div><div><h3 class="text-xl font-bold mb-2 text-white">Time-Bound Revocation</h3><p class="text-gray-400 text-sm leading-relaxed">Consent tokens utilize short-lived TTLs (Time-To-Live). Users can instantly revoke agent access globally, instantly invalidating any pending payment intents.</p></div></div>`)}
+                        ${Card(`<div class="flex gap-4"><div class="text-brand-primary mt-1 w-8">${icons.checkCircle}</div><div><h3 class="text-xl font-bold mb-2 text-white">Anomaly Detection</h3><p class="text-gray-400 text-sm leading-relaxed">Merchants and AP2 Gateways run real-time heuristics. If a coding agent attempts to buy physical goods instead of compute, the risk engine halts settlement.</p></div></div>`)}
+                        ${Card(`<div class="flex gap-4"><div class="text-brand-primary mt-1 w-8">${icons.database}</div><div><h3 class="text-xl font-bold mb-2 text-white">Immutable Audit Logs</h3><p class="text-gray-400 text-sm leading-relaxed">Every authorization, intent generation, and settlement is hashed and logged. This ensures complete transparency for user accounting and dispute resolution.</p></div></div>`)}
+                    </div>
+                </div>
+            `,
+
+            faq: () => `
+                <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-24 animate-fade-in">
+                    ${PageHeader("Frequently Asked Questions", "Comprehensive answers about the AP2 ecosystem.")}
+                    <div class="space-y-4">
+                        ${FAQS.map(faq => `
+                            <div class="bg-white/5 border border-white/10 p-6 rounded-xl">
+                                <h3 class="text-lg font-bold text-white mb-2 flex items-start gap-3">
+                                    <span class="text-brand-primary">Q.</span> ${faq.q}
+                                </h3>
+                                <p class="text-gray-400 pl-7 leading-relaxed">${faq.a}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `,
+
+            glossary: () => `
+                <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-24 animate-fade-in">
+                    ${PageHeader("AP2 Glossary", "Definitions for common terms in Agent Commerce.")}
+                    <div class="grid md:grid-cols-2 gap-x-12 gap-y-6">
+                        ${GLOSSARY_TERMS.sort((a, b) => a.term.localeCompare(b.term)).map(item => `
+                            <div class="border-b border-white/10 pb-4">
+                                <h3 class="text-xl font-bold text-brand-primary mb-2">${item.term}</h3>
+                                <p class="text-gray-300 text-sm">${item.def}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `,
+
+            contact: () => `
+                <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 pb-24 animate-fade-in">
+                    ${PageHeader("Contact Us", "Get in touch with the AP2 Gateway team.")}
+                    ${Card(`
+                        <form class="space-y-4" onsubmit="event.preventDefault(); alert('Thank you for contacting AP2 Gateway. This is a demo form.');">
+                            <div>
+                                <label class="block text-sm font-medium mb-1 text-white">Name</label>
+                                <input type="text" class="w-full bg-black/50 border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:border-brand-primary" placeholder="Your Name" required />
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-1 text-white">Email</label>
+                                <input type="email" class="w-full bg-black/50 border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:border-brand-primary" placeholder="you@company.com" required />
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-1 text-white">Inquiry Type</label>
+                                <select class="w-full bg-black/50 border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:border-brand-primary">
+                                    <option>General Support</option>
+                                    <option>Partnership</option>
+                                    <option>Media</option>
+                                    <option>Directory Submission</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-1 text-white">Message</label>
+                                <textarea rows="4" class="w-full bg-black/50 border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:border-brand-primary" placeholder="How can we help?" required></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-brand-primary text-slate-900 hover:bg-brand-secondary hover:shadow-[0_0_20px_rgba(0,229,255,0.4)] px-6 py-3 rounded-lg font-medium transition-all duration-300">Send Message</button>
+                        </form>
+                    `)}
+                </div>
+            `,
+
+            about: () => `
+                <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pb-24 animate-fade-in prose-custom">
+                    ${PageHeader("About AP2 Gateway", "")}
+                    <p>AP2 Gateway is an independent educational platform dedicated to the Agent Payments Protocol (AP2) and the broader ecosystem of Agent Commerce. Our mission is to accelerate the transition to a machine-to-machine economy by providing high-quality, accessible resources for developers, merchants, and researchers.</p>
+                    <h3 class="text-xl font-bold text-white mt-8 mb-4">Editorial Policy</h3>
+                    <p>We maintain strict editorial independence. We do not accept paid placements for directory listings. All technical explanations are sourced from open standards and community consensus.</p>
+                    <h3 class="text-xl font-bold text-white mt-8 mb-4">Vision</h3>
+                    <p>We believe the next trillion dollars in digital commerce will be executed without human intervention. By educating the market on secure frameworks like AP2, we ensure this future is transparent, safe, and efficient.</p>
+                </div>
+            `,
+
+            legal: () => `
+                <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pb-24 animate-fade-in prose-custom">
+                    ${PageHeader("Legal & Policies", "")}
+                    <h2 class="text-2xl font-bold text-white">Disclaimer</h2>
+                    <p class="p-4 bg-white/5 border-l-4 border-brand-primary italic">AP2 Gateway is an independent educational and community resource. We are not affiliated with Google, AP2 Protocol maintainers, or any official organization.</p>
+                    <h2 class="text-2xl font-bold text-white mt-8">Terms of Service</h2>
+                    <p>By using AP2 Gateway, you agree to use our educational resources for lawful purposes only. We provide code snippets and documentation "as is" without warranty.</p>
+                    <h2 class="text-2xl font-bold text-white mt-8">Privacy Policy</h2>
+                    <p>We respect your privacy. We do not use intrusive tracking. Newsletter subscriptions require only an email address, which is never sold to third parties.</p>
+                    <h2 class="text-2xl font-bold text-white mt-8">Cookie Policy</h2>
+                    <p>We use essential cookies strictly for site functionality. No third-party marketing cookies are deployed.</p>
+                </div>
+            `,
+
+            // Shared logic for Grid Pages
+            ecosystem: () => renderGridPage(
+                "AP2 Ecosystem Directory", 
+                "Explore the network of agents, wallets, and merchants.", 
+                icons.building,
+                [
+                    { title: "Agentic AI", desc: "Enterprise autonomous agents for cloud infrastructure management.", badge: "Agent Platform" },
+                    { title: "PaySwarm", desc: "Merchant acquiring layer optimized for micro-transactions.", badge: "Payment Provider" },
+                    { title: "VaultNode", desc: "Non-custodial smart contract wallet supporting AP2 consents.", badge: "Wallet" },
+                    { title: "ComputeMarket", desc: "Decentralized marketplace selling API and GPU cycles to agents.", badge: "Merchant" },
+                    { title: "TrustVerify", desc: "Real-time risk scoring and anomaly detection oracle.", badge: "Infrastructure" },
+                    { title: "DevAgents", desc: "Autonomous coding assistants that manage their own GitHub and CI/CD billing.", badge: "Agent Platform" }
+                ]
+            ),
+            docs: () => renderGridPage(
+                "Knowledge Center", 
+                "Documentation, tutorials, and deep-dives.", 
+                icons.bookMarked,
+                [
+                    { title: "Introduction to AP2", desc: "A beginner's guide to the protocol.", badge: "Beginner", cta: "Start Course" },
+                    { title: "Agent Commerce Fundamentals", desc: "Economics of M2M markets.", badge: "Intermediate", cta: "Read Doc" },
+                    { title: "Merchant Integration", desc: "Step-by-step guide to accepting AP2 intents.", badge: "Advanced", cta: "View Guide" },
+                    { title: "Protocol Specifications", desc: "RFC-style technical breakdown.", badge: "Reference", cta: "View Spec" },
+                    { title: "Wallet SDK Architecture", desc: "Building compatible client apps.", badge: "Reference", cta: "View Guide" },
+                    { title: "Risk Modeling", desc: "Preventing autonomous fraud.", badge: "Advanced", cta: "Start Course" }
+                ]
+            ),
+            blog: () => renderGridPage(
+                "Insights & News", 
+                "Latest updates on Agent Commerce and Protocol Development.", 
+                icons.fileText,
+                [
+                    { title: "The Rise of AI Agents in B2B Commerce", desc: "How autonomous software is shifting procurement.", badge: "Article" },
+                    { title: "AP2 Core Update v1.2", desc: "New consent primitives and enhanced cryptography.", badge: "Release Notes" },
+                    { title: "Trust and Security in Agent Payments", desc: "A whitepaper on threat vectors.", badge: "Whitepaper" },
+                    { title: "Merchant Adoption Survey 2026", desc: "Statistics on M2M payment readiness.", badge: "Report" },
+                    { title: "Future of Autonomous Transactions", desc: "Op-ed by industry leaders.", badge: "Blog" },
+                    { title: "Video: Building your first AP2 Agent", desc: "Workshop recording from DevCon.", badge: "Video" }
+                ]
+            )
+        };
+
+        // Helper to render grid-style pages
+        function renderGridPage(title, subtitle, iconHtml, items) {
+            let cardsHtml = items.map(item => `
+                <div class="bg-brand-card p-6 rounded-2xl border border-gray-800 hover:border-brand-primary/50 transition-all duration-300 group cursor-pointer">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-3 rounded-lg bg-white/5 group-hover:bg-brand-primary/10 text-white group-hover:text-brand-primary transition-colors">
+                            ${iconHtml}
+                        </div>
+                        ${item.badge ? `<span class="text-xs px-2 py-1 bg-white/10 rounded-full text-gray-300">${item.badge}</span>` : ''}
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-white">${item.title}</h3>
+                    <p class="text-gray-400 text-sm mb-4">${item.desc}</p>
+                    <div class="text-brand-secondary text-sm font-medium flex items-center opacity-0 group-hover:opacity-100 transition-opacity">
+                        ${item.cta || 'Read More'} <span class="ml-1">${icons.arrowRight}</span>
+                    </div>
+                </div>
+            `).join('');
+
+            return `
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24 animate-fade-in">
+                    ${PageHeader(title, subtitle)}
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        ${cardsHtml}
+                    </div>
+                </div>
+            `;
+        }
+
+
+        // --- 5. APPLICATION STATE & ROUTING ---
+        let currentPage = 'home';
+        let isMenuOpen = false;
+        
+        const contentContainer = document.getElementById('app-content');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIconContainer = document.getElementById('menu-icon');
+        const navbar = document.getElementById('navbar');
+
+        function updateSEO(pageId) {
+            const titles = {
+                'home': 'The Knowledge Hub for Agent Payments',
+                'what-is-ap2': 'What is AP2 Protocol',
+                'architecture': 'AP2 Architecture',
+                'developer': 'Developer Hub',
+                'security': 'Security Center',
+                'ecosystem': 'Ecosystem Directory',
+                'docs': 'Documentation',
+                'faq': 'Frequently Asked Questions',
+                'glossary': 'Glossary of Terms',
+                'about': 'About Us',
+                'contact': 'Contact Us',
+                'legal': 'Legal & Policies',
+                'blog': 'Blog & News'
+            };
+            
+            const title = `${titles[pageId] || 'Knowledge Hub'} | AP2 Gateway`;
+            document.title = title;
+            document.getElementById('og-title').content = title;
+        }
+
+        function navigate(pageId) {
+            if (!views[pageId]) pageId = 'home';
+            
+            // Inject content
+            contentContainer.innerHTML = views[pageId]();
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+            
+            // Close menu if open
+            if (isMenuOpen) toggleMobileMenu();
+            
+            // Update metadata
+            updateSEO(pageId);
+            currentPage = pageId;
+        }
+
+        function toggleMobileMenu() {
+            isMenuOpen = !isMenuOpen;
+            if (isMenuOpen) {
+                mobileMenu.classList.remove('hidden');
+                menuIconContainer.innerHTML = icons.x;
+            } else {
+                mobileMenu.classList.add('hidden');
+                menuIconContainer.innerHTML = icons.menu;
+            }
+        }
+
+        // --- 6. EVENT LISTENERS & INIT ---
+        document.getElementById('mobile-menu-btn').addEventListener('click', toggleMobileMenu);
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 10) {
+                navbar.classList.add('bg-[#050816]/90', 'backdrop-blur-md', 'border-b', 'border-white/10');
+                navbar.classList.remove('bg-transparent');
+            } else {
+                navbar.classList.add('bg-transparent');
+                navbar.classList.remove('bg-[#050816]/90', 'backdrop-blur-md', 'border-b', 'border-white/10');
+            }
+        });
+
+        // Initialize App
+        navigate('home');
+
+    </script>
 </body>
 </html>
+
+```
