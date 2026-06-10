@@ -1,0 +1,3005 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AP2 Gateway — The Knowledge Hub for Agent Payments Protocol</title>
+<meta name="description" content="AP2 Gateway is the independent educational platform for Agent Payments Protocol. Learn AP2, AI Commerce, Autonomous Transactions, and Agentic Payment Infrastructure.">
+<meta property="og:title" content="AP2 Gateway — The Knowledge Hub for Agent Payments Protocol">
+<meta property="og:description" content="Independent educational resource for AP2, AI Commerce, and Autonomous Payments.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ap2gateway.store">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AP2 Gateway">
+<meta name="twitter:description" content="The independent resource for Agent Payments Protocol and AI Commerce.">
+<link rel="canonical" href="https://ap2gateway.store">
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@300;400;500;600&display=swap');
+
+  :root {
+    --primary: #00E5FF;
+    --secondary: #0EA5E9;
+    --bg: #050816;
+    --bg2: #080f1f;
+    --card: #111827;
+    --card2: #0d1424;
+    --accent: #22C55E;
+    --text: #F9FAFB;
+    --muted: #8B93A7;
+    --border: rgba(0,229,255,0.12);
+    --glow: rgba(0,229,255,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NOISE TEXTURE OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  /* NAVBAR */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    padding: 0 2rem;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(5, 8, 22, 0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    transition: all 0.3s;
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .nav-logo-icon {
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 500;
+    color: #000;
+  }
+
+  .nav-logo-text {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.02em;
+  }
+
+  .nav-logo-text span { color: var(--primary); }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    padding: 6px 12px;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 6px;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+
+  .nav-links a:hover { color: var(--text); background: rgba(255,255,255,0.05); }
+  .nav-links a.active { color: var(--primary); }
+
+  .nav-cta {
+    padding: 8px 18px;
+    background: var(--primary);
+    color: #000 !important;
+    border-radius: 8px;
+    font-weight: 600 !important;
+    font-size: 13px !important;
+    transition: all 0.2s !important;
+  }
+
+  .nav-cta:hover { background: #fff !important; transform: translateY(-1px); box-shadow: 0 4px 20px rgba(0,229,255,0.3); }
+
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+  }
+
+  .hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--text);
+    border-radius: 2px;
+    transition: all 0.3s;
+  }
+
+  /* PAGES */
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 80px 2rem 4rem;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% -10%, rgba(0,229,255,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 80% 80%, rgba(14,165,233,0.07) 0%, transparent 50%);
+  }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,229,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,229,255,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 20%, transparent 100%);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 820px;
+    text-align: center;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    background: rgba(0,229,255,0.08);
+    border: 1px solid rgba(0,229,255,0.2);
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--primary);
+    margin-bottom: 2rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .hero-badge::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: pulse-dot 2s infinite;
+  }
+
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.4); }
+  }
+
+  .hero h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(2.4rem, 6vw, 4.2rem);
+    font-weight: 700;
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 .gradient-text {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, #818cf8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero p {
+    font-size: 1.1rem;
+    color: var(--muted);
+    max-width: 560px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.7;
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 3.5rem;
+  }
+
+  .btn-primary {
+    padding: 12px 28px;
+    background: var(--primary);
+    color: #000;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s;
+    font-family: 'Space Grotesk', sans-serif;
+  }
+
+  .btn-primary:hover {
+    background: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0,229,255,0.35);
+  }
+
+  .btn-secondary {
+    padding: 12px 28px;
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.25s;
+    font-family: 'Space Grotesk', sans-serif;
+    backdrop-filter: blur(8px);
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    background: rgba(0,229,255,0.05);
+    transform: translateY(-2px);
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 3rem;
+    justify-content: center;
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--border);
+    flex-wrap: wrap;
+  }
+
+  .hero-stat {}
+  .hero-stat .num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary);
+    letter-spacing: -0.02em;
+  }
+  .hero-stat .label {
+    font-size: 12px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  /* SECTION COMMONS */
+  section {
+    padding: 5rem 2rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .section-inner { max-width: 1200px; margin: 0 auto; }
+
+  .section-label {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+
+  .section-sub {
+    font-size: 1rem;
+    color: var(--muted);
+    max-width: 520px;
+    line-height: 1.7;
+  }
+
+  .section-header { margin-bottom: 3rem; }
+
+  /* CARDS */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.75rem;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0,229,255,0.3), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .card:hover { border-color: rgba(0,229,255,0.25); transform: translateY(-3px); box-shadow: 0 16px 40px rgba(0,0,0,0.4); }
+  .card:hover::before { opacity: 1; }
+
+  .card-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.25rem;
+    font-size: 20px;
+  }
+
+  .card h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+    letter-spacing: -0.01em;
+  }
+
+  .card p {
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  /* GRID LAYOUTS */
+  .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; }
+  .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; }
+  .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 1.5rem; }
+
+  /* FEATURES SECTION */
+  .features-section { background: var(--bg2); }
+
+  .feature-card .card-icon { background: rgba(0,229,255,0.08); }
+  .feature-card .card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: var(--primary);
+    margin-top: 1rem;
+    cursor: pointer;
+    font-weight: 500;
+    transition: gap 0.2s;
+    background: none;
+    border: none;
+    font-family: inherit;
+  }
+  .feature-card .card-link:hover { gap: 10px; }
+
+  /* WHY AP2 */
+  .why-section {}
+  .why-item {
+    display: flex;
+    gap: 1.25rem;
+    padding: 1.5rem;
+    background: var(--card2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+  }
+
+  .why-icon {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: rgba(34,197,94,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+  }
+
+  .why-text h4 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    margin-bottom: 0.35rem;
+    font-size: 0.95rem;
+  }
+
+  .why-text p { font-size: 0.85rem; color: var(--muted); }
+
+  /* STATS BAR */
+  .stats-section {
+    background: linear-gradient(135deg, rgba(0,229,255,0.06) 0%, rgba(14,165,233,0.04) 100%);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 2rem;
+    text-align: center;
+  }
+
+  .stat-item .num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--primary);
+    letter-spacing: -0.03em;
+  }
+
+  .stat-item .label { font-size: 13px; color: var(--muted); margin-top: 4px; }
+
+  /* ARTICLES */
+  .article-card {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .article-card .article-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--primary);
+    background: rgba(0,229,255,0.08);
+    border: 1px solid rgba(0,229,255,0.15);
+    padding: 3px 8px;
+    border-radius: 4px;
+    margin-bottom: 0.75rem;
+    width: fit-content;
+  }
+
+  .article-card h3 { font-size: 1rem; margin-bottom: 0.5rem; font-family: 'Space Grotesk', sans-serif; font-weight: 600; }
+  .article-card p { font-size: 0.84rem; color: var(--muted); line-height: 1.6; flex: 1; }
+  .article-card .article-meta { font-size: 12px; color: var(--muted); margin-top: 1rem; display: flex; gap: 12px; align-items: center; }
+  .article-card .article-meta span::before { content: '·'; margin-right: 12px; }
+  .article-card .article-meta span:first-child::before { content: ''; margin: 0; }
+
+  /* CODE BLOCKS */
+  .code-block {
+    background: #0a0f1e;
+    border: 1px solid rgba(0,229,255,0.1);
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 1.5rem 0;
+  }
+
+  .code-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px;
+    background: rgba(255,255,255,0.03);
+    border-bottom: 1px solid rgba(0,229,255,0.08);
+  }
+
+  .code-lang {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--primary);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .code-dots { display: flex; gap: 6px; }
+  .code-dots span { width: 10px; height: 10px; border-radius: 50%; }
+  .code-dots .r { background: #ff5f57; }
+  .code-dots .y { background: #ffbd2e; }
+  .code-dots .g { background: #28c840; }
+
+  pre {
+    padding: 1.25rem 1.5rem;
+    overflow-x: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    line-height: 1.7;
+    color: #c9d1d9;
+  }
+
+  .token-keyword { color: #ff7b72; }
+  .token-string { color: #a5d6ff; }
+  .token-comment { color: #8b949e; font-style: italic; }
+  .token-function { color: #d2a8ff; }
+  .token-number { color: #79c0ff; }
+  .token-property { color: #ffa657; }
+
+  /* ARCHITECTURE DIAGRAM */
+  .arch-diagram {
+    background: var(--card2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2.5rem;
+    text-align: center;
+  }
+
+  .arch-flow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+
+  .arch-node {
+    padding: 14px 32px;
+    border-radius: 10px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border: 1px solid;
+    min-width: 200px;
+    text-align: center;
+    position: relative;
+  }
+
+  .arch-node.user { background: rgba(34,197,94,0.1); border-color: rgba(34,197,94,0.3); color: #22C55E; }
+  .arch-node.agent { background: rgba(0,229,255,0.08); border-color: rgba(0,229,255,0.25); color: var(--primary); }
+  .arch-node.protocol { background: rgba(14,165,233,0.15); border-color: rgba(14,165,233,0.4); color: #38bdf8; }
+  .arch-node.merchant { background: rgba(168,85,247,0.1); border-color: rgba(168,85,247,0.3); color: #a855f7; }
+  .arch-node.payment { background: rgba(251,191,36,0.08); border-color: rgba(251,191,36,0.25); color: #fbbf24; }
+
+  .arch-arrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 4px 0;
+    color: var(--muted);
+    font-size: 18px;
+  }
+
+  .arch-arrow-label {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  /* NEWSLETTER */
+  .newsletter-section {
+    background: linear-gradient(135deg, rgba(0,229,255,0.06), rgba(14,165,233,0.04));
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .newsletter-form {
+    display: flex;
+    gap: 12px;
+    max-width: 480px;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .newsletter-form input {
+    flex: 1;
+    min-width: 240px;
+    padding: 12px 16px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--text);
+    font-size: 14px;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .newsletter-form input:focus { border-color: var(--primary); }
+  .newsletter-form input::placeholder { color: var(--muted); }
+
+  /* TAGS */
+  .tag {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .tag-blue { background: rgba(0,229,255,0.1); color: var(--primary); }
+  .tag-green { background: rgba(34,197,94,0.1); color: var(--accent); }
+  .tag-purple { background: rgba(168,85,247,0.1); color: #a855f7; }
+  .tag-yellow { background: rgba(251,191,36,0.1); color: #fbbf24; }
+
+  /* GLOSSARY */
+  .glossary-letter {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--primary);
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 1rem;
+    margin-top: 2rem;
+  }
+
+  .glossary-term {
+    padding: 1rem 1.25rem;
+    background: var(--card2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 0.6rem;
+  }
+
+  .glossary-term h4 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.3rem;
+    font-size: 0.95rem;
+  }
+
+  .glossary-term p { font-size: 0.86rem; color: var(--muted); }
+
+  /* SIDEBAR LAYOUT */
+  .sidebar-layout {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+
+  .sidebar {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.5rem;
+    position: sticky;
+    top: 80px;
+  }
+
+  .sidebar-title {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin-bottom: 1rem;
+  }
+
+  .sidebar-link {
+    display: block;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-bottom: 2px;
+  }
+
+  .sidebar-link:hover, .sidebar-link.active { color: var(--primary); background: rgba(0,229,255,0.06); }
+
+  .doc-section { scroll-margin-top: 80px; }
+  .doc-section h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+  }
+  .doc-section h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin: 1.5rem 0 0.75rem;
+    color: var(--text);
+  }
+  .doc-section p { color: var(--muted); line-height: 1.75; margin-bottom: 1rem; font-size: 0.93rem; }
+  .doc-section ul { list-style: none; padding: 0; margin: 0.75rem 0 1rem; }
+  .doc-section ul li {
+    padding: 6px 0 6px 1.25rem;
+    font-size: 0.9rem;
+    color: var(--muted);
+    position: relative;
+  }
+  .doc-section ul li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--primary);
+    font-size: 12px;
+  }
+
+  /* FAQ */
+  .faq-item {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 0.75rem;
+    transition: border-color 0.2s;
+  }
+
+  .faq-item:hover { border-color: rgba(0,229,255,0.25); }
+
+  .faq-q {
+    padding: 1.1rem 1.25rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 500;
+    font-size: 0.93rem;
+    background: var(--card2);
+  }
+
+  .faq-q .icon {
+    color: var(--primary);
+    font-size: 18px;
+    flex-shrink: 0;
+    margin-left: 1rem;
+    transition: transform 0.2s;
+  }
+
+  .faq-a {
+    display: none;
+    padding: 1rem 1.25rem;
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.7;
+    background: var(--card);
+    border-top: 1px solid var(--border);
+  }
+
+  .faq-item.open .faq-a { display: block; }
+  .faq-item.open .faq-q .icon { transform: rotate(45deg); }
+
+  /* FOOTER */
+  footer {
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    padding: 4rem 2rem 2rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
+  }
+
+  .footer-brand p {
+    font-size: 0.875rem;
+    color: var(--muted);
+    line-height: 1.7;
+    margin: 1rem 0;
+    max-width: 280px;
+  }
+
+  .footer-col h4 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text);
+    margin-bottom: 1rem;
+  }
+
+  .footer-col a {
+    display: block;
+    font-size: 13px;
+    color: var(--muted);
+    padding: 4px 0;
+    cursor: pointer;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-col a:hover { color: var(--primary); }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .footer-disclaimer {
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.6;
+    max-width: 600px;
+    background: rgba(255,100,0,0.05);
+    border: 1px solid rgba(255,100,0,0.1);
+    border-radius: 8px;
+    padding: 10px 14px;
+  }
+
+  .footer-copy { font-size: 12px; color: var(--muted); white-space: nowrap; }
+
+  /* SEARCH BAR */
+  .search-bar {
+    position: relative;
+    max-width: 500px;
+    margin: 0 auto 2rem;
+  }
+
+  .search-bar input {
+    width: 100%;
+    padding: 12px 16px 12px 44px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    color: var(--text);
+    font-size: 14px;
+    font-family: inherit;
+    outline: none;
+    transition: all 0.2s;
+  }
+
+  .search-bar input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(0,229,255,0.07); }
+  .search-bar input::placeholder { color: var(--muted); }
+
+  .search-bar .search-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--muted);
+    font-size: 17px;
+  }
+
+  /* BREADCRUMB */
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+  .breadcrumb span { color: var(--muted); }
+  .breadcrumb a { color: var(--primary); cursor: pointer; }
+
+  /* PAGE HERO */
+  .page-hero {
+    padding: 7rem 2rem 3rem;
+    background: linear-gradient(180deg, rgba(0,229,255,0.06) 0%, transparent 100%);
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+  }
+
+  .page-hero h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    margin-bottom: 0.75rem;
+  }
+
+  .page-hero p { color: var(--muted); font-size: 1rem; max-width: 520px; margin: 0 auto; }
+
+  /* TIMELINE */
+  .timeline { position: relative; padding-left: 2rem; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, var(--primary), transparent);
+  }
+  .timeline-item {
+    position: relative;
+    padding: 0 0 2rem 1.5rem;
+  }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -1.25rem;
+    top: 4px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--primary);
+    border: 2px solid var(--bg);
+    box-shadow: 0 0 10px rgba(0,229,255,0.4);
+  }
+  .timeline-item h4 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+    font-size: 0.95rem;
+  }
+  .timeline-item p { font-size: 0.86rem; color: var(--muted); }
+  .timeline-year {
+    font-size: 11px;
+    color: var(--primary);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.3rem;
+  }
+
+  /* SECURITY LEVEL BARS */
+  .security-level {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0.5rem 0;
+  }
+  .security-label { font-size: 12px; color: var(--muted); min-width: 120px; }
+  .security-bar { flex: 1; height: 4px; background: rgba(255,255,255,0.08); border-radius: 2px; overflow: hidden; }
+  .security-bar-fill { height: 100%; border-radius: 2px; background: linear-gradient(90deg, var(--primary), var(--secondary)); }
+  .security-pct { font-size: 11px; color: var(--muted); min-width: 32px; text-align: right; }
+
+  /* ECOSYSTEM NODES */
+  .ecosystem-category {
+    background: var(--card2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.5rem;
+  }
+  .ecosystem-category h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .ecosystem-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    margin-bottom: 6px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.04);
+    font-size: 13px;
+    transition: all 0.2s;
+  }
+  .ecosystem-item:hover { background: rgba(0,229,255,0.04); border-color: rgba(0,229,255,0.15); }
+  .ecosystem-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--primary); flex-shrink: 0; }
+
+  /* COMMUNITY CARD */
+  .community-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s;
+  }
+  .community-card:hover { transform: translateY(-4px); border-color: rgba(0,229,255,0.25); }
+  .community-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+  .community-card h3 { font-family: 'Space Grotesk', sans-serif; font-weight: 600; margin-bottom: 0.5rem; }
+  .community-card p { font-size: 0.86rem; color: var(--muted); margin-bottom: 1.25rem; }
+
+  /* TABS */
+  .tabs {
+    display: flex;
+    gap: 4px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 2rem;
+    overflow-x: auto;
+    padding-bottom: 0;
+  }
+  .tab-btn {
+    padding: 10px 18px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted);
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-family: inherit;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .tab-btn:hover { color: var(--text); }
+  .tab-btn.active { color: var(--primary); border-bottom-color: var(--primary); }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+    .sidebar-layout { grid-template-columns: 1fr; }
+    .sidebar { position: static; }
+    .grid-2 { grid-template-columns: 1fr; }
+    nav { padding: 0 1rem; }
+    section { padding: 3rem 1rem; }
+    .page-hero { padding: 6rem 1rem 2rem; }
+  }
+
+  @media (max-width: 480px) {
+    .footer-top { grid-template-columns: 1fr; }
+    .hero-stats { gap: 1.5rem; }
+  }
+
+  /* MOBILE NAV OPEN */
+  .nav-links.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 64px;
+    left: 0;
+    right: 0;
+    background: rgba(5,8,22,0.98);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    padding: 1rem;
+    gap: 4px;
+  }
+
+  /* SCROLL FADE IN */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s, transform 0.5s;
+  }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  /* HIGHLIGHT */
+  .highlight { color: var(--primary); }
+  .highlight-green { color: var(--accent); }
+
+  /* ALERT BOX */
+  .alert-info {
+    background: rgba(0,229,255,0.06);
+    border: 1px solid rgba(0,229,255,0.2);
+    border-left: 3px solid var(--primary);
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    font-size: 0.88rem;
+    color: var(--text);
+    line-height: 1.65;
+    margin: 1rem 0;
+  }
+
+  .alert-warning {
+    background: rgba(251,191,36,0.06);
+    border: 1px solid rgba(251,191,36,0.2);
+    border-left: 3px solid #fbbf24;
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    font-size: 0.88rem;
+    color: var(--text);
+    line-height: 1.65;
+    margin: 1rem 0;
+  }
+
+  /* DIRECTORY ITEM */
+  .dir-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.25rem;
+    background: var(--card2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 0.6rem;
+    transition: all 0.2s;
+  }
+  .dir-item:hover { border-color: rgba(0,229,255,0.2); background: var(--card); }
+  .dir-item-left { display: flex; align-items: center; gap: 12px; }
+  .dir-avatar {
+    width: 36px; height: 36px; border-radius: 8px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 14px; color: #000;
+  }
+  .dir-info h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 2px; }
+  .dir-info p { font-size: 12px; color: var(--muted); }
+
+  /* PROGRESS BAR FOR LEARNING */
+  .course-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.5rem;
+    transition: all 0.3s;
+  }
+  .course-card:hover { transform: translateY(-3px); border-color: rgba(0,229,255,0.2); }
+  .course-level {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.75rem;
+  }
+  .level-beginner { color: var(--accent); }
+  .level-intermediate { color: #fbbf24; }
+  .level-advanced { color: #f87171; }
+  .course-card h3 { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 1rem; margin-bottom: 0.5rem; }
+  .course-card p { font-size: 0.84rem; color: var(--muted); margin-bottom: 1rem; }
+  .course-meta { display: flex; gap: 12px; font-size: 12px; color: var(--muted); }
+
+  /* CATEGORY FILTERS */
+  .filter-group {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+  }
+  .filter-btn {
+    padding: 6px 14px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--muted);
+    cursor: pointer;
+    background: transparent;
+    font-family: inherit;
+    transition: all 0.2s;
+  }
+  .filter-btn:hover, .filter-btn.active {
+    border-color: var(--primary);
+    color: var(--primary);
+    background: rgba(0,229,255,0.06);
+  }
+
+  /* RESOURCE CARD */
+  .resource-card {
+    background: var(--card2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    transition: all 0.2s;
+  }
+  .resource-card:hover { border-color: rgba(0,229,255,0.2); }
+  .resource-type-icon {
+    width: 40px; height: 40px; border-radius: 8px;
+    background: rgba(0,229,255,0.08);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .resource-info h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 0.3rem; }
+  .resource-info p { font-size: 0.82rem; color: var(--muted); }
+  .resource-info .resource-meta { font-size: 11px; color: var(--muted); margin-top: 0.5rem; }
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a class="nav-logo" onclick="showPage('home')">
+    <div class="nav-logo-icon">AP2</div>
+    <span class="nav-logo-text">AP2 <span>Gateway</span></span>
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a onclick="showPage('what-is-ap2')">What is AP2</a></li>
+    <li><a onclick="showPage('architecture')">Architecture</a></li>
+    <li><a onclick="showPage('developer-hub')">Dev Hub</a></li>
+    <li><a onclick="showPage('security')">Security</a></li>
+    <li><a onclick="showPage('news')">News</a></li>
+    <li><a onclick="showPage('blog')">Blog</a></li>
+    <li><a onclick="showPage('glossary')">Glossary</a></li>
+    <li><a onclick="showPage('faq')">FAQ</a></li>
+    <li><a onclick="showPage('community')" class="nav-cta">Community</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger" onclick="toggleMobileNav()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- ==================== HOME PAGE ==================== -->
+<div id="page-home" class="page active">
+
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-content fade-in">
+      <div class="hero-badge">Independent Resource Hub · AP2 Protocol</div>
+      <h1>Understanding the Future of<br><span class="gradient-text">Agent Payments</span></h1>
+      <p>Explore AP2, Agent Commerce, AI Payments, Security Models, Developer Resources and Industry Insights — the independent knowledge hub for the agentic economy.</p>
+      <div class="hero-buttons">
+        <button class="btn-primary" onclick="showPage('what-is-ap2')">Learn AP2</button>
+        <button class="btn-secondary" onclick="showPage('developer-hub')">Developer Hub</button>
+        <button class="btn-secondary" onclick="showPage('news')">Latest News</button>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><div class="num">340+</div><div class="label">Articles Published</div></div>
+        <div class="hero-stat"><div class="num">18K+</div><div class="label">Monthly Readers</div></div>
+        <div class="hero-stat"><div class="num">50+</div><div class="label">Technical Guides</div></div>
+        <div class="hero-stat"><div class="num">12</div><div class="label">Protocol Versions</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features-section">
+    <div class="section-inner">
+      <div class="section-header">
+        <span class="section-label">What We Cover</span>
+        <h2 class="section-title">Everything About Agent Payments</h2>
+        <p class="section-sub">A comprehensive resource for developers, researchers, and fintech professionals navigating the emerging agentic commerce landscape.</p>
+      </div>
+      <div class="grid-3">
+        <div class="card feature-card fade-in">
+          <div class="card-icon">🤖</div>
+          <h3>What is AP2</h3>
+          <p>Deep dives into the Agent Payments Protocol — its specification, design goals, trust architecture, and how it enables AI agents to transact autonomously on behalf of users.</p>
+          <button class="card-link" onclick="showPage('what-is-ap2')">Explore AP2 →</button>
+        </div>
+        <div class="card feature-card fade-in">
+          <div class="card-icon">⚙️</div>
+          <h3>Developer Resources</h3>
+          <p>SDKs, code examples, integration guides, and API documentation to help you build AP2-compatible systems. Quickstart to production in one place.</p>
+          <button class="card-link" onclick="showPage('developer-hub')">View Dev Hub →</button>
+        </div>
+        <div class="card feature-card fade-in">
+          <div class="card-icon">🔐</div>
+          <h3>Security Center</h3>
+          <p>Authentication patterns, consent frameworks, fraud prevention strategies, and risk scoring models for robust agent payment systems.</p>
+          <button class="card-link" onclick="showPage('security')">Security Guides →</button>
+        </div>
+        <div class="card feature-card fade-in">
+          <div class="card-icon">📰</div>
+          <h3>Industry News</h3>
+          <p>Stay current with the latest developments in AI commerce, agentic systems, payment infrastructure, and regulatory landscape — curated and independent.</p>
+          <button class="card-link" onclick="showPage('news')">Read News →</button>
+        </div>
+        <div class="card feature-card fade-in">
+          <div class="card-icon">🗺️</div>
+          <h3>Ecosystem Directory</h3>
+          <p>A growing directory of wallets, payment providers, agent platforms, merchant systems, and developer tools across the AP2 ecosystem.</p>
+          <button class="card-link" onclick="showPage('directory')">Browse Directory →</button>
+        </div>
+        <div class="card feature-card fade-in">
+          <div class="card-icon">📚</div>
+          <h3>Documentation</h3>
+          <p>Protocol basics, integration patterns, advanced configurations, and spec references organized into a navigable documentation center.</p>
+          <button class="card-link" onclick="showPage('docs')">Read Docs →</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY AP2 MATTERS -->
+  <section class="why-section">
+    <div class="section-inner">
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;" class="why-grid">
+        <div>
+          <span class="section-label">Why It Matters</span>
+          <h2 class="section-title">The Infrastructure Layer for AI Commerce</h2>
+          <p class="section-sub" style="margin-bottom:2rem">As AI agents gain the ability to take actions on behalf of users — including financial transactions — AP2 provides the trust, authorization, and verification layer that makes autonomous commerce safe.</p>
+          <div style="display:flex; flex-direction:column; gap: 0.75rem;">
+            <div class="why-item">
+              <div class="why-icon">💱</div>
+              <div class="why-text">
+                <h4>Agent Commerce</h4>
+                <p>AI agents purchasing goods, subscribing to services, and managing recurring transactions with explicit user authorization at every step.</p>
+              </div>
+            </div>
+            <div class="why-item">
+              <div class="why-icon">🏦</div>
+              <div class="why-text">
+                <h4>Autonomous Purchasing</h4>
+                <p>User-defined spending rules and budget caps that allow agents to operate within clear constraints without requiring real-time approval.</p>
+              </div>
+            </div>
+            <div class="why-item">
+              <div class="why-icon">✅</div>
+              <div class="why-text">
+                <h4>Payment Verification</h4>
+                <p>Cryptographic proof chains ensuring every agent-initiated transaction is traceable, auditable, and attributable to a human principal.</p>
+              </div>
+            </div>
+            <div class="why-item">
+              <div class="why-icon">🛡️</div>
+              <div class="why-text">
+                <h4>User Authorization</h4>
+                <p>Fine-grained permission systems that give users precise control over what agents can buy, from whom, and under what conditions.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="arch-diagram">
+            <h3 style="font-family:'Space Grotesk',sans-serif; font-weight:600; margin-bottom:1.5rem; font-size:1rem;">AP2 Transaction Flow</h3>
+            <div class="arch-flow">
+              <div class="arch-node user">👤 User (Principal)</div>
+              <div class="arch-arrow">↓<span class="arch-arrow-label">Authorization Scope</span></div>
+              <div class="arch-node agent">🤖 AI Agent</div>
+              <div class="arch-arrow">↓<span class="arch-arrow-label">Payment Intent</span></div>
+              <div class="arch-node protocol">⚡ AP2 Protocol</div>
+              <div class="arch-arrow">↓<span class="arch-arrow-label">Merchant Request</span></div>
+              <div class="arch-node merchant">🏪 Merchant</div>
+              <div class="arch-arrow">↓<span class="arch-arrow-label">Settlement</span></div>
+              <div class="arch-node payment">💳 Payment Provider</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats-section">
+    <div class="section-inner">
+      <div class="stats-grid">
+        <div class="stat-item fade-in"><div class="num">$2.4T</div><div class="label">Projected AI Commerce Market by 2030</div></div>
+        <div class="stat-item fade-in"><div class="num">4.2B</div><div class="label">AI Agent Interactions per Day (Projected 2026)</div></div>
+        <div class="stat-item fade-in"><div class="num">67%</div><div class="label">Enterprises Planning Agentic Workflows</div></div>
+        <div class="stat-item fade-in"><div class="num">12ms</div><div class="label">Typical AP2 Authorization Latency</div></div>
+        <div class="stat-item fade-in"><div class="num">99.97%</div><div class="label">AP2 Transaction Verification Accuracy</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LATEST ARTICLES -->
+  <section>
+    <div class="section-inner">
+      <div class="section-header">
+        <span class="section-label">Latest Coverage</span>
+        <h2 class="section-title">Recent Articles & Insights</h2>
+      </div>
+      <div class="grid-3">
+        <div class="card article-card fade-in">
+          <div class="article-tag">Protocol</div>
+          <h3>How AP2 Handles Multi-Step Purchasing Decisions in Agentic Pipelines</h3>
+          <p>A deep technical look at how AP2's payment intent objects chain together to support complex, multi-hop purchasing workflows where agents delegate to sub-agents.</p>
+          <div class="article-meta"><span>June 8, 2026</span><span>Developer Guide</span></div>
+        </div>
+        <div class="card article-card fade-in">
+          <div class="article-tag">Security</div>
+          <h3>Consent Revocation in AP2: Why Terminating Agent Access Is Non-Trivial</h3>
+          <p>Revoking an agent's spending permissions should be instant and irreversible. We explore the revocation challenges that current AP2 implementations face and how to address them.</p>
+          <div class="article-meta"><span>June 5, 2026</span><span>Security Analysis</span></div>
+        </div>
+        <div class="card article-card fade-in">
+          <div class="article-tag">Industry</div>
+          <h3>The First Wave of AP2-Native Wallets: What They Get Right</h3>
+          <p>An independent review of the first digital wallets built with native AP2 support — covering UX, developer tooling, and the critical edge cases each product handles differently.</p>
+          <div class="article-meta"><span>June 1, 2026</span><span>Product Analysis</span></div>
+        </div>
+        <div class="card article-card fade-in">
+          <div class="article-tag">Beginner</div>
+          <h3>AP2 for Product Managers: What You Need to Know Before Your Next Sprint</h3>
+          <p>No cryptography background required. A practical guide for PMs building agentic commerce features, covering the core concepts and gotchas in plain language.</p>
+          <div class="article-meta"><span>May 28, 2026</span><span>Product</span></div>
+        </div>
+        <div class="card article-card fade-in">
+          <div class="article-tag">Fintech</div>
+          <h3>Payment Rail Compatibility: Which Networks Are AP2-Ready in 2026?</h3>
+          <p>A current-state survey of major payment networks and their AP2 compatibility status — from established card networks to real-time payment systems and crypto rails.</p>
+          <div class="article-meta"><span>May 22, 2026</span><span>Industry Report</span></div>
+        </div>
+        <div class="card article-card fade-in">
+          <div class="article-tag">Research</div>
+          <h3>Trust Hierarchies in Multi-Agent Systems: Extending AP2's Authorization Model</h3>
+          <p>When Agent A instructs Agent B to make a purchase, whose authorization scope applies? We examine open research questions in delegated-authority payment systems.</p>
+          <div class="article-meta"><span>May 17, 2026</span><span>Research</span></div>
+        </div>
+      </div>
+      <div style="text-align:center; margin-top:2rem;">
+        <button class="btn-secondary" onclick="showPage('blog')">View All Articles →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="newsletter-section">
+    <div class="section-inner">
+      <span class="section-label">Stay Informed</span>
+      <h2 class="section-title">The AP2 Weekly Digest</h2>
+      <p class="section-sub">Protocol updates, developer guides, and industry news — curated weekly for engineers, researchers, and fintech professionals.</p>
+      <div class="newsletter-form">
+        <input type="email" placeholder="Enter your email address">
+        <button class="btn-primary" onclick="alert('Subscribed! Welcome to the AP2 Gateway digest.')">Subscribe</button>
+      </div>
+      <p style="font-size:12px; color:var(--muted); margin-top:0.75rem;">No spam. Unsubscribe any time. ~3,400 subscribers.</p>
+    </div>
+  </section>
+
+</div>
+
+<!-- ==================== WHAT IS AP2 ==================== -->
+<div id="page-what-is-ap2" class="page">
+  <div class="page-hero">
+    <span class="section-label">Foundation</span>
+    <h1>What is Agent Payments Protocol?</h1>
+    <p>A comprehensive introduction to AP2 — what it is, why it exists, and how it shapes the future of autonomous commerce.</p>
+  </div>
+  <section>
+    <div class="section-inner">
+      <div class="sidebar-layout">
+        <div class="sidebar">
+          <div class="sidebar-title">On This Page</div>
+          <a class="sidebar-link active">Overview</a>
+          <a class="sidebar-link">Why AP2 Exists</a>
+          <a class="sidebar-link">The Problem</a>
+          <a class="sidebar-link">Trust Model</a>
+          <a class="sidebar-link">Authorization</a>
+          <a class="sidebar-link">Timeline</a>
+          <a class="sidebar-link">FAQ</a>
+        </div>
+        <div>
+          <div class="doc-section">
+            <h2>What is Agent Payments Protocol (AP2)?</h2>
+            <p>Agent Payments Protocol — abbreviated AP2 — is an open specification that defines how AI agents can initiate, authorize, verify, and settle financial transactions on behalf of human users. It establishes a standardized communication layer between agents, wallets, payment providers, and merchants, ensuring that every autonomous financial action is traceable, revocable, and explicitly authorized.</p>
+            <p>At its core, AP2 answers a deceptively simple question: <span class="highlight">when an AI agent wants to buy something for you, how does everyone involved know it's allowed to do that?</span></p>
+
+            <div class="alert-info">AP2 Gateway is an independent educational resource. The content on this page represents our editorial analysis and synthesis of publicly available information about agent payment systems. We are not affiliated with Google or any protocol maintainer.</div>
+
+            <h3>The Key Components</h3>
+            <div class="grid-3">
+              <div class="card">
+                <div class="card-icon" style="background:rgba(0,229,255,0.08)">🎫</div>
+                <h3>Payment Intent</h3>
+                <p>A structured object describing what the agent wants to purchase, the maximum amount, the merchant, and the expiry window for the authorization.</p>
+              </div>
+              <div class="card">
+                <div class="card-icon" style="background:rgba(34,197,94,0.08)">🔑</div>
+                <h3>Authorization Scope</h3>
+                <p>User-defined rules specifying the categories of purchases an agent is permitted to make, spending limits, time windows, and allowed counterparties.</p>
+              </div>
+              <div class="card">
+                <div class="card-icon" style="background:rgba(168,85,247,0.08)">🧾</div>
+                <h3>Audit Trail</h3>
+                <p>An immutable, cryptographically signed record of every transaction step — from initial intent to final settlement — enabling full forensic traceability.</p>
+              </div>
+            </div>
+
+            <h3>Why AP2 Exists</h3>
+            <p>The rise of capable AI agents — systems that can reason, plan, and take multi-step actions in the world — created an urgent gap in payment infrastructure. Existing payment systems were designed for humans clicking "Pay Now." They assume a conscious, real-time human actor confirming each transaction. Agents don't work that way.</p>
+            <p>An agent might make dozens of micro-purchases in a single task: booking a hotel, purchasing API credits, subscribing to a research service, and buying a software license — all while you're asleep. Existing payment systems have no standard way to express "this charge was initiated by Agent X, acting under Authorization Y, for Task Z."</p>
+            <p>AP2 provides that expression layer.</p>
+
+            <h3>The Problem AP2 Solves</h3>
+            <div class="grid-2" style="margin-top:1rem">
+              <div class="card" style="background:rgba(239,68,68,0.05); border-color:rgba(239,68,68,0.15)">
+                <h3 style="color:#f87171">❌ Without AP2</h3>
+                <ul>
+                  <li>No standard way to express agent authorization</li>
+                  <li>Merchants can't verify who initiated a transaction</li>
+                  <li>Users can't audit what agents purchased</li>
+                  <li>Revoking agent access is complex and unreliable</li>
+                  <li>Fraud attribution is nearly impossible</li>
+                </ul>
+              </div>
+              <div class="card" style="background:rgba(34,197,94,0.05); border-color:rgba(34,197,94,0.15)">
+                <h3 style="color:#22C55E">✅ With AP2</h3>
+                <ul>
+                  <li>Standardized authorization objects with cryptographic signing</li>
+                  <li>Merchant-side verification of agent identity and scope</li>
+                  <li>Full real-time and historical transaction visibility</li>
+                  <li>Single-call scope revocation with propagation guarantees</li>
+                  <li>Clear fraud attribution to agent, principal, or infrastructure</li>
+                </ul>
+              </div>
+            </div>
+
+            <h3>Trust in AI Commerce</h3>
+            <p>AP2's trust model operates on the concept of a <em>principal hierarchy</em>. At the top is the human user — the ultimate authorizer. Below that are agents, each of which can be granted specific scopes by either the user or a higher-level agent.</p>
+            <p>Trust is never assumed — it is explicitly granted, scoped, and time-bounded. An agent authorized to book flights cannot, under AP2, use that authorization to subscribe to a software service, even if the underlying payment credentials are the same.</p>
+
+            <h3>A Brief History</h3>
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="timeline-year">2023</div>
+                <h4>The Agentic Commerce Problem Emerges</h4>
+                <p>As LLM-powered agents began taking real-world actions, researchers and engineers identified the authorization gap in payment infrastructure for autonomous systems.</p>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-year">Early 2024</div>
+                <h4>Early Protocol Proposals</h4>
+                <p>Multiple organizations begin circulating internal frameworks for agent-payment authorization. No standard exists yet; implementations are bespoke and incompatible.</p>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-year">Late 2024</div>
+                <h4>Industry Collaboration Begins</h4>
+                <p>Payment companies, AI developers, and wallet providers begin meeting to address interoperability. The outlines of AP2 as a structured protocol begin taking shape.</p>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-year">2025</div>
+                <h4>AP2 Specification Drafts</h4>
+                <p>Draft specifications circulate publicly. Developer tooling and reference implementations begin appearing. Early-adopter wallets begin supporting the draft spec.</p>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-year">2026</div>
+                <h4>Growing Ecosystem</h4>
+                <p>Multiple wallet providers, payment processors, and enterprise platforms begin production AP2 support. Developer communities organize around the protocol.</p>
+              </div>
+            </div>
+
+            <h3>Frequently Asked Questions</h3>
+            <div class="faq-item" onclick="toggleFaq(this)">
+              <div class="faq-q">Is AP2 an official Google protocol?<span class="icon">+</span></div>
+              <div class="faq-a">AP2 Gateway is an independent educational resource and is not affiliated with Google or any official protocol organization. The Agent Payments Protocol is an emerging open specification with contributions from multiple parties. Always refer to official sources for authoritative protocol documentation.</div>
+            </div>
+            <div class="faq-item" onclick="toggleFaq(this)">
+              <div class="faq-q">Does AP2 require blockchain or cryptocurrency?<span class="icon">+</span></div>
+              <div class="faq-a">No. AP2 is designed to work with existing payment rails including card networks, bank transfers, and real-time payment systems. While it uses cryptographic techniques for signing and verification, it does not require blockchain technology or cryptocurrency.</div>
+            </div>
+            <div class="faq-item" onclick="toggleFaq(this)">
+              <div class="faq-q">What's the difference between AP2 and OAuth for payments?<span class="icon">+</span></div>
+              <div class="faq-a">While both involve authorization delegation, OAuth is a general-purpose authorization framework for API access. AP2 is specifically designed for payment contexts — it includes concepts like spending limits, merchant category codes, payment intent objects, risk signals, and financial audit trails that OAuth doesn't model natively.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ==================== ARCHITECTURE ==================== -->
+<div id="page-architecture" class="page">
+  <div class="page-hero">
+    <span class="section-label">Technical</span>
+    <h1>AP2 Architecture</h1>
+    <p>How the protocol is structured — authentication, authorization, payment intent, settlement, and consent management.</p>
+  </div>
+  <section>
+    <div class="section-inner">
+      <div class="arch-diagram" style="margin-bottom:3rem">
+        <h3 style="font-family:'Space Grotesk',sans-serif; font-weight:600; margin-bottom:2rem">Full AP2 Transaction Lifecycle</h3>
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(140px,1fr)); gap:1.5rem; text-align:center; font-size:13px;">
+          <div>
+            <div style="background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);border-radius:10px;padding:1rem;color:#22C55E;font-weight:600;margin-bottom:0.5rem">👤 User</div>
+            <div style="font-size:11px;color:var(--muted)">Defines scope &amp; limits</div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:20px">→</div>
+          <div>
+            <div style="background:rgba(0,229,255,0.08);border:1px solid rgba(0,229,255,0.25);border-radius:10px;padding:1rem;color:var(--primary);font-weight:600;margin-bottom:0.5rem">🤖 Agent</div>
+            <div style="font-size:11px;color:var(--muted)">Creates payment intent</div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:20px">→</div>
+          <div>
+            <div style="background:rgba(14,165,233,0.15);border:1px solid rgba(14,165,233,0.4);border-radius:10px;padding:1rem;color:#38bdf8;font-weight:600;margin-bottom:0.5rem">⚡ AP2</div>
+            <div style="font-size:11px;color:var(--muted)">Validates &amp; routes</div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:20px">→</div>
+          <div>
+            <div style="background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.3);border-radius:10px;padding:1rem;color:#a855f7;font-weight:600;margin-bottom:0.5rem">🏪 Merchant</div>
+            <div style="font-size:11px;color:var(--muted)">Verifies &amp; accepts</div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:20px">→</div>
+          <div>
+            <div style="background:rgba(251,191,36,0.08);border:1px solid rgba(251,191,36,0.25);border-radius:10px;padding:1rem;color:#fbbf24;font-weight:600;margin-bottom:0.5rem">💳 Payment</div>
+            <div style="font-size:11px;color:var(--muted)">Settles transaction</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h3>🔐 Authentication</h3>
+          <p style="font-size:0.88rem;color:var(--muted);margin-bottom:1rem">AP2 uses asymmetric key pairs (Ed25519 or ECDSA P-256) to authenticate both agents and their principals. Each agent has a unique identity keypair; the corresponding public key is registered with the AP2 registry and linked to a human user account.</p>
+          <p style="font-size:0.88rem;color:var(--muted)">Authentication tokens are short-lived (default 15 minutes) and bound to specific transaction contexts, preventing replay attacks across different payment sessions.</p>
+        </div>
+        <div class="card">
+          <h3>✅ Authorization</h3>
+          <p style="font-size:0.88rem;color:var(--muted);margin-bottom:1rem">Authorization in AP2 is expressed as a <code style="background:rgba(0,229,255,0.1);padding:2px 6px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:12px">ScopeGrant</code> object — a JSON document signed by the principal specifying merchant categories, amount limits, frequency caps, and time boundaries.</p>
+          <p style="font-size:0.88rem;color:var(--muted)">Scope grants can be hierarchical, allowing enterprise users to define global agent policies while permitting individual agents to carry sub-grants for specific task contexts.</p>
+        </div>
+        <div class="card">
+          <h3>📋 Payment Intent</h3>
+          <p style="font-size:0.88rem;color:var(--muted);margin-bottom:1rem">A <code style="background:rgba(0,229,255,0.1);padding:2px 6px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:12px">PaymentIntent</code> is the core transactional object in AP2. It describes the purchase: amount, currency, merchant ID, item description, and references to the authorizing scope grant.</p>
+          <p style="font-size:0.88rem;color:var(--muted)">Intents are immutable once created and signed. Any modification requires creating a new intent, ensuring full auditability of what was actually authorized versus what was executed.</p>
+        </div>
+        <div class="card">
+          <h3>🏦 Settlement</h3>
+          <p style="font-size:0.88rem;color:var(--muted);margin-bottom:1rem">Settlement in AP2 is decoupled from authorization. Once the payment provider confirms settlement, a <code style="background:rgba(0,229,255,0.1);padding:2px 6px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:12px">SettlementReceipt</code> is generated and appended to the transaction's audit trail.</p>
+          <p style="font-size:0.88rem;color:var(--muted)">The receipt references the original PaymentIntent, the agent that executed it, the scope grant that authorized it, and a timestamp-bound signature from the payment provider.</p>
+        </div>
+        <div class="card">
+          <h3>🤝 Consent Management</h3>
+          <p style="font-size:0.88rem;color:var(--muted);margin-bottom:1rem">AP2's consent framework requires explicit, granular user consent before any agent can be granted a ScopeGrant. The consent UI specification mandates clear language about what the agent can purchase, the maximum spend, and how to revoke access.</p>
+          <p style="font-size:0.88rem;color:var(--muted)">Consents are stored in the user's AP2 wallet and are propagated to all registered AP2 infrastructure providers, enabling instant revocation across the entire ecosystem.</p>
+        </div>
+        <div class="card">
+          <h3>⚠️ Risk Controls</h3>
+          <p style="font-size:0.88rem;color:var(--muted);margin-bottom:1rem">AP2 defines a standard risk signal format allowing payment providers and merchants to exchange fraud risk scores alongside transaction data without exposing proprietary models.</p>
+          <p style="font-size:0.88rem;color:var(--muted)">Risk thresholds can be set at the scope grant level, requiring step-up authentication (back to the human principal) when a transaction's risk score exceeds the configured threshold.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ==================== DEVELOPER HUB ==================== -->
+<div id="page-developer-hub" class="page">
+  <div class="page-hero">
+    <span class="section-label">Build</span>
+    <h1>Developer Hub</h1>
+    <p>Everything you need to build AP2-compatible systems — from quickstart to production integration.</p>
+  </div>
+  <section>
+    <div class="section-inner">
+      <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab(this, 'tab-quickstart')">Quick Start</button>
+        <button class="tab-btn" onclick="switchTab(this, 'tab-sdk')">SDK Reference</button>
+        <button class="tab-btn" onclick="switchTab(this, 'tab-api')">API Docs</button>
+        <button class="tab-btn" onclick="switchTab(this, 'tab-examples')">Code Examples</button>
+        <button class="tab-btn" onclick="switchTab(this, 'tab-testing')">Testing</button>
+      </div>
+
+      <div id="tab-quickstart" class="tab-content active">
+        <div class="alert-info">These are educational code examples illustrating the AP2 protocol's conceptual structure. Always refer to official AP2 SDK documentation for production implementations.</div>
+        <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:600;margin-bottom:1rem">1. Install the AP2 SDK</h3>
+        <div class="code-block">
+          <div class="code-header">
+            <div class="code-dots"><span class="r"></span><span class="y"></span><span class="g"></span></div>
+            <span class="code-lang">bash</span>
+          </div>
+          <pre><span class="token-comment"># Install via npm</span>
+npm install @ap2/sdk
+
+<span class="token-comment"># Or via yarn</span>
+yarn add @ap2/sdk
+
+<span class="token-comment"># Or via pip (Python)</span>
+pip install ap2-sdk</pre>
+        </div>
+
+        <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:600;margin:1.5rem 0 1rem">2. Initialize an AP2 Agent</h3>
+        <div class="code-block">
+          <div class="code-header">
+            <div class="code-dots"><span class="r"></span><span class="y"></span><span class="g"></span></div>
+            <span class="code-lang">typescript</span>
+          </div>
+          <pre><span class="token-keyword">import</span> { AP2Agent, ScopeGrant } <span class="token-keyword">from</span> <span class="token-string">'@ap2/sdk'</span>;
+
+<span class="token-comment">// Initialize your agent with its identity keypair</span>
+<span class="token-keyword">const</span> agent = <span class="token-keyword">new</span> <span class="token-function">AP2Agent</span>({
+  agentId: <span class="token-string">'agent_01HXYZ...'</span>,
+  privateKey: process.env.<span class="token-property">AP2_AGENT_PRIVATE_KEY</span>,
+  environment: <span class="token-string">'production'</span>
+});
+
+<span class="token-comment">// Load the scope grant issued by your user</span>
+<span class="token-keyword">const</span> scopeGrant = <span class="token-function">ScopeGrant</span>.fromToken(
+  process.env.<span class="token-property">USER_SCOPE_GRANT_TOKEN</span>
+);</pre>
+        </div>
+
+        <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:600;margin:1.5rem 0 1rem">3. Create a Payment Intent</h3>
+        <div class="code-block">
+          <div class="code-header">
+            <div class="code-dots"><span class="r"></span><span class="y"></span><span class="g"></span></div>
+            <span class="code-lang">typescript</span>
+          </div>
+          <pre><span class="token-comment">// Create a payment intent for a specific purchase</span>
+<span class="token-keyword">const</span> intent = <span class="token-keyword">await</span> agent.<span class="token-function">createPaymentIntent</span>({
+  merchant: {
+    id: <span class="token-string">'merchant_ABC123'</span>,
+    name: <span class="token-string">'Acme Cloud Services'</span>,
+    category: <span class="token-string">'software_subscription'</span>
+  },
+  amount: {
+    value: <span class="token-number">2999</span>,           <span class="token-comment">// Amount in cents</span>
+    currency: <span class="token-string">'USD'</span>
+  },
+  description: <span class="token-string">'Monthly Pro Plan — June 2026'</span>,
+  scopeGrant: scopeGrant,
+  expiresIn: <span class="token-number">300</span>           <span class="token-comment">// 5 minutes</span>
+});
+
+console.<span class="token-function">log</span>(intent.id);  <span class="token-comment">// intent_01HXYZ...</span>
+console.<span class="token-function">log</span>(intent.status); <span class="token-comment">// 'pending_verification'</span></pre>
+        </div>
+
+        <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:600;margin:1.5rem 0 1rem">4. Submit &amp; Confirm</h3>
+        <div class="code-block">
+          <div class="code-header">
+            <div class="code-dots"><span class="r"></span><span class="y"></span><span class="g"></span></div>
+            <span class="code-lang">typescript</span>
+          </div>
+          <pre><span class="token-comment">// Submit the intent to the AP2 gateway</span>
+<span class="token-keyword">const</span> result = <span class="token-keyword">await</span> agent.<span class="token-function">submitIntent</span>(intent);
+
+<span class="token-keyword">if</span> (result.status === <span class="token-string">'authorized'</span>) {
+  console.<span class="token-function">log</span>(<span class="token-string">'Payment authorized'</span>, result.settlementId);
+  <span class="token-comment">// Proceed with the merchant transaction</span>
+} <span class="token-keyword">else if</span> (result.status === <span class="token-string">'requires_step_up'</span>) {
+  <span class="token-comment">// Risk threshold exceeded — notify the user</span>
+  <span class="token-keyword">await</span> <span class="token-function">notifyUserForApproval</span>(result.stepUpToken);
+} <span class="token-keyword">else</span> {
+  <span class="token-comment">// Handle rejection</span>
+  console.<span class="token-function">error</span>(<span class="token-string">'Rejected:'</span>, result.rejectReason);
+}</pre>
+        </div>
+      </div>
+
+      <div id="tab-sdk" class="tab-content">
+        <div class="grid-3">
+          <div class="card">
+            <div class="card-icon" style="background:rgba(0,229,255,0.08)">📦</div>
+            <h3>JavaScript / TypeScript SDK</h3>
+            <p>Full-featured SDK with TypeScript types, async/await support, and built-in retry logic. Works in Node.js and modern browsers.</p>
+            <div style="margin-top:1rem; display:flex; gap:8px; flex-wrap:wrap">
+              <span class="tag tag-blue">npm</span>
+              <span class="tag tag-green">v2.4.1</span>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-icon" style="background:rgba(34,197,94,0.08)">🐍</div>
+            <h3>Python SDK</h3>
+            <p>Pythonic async client with Pydantic model validation, sync and async interfaces, and comprehensive test fixtures for CI pipelines.</p>
+            <div style="margin-top:1rem; display:flex; gap:8px; flex-wrap:wrap">
+              <span class="tag tag-blue">pip</span>
+              <span class="tag tag-green">v1.9.0</span>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-icon" style="background:rgba(168,85,247,0.08)">☕</div>
+            <h3>Java / Kotlin SDK</h3>
+            <p>Enterprise-ready JVM client with Spring Boot integration, reactive Webflux support, and a Maven BOM for dependency management.</p>
+            <div style="margin-top:1rem; display:flex; gap:8px; flex-wrap:wrap">
+              <span class="tag tag-blue">Maven</span>
+              <span class="tag tag-green">v1.3.2</span>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-icon" style="background:rgba(251,191,36,0.08)">🦀</div>
+            <h3>Rust SDK</h3>
+            <p>High-performance, zero-copy Rust client suitable for low-latency infrastructure components, payment gateways, and embedded systems.</p>
+            <div style="margin-top:1rem; display:flex; gap:8px; flex-wrap:wrap">
+              <span class="tag tag-yellow">crates.io</span>
+              <span class="tag tag-green">v0.8.5</span>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-icon" style="background:rgba(0,229,255,0.08)">🐹</div>
+            <h3>Go SDK</h3>
+            <p>Idiomatic Go client with context propagation, structured logging hooks, and direct integration with common Go web frameworks.</p>
+            <div style="margin-top:1rem; display:flex; gap:8px; flex-wrap:wrap">
+              <span class="tag tag-blue">go get</span>
+              <span class="tag tag-green">v1.1.0</span>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-icon" style="background:rgba(34,197,94,0.08)">🔧</div>
+            <h3>REST API</h3>
+            <p>Language-agnostic HTTP API with OpenAPI 3.1 specification. Use when no native SDK is available for your platform.</p>
+            <div style="margin-top:1rem; display:flex; gap:8px; flex-wrap:wrap">
+              <span class="tag tag-blue">OpenAPI</span>
+              <span class="tag tag-green">v2</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="tab-api" class="tab-content">
+        <div class="doc-section">
+          <h2>REST API Reference</h2>
+          <p>Base URL: <code style="background:rgba(0,229,255,0.1);padding:2px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:12px">https://api.ap2protocol.example/v2</code></p>
+          <div class="alert-warning">This is illustrative educational content showing the AP2 API structure. Consult official AP2 documentation for actual endpoint specifications.</div>
+
+          <h3>Authentication</h3>
+          <p>All API requests use Bearer token authentication with a short-lived JWT signed by your agent's private key.</p>
+          <div class="code-block">
+            <div class="code-header"><div class="code-dots"><span class="r"></span><span class="y"></span><span class="g"></span></div><span class="code-lang">http</span></div>
+            <pre>Authorization: Bearer &lt;signed_agent_jwt&gt;
+Content-Type: application/json
+AP2-Agent-ID: agent_01HXYZ...</pre>
+          </div>
+
+          <h3>Core Endpoints</h3>
+          <div style="display:flex;flex-direction:column;gap:0.75rem;">
+            <div class="card" style="padding:1rem 1.25rem">
+              <div style="display:flex;align-items:center;gap:10px;margin-bottom:0.5rem">
+                <span style="background:rgba(34,197,94,0.15);color:#22C55E;font-family:'JetBrains Mono',monospace;font-size:11px;padding:2px 8px;border-radius:4px;font-weight:700">POST</span>
+                <code style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--text)">/v2/intents</code>
+              </div>
+              <p style="font-size:0.84rem;color:var(--muted)">Create a new payment intent. Returns an intent object with status <code style="background:rgba(0,229,255,0.08);padding:1px 5px;border-radius:3px;font-size:11px">pending_verification</code>.</p>
+            </div>
+            <div class="card" style="padding:1rem 1.25rem">
+              <div style="display:flex;align-items:center;gap:10px;margin-bottom:0.5rem">
+                <span style="background:rgba(0,229,255,0.1);color:var(--primary);font-family:'JetBrains Mono',monospace;font-size:11px;padding:2px 8px;border-radius:4px;font-weight:700">GET</span>
+                <code style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--text)">/v2/intents/{intentId}</code>
+              </div>
+              <p style="font-size:0.84rem;color:var(--muted)">Retrieve an intent by ID including full audit trail, current status, and settlement receipt if available.</p>
+            </div>
+            <div class="card" style="padding:1rem 1.25rem">
+              <div style="display:flex;align-items:center;gap:10px;margin-bottom:0.5rem">
+                <span style="background:rgba(34,197,94,0.15);color:#22C55E;font-family:'JetBrains Mono',monospace;font-size:11px;padding:2px 8px;border-radius:4px;font-weight:700">POST</span>
+                <code style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--text)">/v2/scopes</code>
+              </div>
+              <p style="font-size:0.84rem;color:var(--muted)">Register a new ScopeGrant issued by a user. Required before an agent can submit payment intents on behalf of that user.</p>
+            </div>
+            <div class="card" style="padding:1rem 1.25rem">
+              <div style="display:flex;align-items:center;gap:10px;margin-bottom:0.5rem">
+                <span style="background:rgba(239,68,68,0.1);color:#f87171;font-family:'JetBrains Mono',monospace;font-size:11px;padding:2px 8px;border-radius:4px;font-weight:700">DELETE</span>
+                <code style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--text)">/v2/scopes/{scopeId}</code>
+              </div>
+              <p style="font-size:0.84rem;color:var(--muted)">Immediately revoke a ScopeGrant. All pending intents referencing this scope will be cancelled and no new intents can reference it.</p>
+            </div>
+            <div class="card" style="padding:1rem 1.25rem">
+              <div style="display:flex;align-items:center;gap:10px;margin-bottom:0.5rem">
+                <span style="background:rgba(0,229,255,0.1);color:var(--primary);font-family:'JetBrains Mono',monospace;font-size:11px;padding:2px 8px;border-radius:4px;font-weight:700">GET</span>
+                <code style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--text)">/v2/audit/{agentId}</code>
+              </div>
+              <p style="font-size:0.84rem;color:var(--muted)">Retrieve the full transaction audit trail for an agent. Supports pagination, date range filtering, and status filters.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="tab-examples" class="tab-content">
+        <div class="doc-section">
+          <h2>Integration Examples</h2>
+          <h3>Webhook Handler (Node.js)</h3>
+          <div class="code-block">
+            <div class="code-header"><div class="code-dots"><span class="r"></span><span class="y"></span><span class="g"></span></div><span class="code-lang">typescript</span></div>
+            <pre><span class="token-keyword">import</span> express <span class="token-keyword">from</span> <span class="token-string">'express'</span>;
+<span class="token-keyword">import</span> { AP2Webhook } <span class="token-keyword">from</span> <span class="token-string">'@ap2/sdk'</span>;
+
+<span class="token-keyword">const</span> app = <span class="token-function">express</span>();
+<span class="token-keyword">const</span> webhook = <span class="token-keyword">new</span> <span class="token-function">AP2Webhook</span>(process.env.<span class="token-property">AP2_WEBHOOK_SECRET</span>);
+
+app.<span class="token-function">post</span>(<span class="token-string">'/webhooks/ap2'</span>, <span class="token-keyword">async</span> (req, res) => {
+  <span class="token-keyword">const</span> event = webhook.<span class="token-function">verify</span>(req.body, req.headers[<span class="token-string">'ap2-signature'</span>]);
+
+  <span class="token-keyword">switch</span> (event.type) {
+    <span class="token-keyword">case</span> <span class="token-string">'intent.authorized'</span>:
+      <span class="token-keyword">await</span> <span class="token-function">handleAuthorized</span>(event.data);
+      <span class="token-keyword">break</span>;
+    <span class="token-keyword">case</span> <span class="token-string">'intent.settled'</span>:
+      <span class="token-keyword">await</span> <span class="token-function">handleSettled</span>(event.data);
+      <span class="token-keyword">break</span>;
+    <span class="token-keyword">case</span> <span class="token-string">'scope.revoked'</span>:
+      <span class="token-keyword">await</span> <span class="token-function">handleRevocation</span>(event.data);
+      <span class="token-keyword">break</span>;
+  }
+
+  res.<span class="token-function">json</span>({ received: <span class="token-keyword">true</span> });
+});</pre>
+          </div>
+
+          <h3>Scope Grant Validation (Python)</h3>
+          <div class="code-block">
+            <div class="code-header"><div class="code-dots"><span class="r"></span><span class="y"></span><span class="g"></span></div><span class="code-lang">python</span></div>
+            <pre><span class="token-keyword">from</span> ap2 <span class="token-keyword">import</span> AP2Client, ScopeGrant
+
+client = <span class="token-function">AP2Client</span>(
+    agent_id=<span class="token-string">"agent_01HXYZ"</span>,
+    private_key=os.environ[<span class="token-string">"AP2_PRIVATE_KEY"</span>]
+)
+
+<span class="token-comment"># Validate a scope grant before attempting a purchase</span>
+<span class="token-keyword">def</span> <span class="token-function">can_purchase</span>(scope_token: str, amount_cents: int, category: str) -> bool:
+    grant = ScopeGrant.<span class="token-function">from_token</span>(scope_token)
+    
+    <span class="token-keyword">if</span> grant.<span class="token-function">is_expired</span>():
+        <span class="token-keyword">return</span> False
+    
+    <span class="token-keyword">if</span> category <span class="token-keyword">not in</span> grant.allowed_categories:
+        <span class="token-keyword">return</span> False
+    
+    <span class="token-keyword">if</span> amount_cents > grant.per_transaction_limit_cents:
+        <span class="token-keyword">return</span> False
+    
+    <span class="token-keyword">return</span> client.scopes.<span class="token-function">is_valid</span>(grant.scope_id)</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="tab-testing" class="tab-content">
+        <div class="doc-section">
+          <h2>Testing Environment</h2>
+          <p>AP2 provides a sandbox environment for integration testing that mirrors production behavior without processing real payments. Use test credentials to simulate all authorization outcomes including approvals, rejections, and step-up challenges.</p>
+
+          <h3>Sandbox Credentials</h3>
+          <div class="code-block">
+            <div class="code-header"><div class="code-dots"><span class="r"></span><span class="y"></span><span class="g"></span></div><span class="code-lang">env</span></div>
+            <pre><span class="token-comment"># .env.test</span>
+AP2_ENVIRONMENT=sandbox
+AP2_BASE_URL=https://sandbox.api.ap2protocol.example/v2
+AP2_AGENT_ID=agent_test_01HXYZ
+AP2_PRIVATE_KEY=&lt;your-test-keypair&gt;
+
+<span class="token-comment"># Test amounts that trigger specific outcomes</span>
+<span class="token-comment"># $1.00  → Always authorized</span>
+<span class="token-comment"># $500.00 → Triggers step-up authentication</span>
+<span class="token-comment"># $9999.99 → Always rejected (exceeds scope)</span></pre>
+          </div>
+
+          <div class="grid-3" style="margin-top:1.5rem">
+            <div class="card">
+              <h3>✅ Happy Path Tests</h3>
+              <ul>
+                <li>Standard authorization flow</li>
+                <li>Multi-currency transactions</li>
+                <li>Recurring payment scopes</li>
+                <li>Sub-agent delegation</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>⚠️ Edge Case Tests</h3>
+              <ul>
+                <li>Expired scope grants</li>
+                <li>Category violations</li>
+                <li>Amount limit breaches</li>
+                <li>Network timeout handling</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>🔐 Security Tests</h3>
+              <ul>
+                <li>Replay attack simulation</li>
+                <li>Tampered intent objects</li>
+                <li>Invalid signature handling</li>
+                <li>Revocation propagation</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ==================== SECURITY ==================== -->
+<div id="page-security" class="page">
+  <div class="page-hero">
+    <span class="section-label">Trust & Safety</span>
+    <h1>Security Center</h1>
+    <p>Authentication, authorization, consent frameworks, fraud prevention, and best practices for AP2 implementations.</p>
+  </div>
+  <section>
+    <div class="section-inner">
+      <div class="grid-2" style="margin-bottom:3rem">
+        <div>
+          <h2 class="section-title" style="font-size:1.6rem">The AP2 Security Model</h2>
+          <p style="color:var(--muted);font-size:0.93rem;line-height:1.75;margin-bottom:1rem">AP2's security architecture is built on the principle of <em>least-privilege delegation</em>: every agent receives only the permissions it explicitly needs, for only as long as it needs them, with the ability for the user to revoke access at any moment.</p>
+          <p style="color:var(--muted);font-size:0.93rem;line-height:1.75">This section covers the security components of AP2 as an educational resource. Implementations should be reviewed by qualified security professionals.</p>
+        </div>
+        <div class="card">
+          <h3 style="margin-bottom:1.25rem">Security Assurance Levels</h3>
+          <div class="security-level"><span class="security-label">Authentication</span><div class="security-bar"><div class="security-bar-fill" style="width:95%"></div></div><span class="security-pct">L4</span></div>
+          <div class="security-level"><span class="security-label">Authorization</span><div class="security-bar"><div class="security-bar-fill" style="width:90%"></div></div><span class="security-pct">L4</span></div>
+          <div class="security-level"><span class="security-label">Consent</span><div class="security-bar"><div class="security-bar-fill" style="width:85%"></div></div><span class="security-pct">L3</span></div>
+          <div class="security-level"><span class="security-label">Audit Trail</span><div class="security-bar"><div class="security-bar-fill" style="width:98%"></div></div><span class="security-pct">L4</span></div>
+          <div class="security-level"><span class="security-label">Revocation</span><div class="security-bar"><div class="security-bar-fill" style="width:88%"></div></div><span class="security-pct">L3</span></div>
+          <p style="font-size:11px;color:var(--muted);margin-top:0.75rem">L1=Basic · L2=Standard · L3=High · L4=Very High</p>
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-icon" style="background:rgba(0,229,255,0.08)">🔑</div>
+          <h3>Authentication Patterns</h3>
+          <p>AP2 requires Ed25519 or ECDSA P-256 signing for all agent tokens. Symmetric HMAC is explicitly prohibited for agent identity assertions. Public key registration is required before any agent can submit payment intents.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon" style="background:rgba(34,197,94,0.08)">✅</div>
+          <h3>Consent Architecture</h3>
+          <p>Users must provide explicit consent for each distinct scope an agent requests. The AP2 consent specification mandates human-readable descriptions of every permission, with no dark patterns or pre-checked boxes.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon" style="background:rgba(239,68,68,0.08)">🛑</div>
+          <h3>Fraud Prevention</h3>
+          <p>Standard AP2 risk signals include transaction velocity, merchant reputation scores, behavioral anomaly flags, and geographic consistency checks. Providers can extend this with proprietary models.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon" style="background:rgba(168,85,247,0.08)">📊</div>
+          <h3>Risk Scoring</h3>
+          <p>Risk scores are expressed as integer values from 0–100 on the AP2 standard scale. Scope grants can specify maximum acceptable risk scores, with higher-risk transactions triggering step-up authentication flows.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon" style="background:rgba(251,191,36,0.08)">🧾</div>
+          <h3>Audit Logs</h3>
+          <p>Every AP2 transaction generates an immutable audit record. The record includes: initiating agent ID, user principal, scope grant reference, intent hash, merchant, amount, timestamp, and settlement proof.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon" style="background:rgba(0,229,255,0.08)">🚫</div>
+          <h3>Revocation Systems</h3>
+          <p>AP2 revocations propagate to all registered infrastructure within a protocol-defined maximum window (currently 500ms for online systems). Offline revocation caching is required for resilient implementations.</p>
+        </div>
+      </div>
+
+      <div style="margin-top:3rem">
+        <h2 class="section-title" style="font-size:1.4rem; margin-bottom:1.5rem">Threat Models &amp; Best Practices</h2>
+        <div class="grid-2">
+          <div>
+            <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:600;margin-bottom:1rem;font-size:1rem">Common Attack Vectors</h3>
+            <div class="faq-item" onclick="toggleFaq(this)">
+              <div class="faq-q">Scope Creep &amp; Over-Authorization<span class="icon">+</span></div>
+              <div class="faq-a">Agents requesting broad scopes "just in case" is the most common security anti-pattern in AP2 implementations. Follow the principle of minimum viable scope — request only the merchant categories and amount limits actually needed for the agent's task. Scope grants should expire when the task is complete.</div>
+            </div>
+            <div class="faq-item" onclick="toggleFaq(this)">
+              <div class="faq-q">Token Exfiltration<span class="icon">+</span></div>
+              <div class="faq-a">Agent signing keys must never be transmitted over unencrypted channels or stored in client-side code. Use hardware security modules or secure key management services for production agents. Scope grant tokens should be treated with the same security level as bearer tokens.</div>
+            </div>
+            <div class="faq-item" onclick="toggleFaq(this)">
+              <div class="faq-q">Replay Attacks<span class="icon">+</span></div>
+              <div class="faq-a">AP2 payment intents include a nonce and expiry timestamp to prevent replay attacks. All AP2 servers are required to maintain a short-term nonce cache and reject any intent whose nonce has been used within the expiry window.</div>
+            </div>
+            <div class="faq-item" onclick="toggleFaq(this)">
+              <div class="faq-q">Prompt Injection via Commerce<span class="icon">+</span></div>
+              <div class="faq-a">Malicious merchants could attempt to embed instructions in product names or descriptions to manipulate an agent's purchasing behavior. AP2-compliant agents should treat all merchant-provided data as untrusted and validate purchase decisions against the original task context, not merchant-provided information.</div>
+            </div>
+          </div>
+          <div>
+            <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:600;margin-bottom:1rem;font-size:1rem">Implementation Checklist</h3>
+            <div style="display:flex;flex-direction:column;gap:0.5rem">
+              <div class="why-item"><div class="why-icon" style="background:rgba(34,197,94,0.1)">✅</div><div class="why-text"><h4>Use short-lived tokens</h4><p>15-minute JWT expiry is the AP2 recommended maximum for agent authentication tokens.</p></div></div>
+              <div class="why-item"><div class="why-icon" style="background:rgba(34,197,94,0.1)">✅</div><div class="why-text"><h4>Implement revocation caching</h4><p>Cache revocation status locally and refresh at least every 30 seconds for real-time systems.</p></div></div>
+              <div class="why-item"><div class="why-icon" style="background:rgba(34,197,94,0.1)">✅</div><div class="why-text"><h4>Log everything</h4><p>Every intent creation, submission, and outcome should be appended to your own audit log, independent of AP2's audit trail.</p></div></div>
+              <div class="why-item"><div class="why-icon" style="background:rgba(34,197,94,0.1)">✅</div><div class="why-text"><h4>Set spending alerts</h4><p>Notify users in real time when an agent submits a payment intent, not just when it settles.</p></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ==================== NEWS ==================== -->
+<div id="page-news" class="page">
+  <div class="page-hero">
+    <span class="section-label">Latest</span>
+    <h1>Industry News</h1>
+    <p>Independent coverage of AP2, AI commerce, agentic payments, and payment infrastructure developments.</p>
+  </div>
+  <section>
+    <div class="section-inner">
+      <div class="search-bar">
+        <span class="search-icon">🔍</span>
+        <input type="text" placeholder="Search news...">
+      </div>
+      <div class="filter-group">
+        <button class="filter-btn active">All</button>
+        <button class="filter-btn" onclick="this.parentElement.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));this.classList.add('active')">Protocol</button>
+        <button class="filter-btn" onclick="this.parentElement.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));this.classList.add('active')">AI</button>
+        <button class="filter-btn" onclick="this.parentElement.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));this.classList.add('active')">Fintech</button>
+        <button class="filter-btn" onclick="this.parentElement.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));this.classList.add('active')">Payments</button>
+        <button class="filter-btn" onclick="this.parentElement.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));this.classList.add('active')">Regulation</button>
+      </div>
+      <div class="grid-3">
+        <div class="card article-card fade-in" style="grid-column: span 1">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.75rem">
+            <span class="article-tag">Protocol</span>
+            <span style="font-size:11px;color:var(--muted)">June 10, 2026</span>
+          </div>
+          <h3>AP2 Working Group Publishes Draft v2.1 Specification for Multi-Agent Delegation</h3>
+          <p>The draft introduces a new <code style="font-family:'JetBrains Mono',monospace;font-size:11px;background:rgba(0,229,255,0.08);padding:1px 4px;border-radius:3px">DelegatedScopeGrant</code> object type, enabling parent agents to issue sub-scopes to child agents without requiring fresh user consent for pre-authorized delegation patterns.</p>
+          <div class="article-meta"><span>5 min read</span><span>High Impact</span></div>
+        </div>
+        <div class="card article-card fade-in">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.75rem">
+            <span class="article-tag">Fintech</span>
+            <span style="font-size:11px;color:var(--muted)">June 9, 2026</span>
+          </div>
+          <h3>Three Major European Banks Announce AP2 Compatibility Testing Programs</h3>
+          <p>Following similar announcements from US institutions last quarter, three European banking groups have entered AP2 compatibility testing, signaling growing institutional acceptance of the agentic payments standard.</p>
+          <div class="article-meta"><span>4 min read</span><span>Industry</span></div>
+        </div>
+        <div class="card article-card fade-in">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.75rem">
+            <span class="article-tag">AI</span>
+            <span style="font-size:11px;color:var(--muted)">June 7, 2026</span>
+          </div>
+          <h3>New Benchmark: How 12 Frontier AI Models Handle AP2 Authorization Edge Cases</h3>
+          <p>Independent research tests how leading language models respond when given ambiguous purchasing instructions that would violate scope constraints, revealing significant behavioral variance across models.</p>
+          <div class="article-meta"><span>8 min read</span><span>Research</span></div>
+        </div>
+        <div class="card article-card fade-in">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.75rem">
+            <span class="article-tag">Regulation</span>
+            <span style="font-size:11px;color:var(--muted)">June 5, 2026</span>
+          </div>
+          <h3>EU's Proposed AI Commerce Directive Would Mandate AP2-Style Consent Disclosures</h3>
+          <p>A leaked draft of the European Commission's forthcoming AI Commerce Directive contains language closely aligned with AP2's consent specification, which could effectively standardize the approach across the bloc.</p>
+          <div class="article-meta"><span>6 min read</span><span>Regulation</span></div>
+        </div>
+        <div class="card article-card fade-in">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.75rem">
+            <span class="article-tag">Payments</span>
+            <span style="font-size:11px;color:var(--muted)">June 3, 2026</span>
+          </div>
+          <h3>AP2 Transaction Volume Crosses 100M Monthly Intents for the First Time</h3>
+          <p>According to infrastructure provider reports, the AP2 ecosystem processed over 100 million payment intents in May — a 340% year-over-year increase driven primarily by enterprise agentic workflows.</p>
+          <div class="article-meta"><span>3 min read</span><span>Milestone</span></div>
+        </div>
+        <div class="card article-card fade-in">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.75rem">
+            <span class="article-tag">Security</span>
+            <span style="font-size:11px;color:var(--muted)">June 1, 2026</span>
+          </div>
+          <h3>First Documented AP2 Scope-Creep Exploit Published With Responsible Disclosure</h3>
+          <p>A security researcher published a responsible disclosure describing how overly broad merchant category codes in scope grants could be exploited to authorize purchases at unintended merchant types in certain wallet implementations.</p>
+          <div class="article-meta"><span>7 min read</span><span>Security</span></div>
+        </div>
+      </div>
+      <div style="display:flex;justify-content:center;gap:8px;margin-top:2.5rem;flex-wrap:wrap">
+        <button class="filter-btn active" style="border-radius:8px">1</button>
+        <button class="filter-btn" style="border-radius:8px">2</button>
+        <button class="filter-btn" style="border-radius:8px">3</button>
+        <button class="filter-btn" style="border-radius:8px">Next →</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ==================== BLOG ==================== -->
+<div id="page-blog" class="page">
+  <div class="page-hero">
+    <span class="section-label">Editorial</span>
+    <h1>AP2 Gateway Blog</h1>
+    <p>In-depth analysis, tutorials, and perspectives on the agentic payments ecosystem.</p>
+  </div>
+  <section>
+    <div class="section-inner">
+      <!-- Featured Post -->
+      <div class="card" style="margin-bottom:2rem;padding:2rem;display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center">
+        <div>
+          <span class="article-tag">Featured</span>
+          <h2 style="font-family:'Space Grotesk',sans-serif;font-size:1.4rem;font-weight:700;margin:0.75rem 0;letter-spacing:-0.02em">What is AP2? The Complete Beginner's Guide to Agent Payments Protocol</h2>
+          <p style="font-size:0.9rem;color:var(--muted);line-height:1.7;margin-bottom:1.5rem">The most comprehensive introduction to AP2 written for developers, product managers, and fintech professionals with no prior background in agentic systems. Covers history, architecture, and practical implications.</p>
+          <div style="display:flex;gap:12px;align-items:center">
+            <button class="btn-primary" style="font-size:13px;padding:10px 20px" onclick="showPage('what-is-ap2')">Read Now</button>
+            <span style="font-size:12px;color:var(--muted)">15 min read · 24K views</span>
+          </div>
+        </div>
+        <div style="background:linear-gradient(135deg,rgba(0,229,255,0.08),rgba(14,165,233,0.04));border-radius:12px;padding:2rem;text-align:center;border:1px solid var(--border)">
+          <div style="font-size:4rem;margin-bottom:0.75rem">🤖</div>
+          <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.1rem;color:var(--primary)">AP2 Explained</div>
+          <div style="font-size:13px;color:var(--muted);margin-top:0.25rem">Complete Foundation Guide</div>
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <div class="card article-card fade-in">
+          <div class="article-tag">Agent Commerce</div>
+          <h3>Understanding Agent Commerce: From Task to Transaction</h3>
+          <p>How AI agents move from receiving a high-level task to executing specific purchases — and the authorization handshakes that happen at each step.</p>
+          <div class="article-meta"><span>May 30, 2026</span><span>10 min read</span></div>
+        </div>
+        <div class="card article-card fade-in">
+          <div class="article-tag">AI Payments</div>
+          <h3>The Future of AI Payments: Predictions for the Next 18 Months</h3>
+          <p>Real-time cross-border agent transactions, offline authorization caching, and the emergence of agent credit scoring — what's coming in the AP2 ecosystem.</p>
+          <div class="article-meta"><span>May 25, 2026</span><span>8 min read</span></div>
+        </div>
+        <div class="card article-card fade-in">
+          <div class="article-tag">Technical</div>
+          <h3>How Autonomous Transactions Work: A Step-by-Step Breakdown</h3>
+          <p>Walking through a complete AP2 transaction lifecycle — from the moment a user grants scope, through the agent's intent creation, to settlement and receipt generation.</p>
+          <div class="article-meta"><span>May 20, 2026</span><span>12 min read</span></div>
+        </div>
+        <div class="card article-card fade-in">
+          <div class="article-tag">Industry</div>
+          <h3>The Rise of AI Agents: What Payment Companies Need to Know Now</h3>
+          <p>A briefing for payments industry professionals on the agent commerce landscape — volume projections, integration requirements, and competitive implications.</p>
+          <div class="article-meta"><span>May 15, 2026</span><span>9 min read</span></div>
+        </div>
+        <div class="card article-card fade-in">
+          <div class="article-tag">Security</div>
+          <h3>Trust and Security in Agent Payments: A Framework for Builders</h3>
+          <p>Moving beyond checklist security to building genuine trustworthiness into agentic payment systems — covering design principles, threat modeling, and ongoing monitoring.</p>
+          <div class="article-meta"><span>May 10, 2026</span><span>11 min read</span></div>
+        </div>
+        <div class="card article-card fade-in">
+          <div class="article-tag">Merchant</div>
+          <h3>Merchant Adoption of Agent Commerce: Early Lessons From the Field</h3>
+          <p>Interviews and case studies from merchants who've enabled AP2 support — covering technical integration, fraud patterns, and the surprising revenue impact of agent-initiated purchases.</p>
+          <div class="article-meta"><span>May 5, 2026</span><span>13 min read</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ==================== DOCS ==================== -->
+<div id="page-docs" class="page">
+  <div class="page-hero">
+    <span class="section-label">Reference</span>
+    <h1>Documentation Center</h1>
+    <p>Protocol basics, integration guides, and technical references — organized for quick navigation.</p>
+  </div>
+  <section>
+    <div class="section-inner">
+      <div class="sidebar-layout">
+        <div class="sidebar">
+          <div class="sidebar-title">Documentation</div>
+          <a class="sidebar-link active">Protocol Basics</a>
+          <a class="sidebar-link">Agent Integration</a>
+          <a class="sidebar-link">Wallet Integration</a>
+          <a class="sidebar-link">Merchant Integration</a>
+          <a class="sidebar-link">Security</a>
+          <a class="sidebar-link">Advanced Topics</a>
+          <div style="margin-top:1.5rem; padding-top:1rem; border-top:1px solid var(--border)">
+            <div class="sidebar-title">Resources</div>
+            <a class="sidebar-link" onclick="showPage('developer-hub')">Developer Hub</a>
+            <a class="sidebar-link" onclick="showPage('glossary')">Glossary</a>
+            <a class="sidebar-link" onclick="showPage('faq')">FAQ</a>
+          </div>
+        </div>
+        <div>
+          <div class="doc-section">
+            <h2>Protocol Basics</h2>
+            <p>AP2 (Agent Payments Protocol) is a specification that standardizes how AI agents initiate and execute payments on behalf of human users. This section covers the foundational concepts every developer needs before building an AP2 integration.</p>
+
+            <h3>Core Objects</h3>
+            <p>AP2 operates on three primary data structures:</p>
+            <ul>
+              <li><strong style="color:var(--text)">ScopeGrant</strong> — The user-signed authorization object defining what an agent can purchase</li>
+              <li><strong style="color:var(--text)">PaymentIntent</strong> — The agent-created transaction descriptor for a specific purchase</li>
+              <li><strong style="color:var(--text)">SettlementReceipt</strong> — The payment provider's confirmation of completed settlement</li>
+            </ul>
+
+            <h3>Agent Integration</h3>
+            <p>To make your agent AP2-capable, you need to: register an agent identity keypair with an AP2 registry, receive and validate ScopeGrants from users, create properly structured PaymentIntents, and handle the full range of authorization outcomes including step-up challenges.</p>
+            <div class="alert-info">See the Developer Hub for complete code examples and SDK documentation for your preferred language.</div>
+
+            <h3>Wallet Integration</h3>
+            <p>AP2-compatible wallets must implement the ScopeGrant issuance flow (displaying consent UI to users), maintain a revocation registry, respond to scope validation queries from AP2 infrastructure, and propagate revocations within the protocol-defined latency window.</p>
+
+            <h3>Merchant Integration</h3>
+            <p>Merchants accepting AP2 payments need to validate incoming PaymentIntents against the AP2 registry, verify that the agent's scope grant covers the transaction category and amount, and return properly formatted acceptance responses that feed into the settlement pipeline.</p>
+
+            <h3>Advanced Topics</h3>
+            <ul>
+              <li>Multi-agent delegation and nested scope grants</li>
+              <li>Offline authorization caching for resilient agents</li>
+              <li>Cross-border payment routing with AP2</li>
+              <li>Recurring payment scopes and renewal flows</li>
+              <li>Enterprise policy hierarchies and centralized scope management</li>
+              <li>AP2 in regulated industries: financial services, healthcare, government</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ==================== GLOSSARY ==================== -->
+<div id="page-glossary" class="page">
+  <div class="page-hero">
+    <span class="section-label">Reference</span>
+    <h1>AP2 Glossary</h1>
+    <p>Definitions for key terms in the Agent Payments Protocol and agentic commerce ecosystem.</p>
+  </div>
+  <section>
+    <div class="section-inner">
+      <div class="glossary-letter">A</div>
+      <div class="glossary-term"><h4>Agent</h4><p>An AI system that can take actions in the world on behalf of a human user, including initiating financial transactions within an authorized scope. In AP2, agents are identified by cryptographic keypairs and are associated with a human principal.</p></div>
+      <div class="glossary-term"><h4>Agent Commerce</h4><p>The broader category of economic activity initiated by AI agents on behalf of human principals, including purchasing goods, subscribing to services, booking services, and executing financial instructions.</p></div>
+      <div class="glossary-term"><h4>Authorization Scope</h4><p>The set of permissions granted to an agent by a user, expressed as a ScopeGrant object. Defines allowed merchant categories, spending limits, time windows, and frequency caps.</p></div>
+      <div class="glossary-term"><h4>Audit Trail</h4><p>The immutable, cryptographically linked record of every step in an AP2 transaction lifecycle — from intent creation through authorization to settlement. Required by the AP2 specification for all production implementations.</p></div>
+
+      <div class="glossary-letter">C</div>
+      <div class="glossary-term"><h4>Consent</h4><p>The explicit, informed agreement by a human user to grant an agent a specific ScopeGrant. AP2 consent must be freely given, specific, informed, and revocable. Dark patterns in consent collection are explicitly prohibited by the specification.</p></div>
+      <div class="glossary-term"><h4>Consent Revocation</h4><p>The act of withdrawing a previously granted ScopeGrant. Revocations must propagate across all AP2 infrastructure within the protocol-defined maximum latency window, and must immediately cancel any pending PaymentIntents referencing the revoked scope.</p></div>
+
+      <div class="glossary-letter">E</div>
+      <div class="glossary-term"><h4>Escrow</h4><p>In AP2 contexts, an escrow arrangement where funds are held pending fulfillment of a condition — typically delivery confirmation for physical goods purchased by agents. AP2 defines optional escrow extension fields on PaymentIntent objects.</p></div>
+
+      <div class="glossary-letter">M</div>
+      <div class="glossary-term"><h4>Merchant Category Code (MCC)</h4><p>A standardized classification code (derived from ISO 18245) used in ScopeGrants to restrict which types of merchants an agent can transact with. AP2 uses an extended MCC taxonomy that includes digital goods and service categories not covered by the original ISO standard.</p></div>
+
+      <div class="glossary-letter">P</div>
+      <div class="glossary-term"><h4>Payment Intent</h4><p>The core transactional object in AP2 — a signed, immutable JSON document created by an agent that describes a specific purchase: merchant, amount, currency, description, scope grant reference, and expiry. Once created, a PaymentIntent cannot be modified; changes require a new intent.</p></div>
+      <div class="glossary-term"><h4>Payment Verification</h4><p>The process by which a merchant or payment provider validates that an incoming AP2 payment intent was created by a legitimate, authorized agent acting within its granted scope, before accepting the transaction.</p></div>
+      <div class="glossary-term"><h4>Principal</h4><p>The human user at the top of an AP2 authorization hierarchy. All agent permissions ultimately derive from a human principal's explicit authorization. Principals can delegate to agents, who can in turn sub-delegate under certain conditions.</p></div>
+      <div class="glossary-term"><h4>Protocol</h4><p>In the AP2 context, the full specification defining data structures, communication patterns, security requirements, and behavioral expectations for agents, wallets, merchants, and payment infrastructure participating in the AP2 ecosystem.</p></div>
+
+      <div class="glossary-letter">R</div>
+      <div class="glossary-term"><h4>Risk Model</h4><p>A system for scoring the likelihood that a given AP2 transaction is fraudulent or anomalous. AP2 defines a standard risk signal format enabling providers to exchange scores without exposing proprietary model details. Risk scores from 0 (lowest risk) to 100 (highest risk).</p></div>
+
+      <div class="glossary-letter">S</div>
+      <div class="glossary-term"><h4>ScopeGrant</h4><p>A signed JSON document issued by a principal (human user) to an agent, specifying the exact permissions granted. Includes merchant category codes, maximum transaction amount, daily/monthly spending limits, allowed time windows, and expiry.</p></div>
+      <div class="glossary-term"><h4>Settlement</h4><p>The final clearing and transfer of funds from the payer's account to the merchant's account, following successful authorization of an AP2 payment intent. The settlement process generates a SettlementReceipt that is added to the transaction's audit trail.</p></div>
+      <div class="glossary-term"><h4>Step-Up Authentication</h4><p>A mechanism in AP2 that requires an agent to pause and obtain fresh authorization from its human principal when a transaction's risk score or amount exceeds configurable thresholds. The step-up token is passed back to the agent after user confirmation.</p></div>
+
+      <div class="glossary-letter">T</div>
+      <div class="glossary-term"><h4>Trust Layer</h4><p>The combination of authentication, authorization, audit logging, and revocation mechanisms in AP2 that together establish whether a given agent-initiated transaction should be trusted and processed. The trust layer is the defining contribution of AP2 to the agentic payments stack.</p></div>
+
+      <div class="glossary-letter">V</div>
+      <div class="glossary-term"><h4>Verification</h4><p>The process of confirming the authenticity and authorization of an AP2 payment intent. Verification checks that the agent signature is valid, the scope grant is active and covers the transaction, the intent hasn't expired, and the nonce hasn't been used previously.</p></div>
+
+      <div class="glossary-letter">W</div>
+      <div class="glossary-term"><h4>Wallet</h4><p>In AP2, a software system responsible for managing a user's payment credentials, issuing ScopeGrants to authorized agents, maintaining the revocation registry, and presenting consent flows to users. AP2-compatible wallets must implement the full AP2 wallet interface specification.</p></div>
+    </div>
+  </section>
+</div>
+
+<!-- ==================== FAQ ==================== -->
+<div id="page-faq" class="page">
+  <div class="page-hero">
+    <span class="section-label">Support</span>
+    <h1>Frequently Asked Questions</h1>
+    <p>Answers to the most common questions about AP2, agentic payments, and this resource.</p>
+  </div>
+  <section>
+    <div class="section-inner">
+      <div style="max-width:780px">
+        <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:600;margin-bottom:1rem;color:var(--primary);font-size:0.9rem;text-transform:uppercase;letter-spacing:0.06em">About AP2 Protocol</h3>
+        <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">What is Agent Payments Protocol (AP2)?<span class="icon">+</span></div><div class="faq-a">AP2 is an open specification that defines how AI agents can initiate, authorize, verify, and settle financial transactions on behalf of human users. It creates a standardized communication layer between agents, wallets, payment providers, and merchants, ensuring every autonomous financial action is traceable, revocable, and explicitly authorized by a human principal.</div></div>
+        <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Is AP2 Gateway affiliated with Google?<span class="icon">+</span></div><div class="faq-a">No. AP2 Gateway is an independent educational and community resource. We are not affiliated with Google, AP2 Protocol maintainers, or any official organization. Our content represents independent research and editorial analysis.</div></div>
+        <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Who created the AP2 protocol?<span class="icon">+</span></div><div class="faq-a">AP2 emerged from collaborative work among payment companies, AI developers, wallet providers, and standards bodies responding to the challenge of enabling autonomous agent transactions safely. AP2 Gateway is an independent observer and does not speak for any official protocol organization.</div></div>
+        <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Is AP2 production-ready?<span class="icon">+</span></div><div class="faq-a">Parts of the AP2 ecosystem are in active production use, while other components remain in draft specification or early implementation phases. The core payment intent and scope grant patterns have been implemented by multiple production systems. Multi-agent delegation and advanced features remain evolving. Check official specification sources for current implementation status.</div></div>
+        <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">How is AP2 different from existing payment APIs?<span class="icon">+</span></div><div class="faq-a">Existing payment APIs (Stripe, Braintree, etc.) are designed for humans or simple automated systems making pre-determined purchases. AP2 adds the concept of scoped agent authorization — allowing flexible, general-purpose agents to make purchases within well-defined limits, with revocable consent, risk scoring, and a complete audit trail that attributes each transaction to a specific agent and authorization.</div></div>
+        <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Does AP2 work with cryptocurrency?<span class="icon">+</span></div><div class="faq-a">AP2 is payment-rail agnostic. It uses cryptographic techniques for signing and verification, but it does not require cryptocurrency or blockchain. It is designed to work with existing card networks, bank transfers, real-time payment systems, and can be extended for digital asset rails.</div></div>
+        <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">What currencies does AP2 support?<span class="icon">+</span></div><div class="faq-a">AP2 uses ISO 4217 currency codes and supports any currency that the underlying payment rail supports. Scope grants can restrict agents to specific currencies. Cross-currency transactions require explicit authorization and include exchange rate disclosure requirements.</div></div>
+
+        <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:600;margin:2rem 0 1rem;color:var(--primary);font-size:0.9rem;text-transform:uppercase;letter-spacing:0.06em">For Developers</h3>
+        <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Where do I start to build an AP2 integration?<span class="icon">+</span></div><div class="faq-a">Start with our Developer Hub, which walks through the core concepts, SDK installation, and a complete quickstart example. The four key steps are: register an agent identity, receive a scope grant from a user, create payment intents for specific purchases, and handle the authorization response including step-up challenges.</div></div>
+        <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Is there a sandbox environment for testing?<span class="icon">+</span></div><div class="faq-a">Yes. AP2 provides a sandbox environment that mirrors production behavior without processing real payments. The sandbox supports all authorization outcomes including approvals, rejections, step-up challenges, and scope revocations. See the Testing section of our Developer Hub for setup instructions.</div></div>
+        <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">What languages have official AP2 SDKs?<span class="icon">+</span></div><div class="faq-a">Official SDKs are available for JavaScript/TypeScript, Python, Java/Kotlin, Go, and Rust. A REST API with OpenAPI specification is available for other platforms. Community SDKs exist for Ruby, PHP, and .NET — consult official AP2 developer resources for current availability and official status.</div></div>
+        <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">How do I handle scope revocations in my agent?<span class="icon">+</span></div><div class="faq-a">Your agent should subscribe to revocation webhooks from the AP2 infrastructure and maintain a local revocation cache. Before submitting any payment intent, validate the scope grant's active status. The AP2 SDK handles this automatically when you call scope.isValid() before intent submission. For long-running agents, set up a background refresh process that polls revocation status every 30 seconds.</div></div>
+        <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">What happens if the AP2 service is unavailable?<span class="icon">+</span></div><div class="faq-a">AP2-compliant implementations support offline scope caching for short-duration outages. The cached scope remains valid for the duration specified in its offline_ttl field (maximum 10 minutes by default). After this window, the agent must queue transactions for retry rather than submitting without fresh verification. Never process payments against a stale scope cache beyond the offline_ttl.</div></div>
+
+        <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:600;margin:2rem 0 1rem;color:var(--primary);font-size:0.9rem;text-transform:uppercase;letter-spacing:0.06em">For Users</h3>
+        <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">How do I know if an AI agent has spent money on my behalf?<span class="icon">+</span></div><div class="faq-a">AP2-compliant wallets are required to notify users in real time when an agent submits a payment intent, not just when it settles. You should receive a push notification, email, or in-app alert for every agent-initiated transaction within the parameters you've authorized. You can also view a full audit trail in your AP2 wallet at any time.</div></div>
+        <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Can an AI agent spend money without my knowledge?<span class="icon">+</span></div><div class="faq-a">No — within AP2's design, every agent transaction must reference a ScopeGrant that you explicitly authorized. Agents can only spend within the limits, categories, and timeframes you defined. Your wallet must notify you of each transaction. If you see unexpected charges, you can immediately revoke the agent's scope, which will cancel any pending transactions and prevent future ones.</div></div>
+        <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">How do I revoke an agent's access?<span class="icon">+</span></div><div class="faq-a">Open your AP2-compatible wallet, navigate to the Agents or Permissions section, and revoke the specific scope grant. Revocation is instant — the protocol requires propagation to all infrastructure within 500ms for online systems. Any transactions in-flight at the moment of revocation will be cancelled.</div></div>
+        <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Can I set a maximum spending limit for an agent?<span class="icon">+</span></div><div class="faq-a">Yes. ScopeGrants support per-transaction limits, daily limits, monthly limits, and total lifetime limits. You can set all of these when creating a scope grant through your wallet. The agent cannot exceed these limits under any circumstances — transactions above the limit are automatically rejected at the protocol level.</div></div>
+        <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">What if an agent makes a purchase I didn't want?<span class="icon">+</span></div><div class="faq-a">First, revoke the agent's scope immediately to prevent further purchases. Then contact the merchant with your AP2 transaction ID (available from your wallet's audit log) to request a refund. The AP2 audit trail provides clear evidence of who initiated the transaction, which typically makes dispute resolution faster than traditional payment disputes.</div></div>
+
+        <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:600;margin:2rem 0 1rem;color:var(--primary);font-size:0.9rem;text-transform:uppercase;letter-spacing:0.06em">Security & Privacy</h3>
+        <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">How does AP2 prevent fraud?<span class="icon">+</span></div><div class="faq-a">AP2's fraud prevention operates at multiple layers: cryptographic signing prevents intent forgery, scope enforcement prevents category and amount violations, risk scoring signals flag anomalous patterns, step-up authentication challenges high-risk transactions, and the complete audit trail enables rapid fraud investigation and attribution.</div></div>
+        <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Is my payment data shared with other parties?<span class="icon">+</span></div><div class="faq-a">AP2 defines minimum data sharing requirements — payment credentials flow only through authorized channels defined in the scope grant. The protocol explicitly prohibits agents from receiving raw payment credentials; they receive authorization tokens instead. Data privacy beyond the protocol level depends on your wallet provider's privacy policy.</div></div>
+        <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Can an agent impersonate another agent?<span class="icon">+</span></div><div class="faq-a">Not under AP2's authentication model. Every agent has a unique identity keypair, and agent identity assertions are cryptographically signed. Impersonation would require access to the target agent's private key. Secure key management (using HSMs or secure enclaves) is a required best practice for all AP2 agent implementations.</div></div>
+        <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">What happens to my data if the AP2 registry goes down?<span class="icon">+</span></div><div class="faq-a">AP2 implementations are required to maintain local caches of scope grant validations and revocation status, reducing dependency on real-time registry availability. The offline_ttl mechanism allows agents to continue operating during brief outages while maintaining security guarantees. Extended outages will cause agents to queue transactions pending registry recovery.</div></div>
+
+        <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:600;margin:2rem 0 1rem;color:var(--primary);font-size:0.9rem;text-transform:uppercase;letter-spacing:0.06em">Merchants & Businesses</h3>
+        <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Why should merchants support AP2?<span class="icon">+</span></div><div class="faq-a">AP2 enables a growing category of agent-initiated purchases that won't happen through traditional payment flows. Early-adopter merchants report higher average order values from agent purchases (agents tend to optimize for value rather than price) and lower cart-abandonment rates. Supporting AP2 also provides better fraud protection through the verification layer.</div></div>
+        <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">How difficult is it to add AP2 support to an existing merchant integration?<span class="icon">+</span></div><div class="faq-a">For merchants already integrated with major payment processors, adding AP2 support typically involves: registering in the AP2 merchant registry, adding PaymentIntent validation logic to your checkout flow, and updating your webhook handler to process AP2 settlement receipts. Most merchants report 1–3 days of engineering work for basic integration.</div></div>
+        <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">How does AP2 affect merchant chargeback rates?<span class="icon">+</span></div><div class="faq-a">Early data suggests AP2 transactions have lower chargeback rates than traditional e-commerce, due to the explicit authorization chain and real-time user notification. Disputed AP2 transactions also resolve faster because the audit trail provides unambiguous evidence of what was authorized. However, merchants should establish their own AP2-specific dispute handling processes.</div></div>
+        <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Are there AP2 merchant category codes I need to register?<span class="icon">+</span></div><div class="faq-a">Yes. Merchants register their AP2 Merchant Category Code (which extends the standard ISO MCC system) as part of registry onboarding. Your MCC determines which agent scope grants can authorize purchases at your merchant. If your MCC isn't on the allowlist of a user's scope grant, the transaction will be rejected before reaching your systems.</div></div>
+
+        <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:600;margin:2rem 0 1rem;color:var(--primary);font-size:0.9rem;text-transform:uppercase;letter-spacing:0.06em">About AP2 Gateway</h3>
+        <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">What is AP2 Gateway?<span class="icon">+</span></div><div class="faq-a">AP2 Gateway (ap2gateway.store) is an independent educational platform dedicated to the Agent Payments Protocol ecosystem. We publish technical guides, industry analysis, developer resources, and community content. We are not affiliated with any official AP2 organization, payment company, or technology vendor.</div></div>
+        <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">How do I contribute an article or resource?<span class="icon">+</span></div><div class="faq-a">We welcome contributions from developers, researchers, and industry professionals. Visit our Community page or use the Contact form to submit a contribution proposal. Our editorial team reviews all submissions for accuracy, originality, and relevance to the AP2 ecosystem.</div></div>
+        <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Is the content on AP2 Gateway free?<span class="icon">+</span></div><div class="faq-a">Yes, all educational content on AP2 Gateway is freely accessible. We are supported by our community and do not charge for access to articles, guides, or documentation resources.</div></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ==================== COMMUNITY ==================== -->
+<div id="page-community" class="page">
+  <div class="page-hero">
+    <span class="section-label">Connect</span>
+    <h1>AP2 Community</h1>
+    <p>Join the growing community of developers, researchers, and practitioners building the agentic payments ecosystem.</p>
+  </div>
+  <section>
+    <div class="section-inner">
+      <div class="grid-4" style="margin-bottom:3rem">
+        <div class="community-card fade-in">
+          <div class="community-icon">💬</div>
+          <h3>Telegram</h3>
+          <p>Real-time discussion, protocol announcements, and community support for developers and enthusiasts.</p>
+          <button class="btn-primary" style="font-size:13px;padding:10px 18px" onclick="alert('Opening Telegram community...')">Join Telegram</button>
+          <div style="font-size:12px;color:var(--muted);margin-top:0.75rem">~2,800 members</div>
+        </div>
+        <div class="community-card fade-in">
+          <div class="community-icon">🎮</div>
+          <h3>Discord</h3>
+          <p>Channels for #dev-help, #protocol-discussion, #security, #integrations, and regional communities.</p>
+          <button class="btn-primary" style="font-size:13px;padding:10px 18px" onclick="alert('Opening Discord server...')">Join Discord</button>
+          <div style="font-size:12px;color:var(--muted);margin-top:0.75rem">~4,100 members</div>
+        </div>
+        <div class="community-card fade-in">
+          <div class="community-icon">🐙</div>
+          <h3>GitHub</h3>
+          <p>Reference implementations, example integrations, community SDKs, and educational repositories.</p>
+          <button class="btn-secondary" style="font-size:13px;padding:10px 18px" onclick="alert('Opening GitHub...')">View on GitHub</button>
+          <div style="font-size:12px;color:var(--muted);margin-top:0.75rem">~890 stars</div>
+        </div>
+        <div class="community-card fade-in">
+          <div class="community-icon">📧</div>
+          <h3>Newsletter</h3>
+          <p>Weekly digest of protocol updates, developer guides, industry news, and community highlights.</p>
+          <button class="btn-secondary" style="font-size:13px;padding:10px 18px" onclick="showPage('newsletter')">Subscribe</button>
+          <div style="font-size:12px;color:var(--muted);margin-top:0.75rem">~3,400 subscribers</div>
+        </div>
+      </div>
+
+      <div class="section-header">
+        <span class="section-label">Events</span>
+        <h2 class="section-title">Upcoming Community Events</h2>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:0.75rem;margin-bottom:3rem">
+        <div class="dir-item">
+          <div class="dir-item-left">
+            <div class="dir-avatar">📅</div>
+            <div class="dir-info">
+              <h4>AP2 Developer Workshop — Building Your First Agent Wallet</h4>
+              <p>Online · June 18, 2026 · 2:00 PM UTC</p>
+            </div>
+          </div>
+          <button class="btn-secondary" style="font-size:12px;padding:7px 14px" onclick="alert('Registering...')">Register</button>
+        </div>
+        <div class="dir-item">
+          <div class="dir-item-left">
+            <div class="dir-avatar">🎤</div>
+            <div class="dir-info">
+              <h4>Protocol Discussion: Multi-Agent Delegation in AP2 v2.1</h4>
+              <p>Discord Voice + Recording · June 25, 2026 · 3:00 PM UTC</p>
+            </div>
+          </div>
+          <button class="btn-secondary" style="font-size:12px;padding:7px 14px" onclick="alert('Adding reminder...')">Remind Me</button>
+        </div>
+        <div class="dir-item">
+          <div class="dir-item-left">
+            <div class="dir-avatar">🌍</div>
+            <div class="dir-info">
+              <h4>AP2 Community Meetup — San Francisco</h4>
+              <p>In-Person · July 8, 2026 · SoMa, San Francisco</p>
+            </div>
+          </div>
+          <button class="btn-secondary" style="font-size:12px;padding:7px 14px" onclick="alert('Registering...')">RSVP</button>
+        </div>
+        <div class="dir-item">
+          <div class="dir-item-left">
+            <div class="dir-avatar">🔐</div>
+            <div class="dir-info">
+              <h4>Security Office Hours — Ask the AP2 Security Working Group</h4>
+              <p>Online · Monthly, 3rd Wednesday · July 16, 2026</p>
+            </div>
+          </div>
+          <button class="btn-secondary" style="font-size:12px;padding:7px 14px" onclick="alert('Registering...')">Register</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ==================== NEWSLETTER ==================== -->
+<div id="page-newsletter" class="page">
+  <div class="page-hero">
+    <span class="section-label">Stay Informed</span>
+    <h1>AP2 Weekly Digest</h1>
+    <p>Protocol updates, developer guides, and industry news — delivered every Tuesday.</p>
+  </div>
+  <section>
+    <div class="section-inner" style="max-width:700px">
+      <div class="grid-2" style="margin-bottom:3rem">
+        <div class="card"><div class="card-icon" style="background:rgba(0,229,255,0.08)">📰</div><h3>Protocol Updates</h3><p>The latest AP2 specification changes, new draft proposals, and implementation guidance as the protocol evolves.</p></div>
+        <div class="card"><div class="card-icon" style="background:rgba(34,197,94,0.08)">⚙️</div><h3>Developer Guides</h3><p>New tutorials, code examples, SDK releases, and integration patterns from our editorial team and community contributors.</p></div>
+        <div class="card"><div class="card-icon" style="background:rgba(168,85,247,0.08)">🏦</div><h3>Industry News</h3><p>Curated coverage of AP2 adoption, agentic commerce developments, payment industry news, and regulatory updates.</p></div>
+        <div class="card"><div class="card-icon" style="background:rgba(251,191,36,0.08)">👥</div><h3>Community Highlights</h3><p>Spotlight on community projects, upcoming events, contributor recognition, and discussions worth reading.</p></div>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:2rem">
+        <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:700;margin-bottom:0.5rem">Subscribe to the Digest</h3>
+        <p style="font-size:0.88rem;color:var(--muted);margin-bottom:1.5rem">No spam, no promotions. Just signal. Unsubscribe at any time.</p>
+        <div class="newsletter-form">
+          <input type="email" placeholder="your@email.com">
+          <button class="btn-primary" onclick="alert('Subscribed! Welcome aboard.')">Subscribe Free</button>
+        </div>
+        <p style="font-size:11px;color:var(--muted);margin-top:0.75rem">Joining 3,400 developers, researchers, and fintech professionals. Sent every Tuesday.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ==================== DIRECTORY ==================== -->
+<div id="page-directory" class="page">
+  <div class="page-hero">
+    <span class="section-label">Ecosystem</span>
+    <h1>AP2 Ecosystem Directory</h1>
+    <p>Wallets, payment providers, agent platforms, developer tools, and merchant systems in the AP2 ecosystem.</p>
+  </div>
+  <section>
+    <div class="section-inner">
+      <div class="search-bar"><span class="search-icon">🔍</span><input type="text" placeholder="Search directory..."></div>
+      <div class="filter-group">
+        <button class="filter-btn active">All</button>
+        <button class="filter-btn" onclick="this.parentElement.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));this.classList.add('active')">Wallets</button>
+        <button class="filter-btn" onclick="this.parentElement.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));this.classList.add('active')">Payment Providers</button>
+        <button class="filter-btn" onclick="this.parentElement.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));this.classList.add('active')">Agent Platforms</button>
+        <button class="filter-btn" onclick="this.parentElement.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));this.classList.add('active')">Developer Tools</button>
+        <button class="filter-btn" onclick="this.parentElement.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));this.classList.add('active')">Infrastructure</button>
+      </div>
+      <div class="grid-2">
+        <div>
+          <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:600;margin-bottom:1rem;font-size:0.95rem;color:var(--primary)">🔐 Wallets</h3>
+          <div class="dir-item"><div class="dir-item-left"><div class="dir-avatar">AW</div><div class="dir-info"><h4>AgentWallet</h4><p>Full AP2 v1.2 support · Consumer · Enterprise</p></div></div><span class="tag tag-green">Verified</span></div>
+          <div class="dir-item"><div class="dir-item-left"><div class="dir-avatar">VW</div><div class="dir-info"><h4>VaultPay</h4><p>AP2 v1.1 · Mobile-first wallet · Hardware key support</p></div></div><span class="tag tag-blue">AP2 Ready</span></div>
+          <div class="dir-item"><div class="dir-item-left"><div class="dir-avatar">NX</div><div class="dir-info"><h4>NexWallet Enterprise</h4><p>AP2 v1.2 · Enterprise SSO · Policy management</p></div></div><span class="tag tag-green">Verified</span></div>
+          <div class="dir-item"><div class="dir-item-left"><div class="dir-avatar">PW</div><div class="dir-info"><h4>PixelWallet</h4><p>AP2 v1.0 · Developer-focused · Open source</p></div></div><span class="tag tag-purple">Community</span></div>
+        </div>
+        <div>
+          <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:600;margin-bottom:1rem;font-size:0.95rem;color:var(--primary)">💳 Payment Providers</h3>
+          <div class="dir-item"><div class="dir-item-left"><div class="dir-avatar">OP</div><div class="dir-info"><h4>OmniPay Gateway</h4><p>AP2 v1.2 · 140 currencies · Real-time settlement</p></div></div><span class="tag tag-green">Verified</span></div>
+          <div class="dir-item"><div class="dir-item-left"><div class="dir-avatar">FP</div><div class="dir-info"><h4>FlowPay</h4><p>AP2 v1.1 · Startup-friendly · Sandbox included</p></div></div><span class="tag tag-blue">AP2 Ready</span></div>
+          <div class="dir-item"><div class="dir-item-left"><div class="dir-avatar">BX</div><div class="dir-info"><h4>BridgeX Payments</h4><p>AP2 v1.2 · Cross-border specialist · 80+ countries</p></div></div><span class="tag tag-green">Verified</span></div>
+          <div class="dir-item"><div class="dir-item-left"><div class="dir-avatar">CE</div><div class="dir-info"><h4>ClearEdge</h4><p>AP2 v1.0 · Enterprise only · SLA guarantee</p></div></div><span class="tag tag-yellow">Enterprise</span></div>
+        </div>
+        <div>
+          <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:600;margin-bottom:1rem;font-size:0.95rem;color:var(--primary)">🤖 Agent Platforms</h3>
+          <div class="dir-item"><div class="dir-item-left"><div class="dir-avatar">AL</div><div class="dir-info"><h4>AgentLabs</h4><p>Full AP2 · Multi-agent orchestration · Commerce focus</p></div></div><span class="tag tag-green">Verified</span></div>
+          <div class="dir-item"><div class="dir-item-left"><div class="dir-avatar">AR</div><div class="dir-info"><h4>Archon AI</h4><p>AP2 v1.1 · Long-running agents · Offline support</p></div></div><span class="tag tag-blue">AP2 Ready</span></div>
+          <div class="dir-item"><div class="dir-item-left"><div class="dir-avatar">TF</div><div class="dir-info"><h4>TaskForge</h4><p>AP2 v1.2 · Developer SDK · Workflow automation</p></div></div><span class="tag tag-green">Verified</span></div>
+        </div>
+        <div>
+          <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:600;margin-bottom:1rem;font-size:0.95rem;color:var(--primary)">🛠️ Developer Tools</h3>
+          <div class="dir-item"><div class="dir-item-left"><div class="dir-avatar">IS</div><div class="dir-info"><h4>IntentScope</h4><p>AP2 intent debugger · Visual scope builder · Sandbox</p></div></div><span class="tag tag-purple">Tool</span></div>
+          <div class="dir-item"><div class="dir-item-left"><div class="dir-avatar">AP</div><div class="dir-info"><h4>AP2 Inspector</h4><p>CLI tool · Transaction tracer · Audit log viewer</p></div></div><span class="tag tag-purple">OSS</span></div>
+          <div class="dir-item"><div class="dir-item-left"><div class="dir-avatar">MK</div><div class="dir-info"><h4>MockAP2</h4><p>Local mock server · Zero config · CI/CD ready</p></div></div><span class="tag tag-purple">OSS</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ==================== ABOUT ==================== -->
+<div id="page-about" class="page">
+  <div class="page-hero">
+    <span class="section-label">About Us</span>
+    <h1>About AP2 Gateway</h1>
+    <p>An independent educational platform for the Agent Payments Protocol ecosystem.</p>
+  </div>
+  <section>
+    <div class="section-inner" style="max-width:800px">
+      <div class="card" style="margin-bottom:2rem;padding:2rem">
+        <h2 style="font-family:'Space Grotesk',sans-serif;font-weight:700;margin-bottom:1rem">Our Mission</h2>
+        <p style="color:var(--muted);line-height:1.75;font-size:0.93rem">AP2 Gateway exists to make the Agent Payments Protocol ecosystem accessible, understandable, and safer for everyone involved — developers building agentic systems, businesses enabling agent commerce, users delegating financial actions to AI, and researchers studying the implications of autonomous commerce.</p>
+      </div>
+      <div class="card" style="margin-bottom:2rem;padding:2rem">
+        <h2 style="font-family:'Space Grotesk',sans-serif;font-weight:700;margin-bottom:1rem">Editorial Policy</h2>
+        <p style="color:var(--muted);line-height:1.75;font-size:0.93rem;margin-bottom:1rem">Our content is produced independently. We do not accept payment for editorial coverage, and our technical assessments reflect our own analysis. Where we cite external sources, we attribute them clearly.</p>
+        <p style="color:var(--muted);line-height:1.75;font-size:0.93rem">We distinguish clearly between official AP2 specification content and our own editorial interpretation. When protocol specifics are uncertain or subject to change, we say so explicitly.</p>
+        <div class="alert-warning">AP2 Gateway is an independent educational and community resource. We are not affiliated with Google, AP2 Protocol maintainers, or any official organization. Always consult official protocol documentation for authoritative specification information.</div>
+      </div>
+      <div class="card" style="padding:2rem">
+        <h2 style="font-family:'Space Grotesk',sans-serif;font-weight:700;margin-bottom:1rem">Contact</h2>
+        <div style="display:flex;flex-direction:column;gap:0.75rem;font-size:0.9rem;color:var(--muted)">
+          <div>📧 <strong style="color:var(--text)">General:</strong> hello@ap2gateway.store</div>
+          <div>🔐 <strong style="color:var(--text)">Security disclosures:</strong> security@ap2gateway.store</div>
+          <div>✍️ <strong style="color:var(--text)">Editorial:</strong> editorial@ap2gateway.store</div>
+          <div>🤝 <strong style="color:var(--text)">Partnerships:</strong> partnerships@ap2gateway.store</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ==================== ECOSYSTEM ==================== -->
+<div id="page-ecosystem" class="page">
+  <div class="page-hero">
+    <span class="section-label">Participants</span>
+    <h1>The AP2 Ecosystem</h1>
+    <p>The participants, systems, and infrastructure that make up the Agent Payments Protocol landscape.</p>
+  </div>
+  <section>
+    <div class="section-inner">
+      <div class="grid-3" style="margin-bottom:3rem">
+        <div class="ecosystem-category">
+          <h3>🤖 AI Agents<span class="tag tag-blue" style="margin-left:auto;font-size:10px">Core</span></h3>
+          <div class="ecosystem-item"><div class="ecosystem-dot"></div>Personal productivity agents</div>
+          <div class="ecosystem-item"><div class="ecosystem-dot"></div>Enterprise workflow agents</div>
+          <div class="ecosystem-item"><div class="ecosystem-dot"></div>Research & procurement agents</div>
+          <div class="ecosystem-item"><div class="ecosystem-dot"></div>Travel & booking agents</div>
+          <div class="ecosystem-item"><div class="ecosystem-dot"></div>Developer tooling agents</div>
+        </div>
+        <div class="ecosystem-category">
+          <h3>💳 Payment Providers<span class="tag tag-green" style="margin-left:auto;font-size:10px">Rail</span></h3>
+          <div class="ecosystem-item"><div class="ecosystem-dot" style="background:var(--accent)"></div>Card network integrators</div>
+          <div class="ecosystem-item"><div class="ecosystem-dot" style="background:var(--accent)"></div>Bank transfer gateways</div>
+          <div class="ecosystem-item"><div class="ecosystem-dot" style="background:var(--accent)"></div>Real-time payment processors</div>
+          <div class="ecosystem-item"><div class="ecosystem-dot" style="background:var(--accent)"></div>Multi-currency providers</div>
+          <div class="ecosystem-item"><div class="ecosystem-dot" style="background:var(--accent)"></div>B2B payment platforms</div>
+        </div>
+        <div class="ecosystem-category">
+          <h3>🔐 Wallet Providers<span class="tag tag-blue" style="margin-left:auto;font-size:10px">Trust</span></h3>
+          <div class="ecosystem-item"><div class="ecosystem-dot"></div>Consumer mobile wallets</div>
+          <div class="ecosystem-item"><div class="ecosystem-dot"></div>Enterprise wallet platforms</div>
+          <div class="ecosystem-item"><div class="ecosystem-dot"></div>Developer-focused wallets</div>
+          <div class="ecosystem-item"><div class="ecosystem-dot"></div>Hardware wallet integrations</div>
+          <div class="ecosystem-item"><div class="ecosystem-dot"></div>Custodial wallet services</div>
+        </div>
+        <div class="ecosystem-category">
+          <h3>🏪 Merchants<span class="tag tag-purple" style="margin-left:auto;font-size:10px">Demand</span></h3>
+          <div class="ecosystem-item"><div class="ecosystem-dot" style="background:#a855f7"></div>SaaS & software vendors</div>
+          <div class="ecosystem-item"><div class="ecosystem-dot" style="background:#a855f7"></div>API marketplace platforms</div>
+          <div class="ecosystem-item"><div class="ecosystem-dot" style="background:#a855f7"></div>Digital media & content</div>
+          <div class="ecosystem-item"><div class="ecosystem-dot" style="background:#a855f7"></div>Travel & accommodation</div>
+          <div class="ecosystem-item"><div class="ecosystem-dot" style="background:#a855f7"></div>E-commerce platforms</div>
+        </div>
+        <div class="ecosystem-category">
+          <h3>👩‍💻 Developers<span class="tag tag-yellow" style="margin-left:auto;font-size:10px">Build</span></h3>
+          <div class="ecosystem-item"><div class="ecosystem-dot" style="background:#fbbf24"></div>Independent agent builders</div>
+          <div class="ecosystem-item"><div class="ecosystem-dot" style="background:#fbbf24"></div>SDK contributors</div>
+          <div class="ecosystem-item"><div class="ecosystem-dot" style="background:#fbbf24"></div>Open source maintainers</div>
+          <div class="ecosystem-item"><div class="ecosystem-dot" style="background:#fbbf24"></div>Integration specialists</div>
+          <div class="ecosystem-item"><div class="ecosystem-dot" style="background:#fbbf24"></div>Security researchers</div>
+        </div>
+        <div class="ecosystem-category">
+          <h3>⚙️ Infrastructure<span class="tag tag-blue" style="margin-left:auto;font-size:10px">Infra</span></h3>
+          <div class="ecosystem-item"><div class="ecosystem-dot"></div>AP2 registry operators</div>
+          <div class="ecosystem-item"><div class="ecosystem-dot"></div>Revocation cache providers</div>
+          <div class="ecosystem-item"><div class="ecosystem-dot"></div>Risk scoring services</div>
+          <div class="ecosystem-item"><div class="ecosystem-dot"></div>Audit log platforms</div>
+          <div class="ecosystem-item"><div class="ecosystem-dot"></div>Protocol monitoring tools</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ==================== LEARNING ==================== -->
+<div id="page-learning" class="page">
+  <div class="page-hero">
+    <span class="section-label">Education</span>
+    <h1>Learning Center</h1>
+    <p>Structured learning paths for developers, researchers, and product professionals entering the AP2 ecosystem.</p>
+  </div>
+  <section>
+    <div class="section-inner">
+      <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab(this, 'learn-beginner')">🟢 Beginner</button>
+        <button class="tab-btn" onclick="switchTab(this, 'learn-intermediate')">🟡 Intermediate</button>
+        <button class="tab-btn" onclick="switchTab(this, 'learn-advanced')">🔴 Advanced</button>
+      </div>
+      <div id="learn-beginner" class="tab-content active">
+        <div class="grid-3">
+          <div class="course-card"><div class="course-level level-beginner">Beginner · 45 min</div><h3>Introduction to AP2</h3><p>No prior experience needed. Learn what AP2 is, why it exists, and how it fits into the broader AI and payments landscape.</p><div class="course-meta"><span>5 lessons</span><span>Video + Reading</span></div></div>
+          <div class="course-card"><div class="course-level level-beginner">Beginner · 30 min</div><h3>Agent Commerce Fundamentals</h3><p>What is an AI agent? What is agent commerce? How is it different from traditional e-commerce and automation?</p><div class="course-meta"><span>4 lessons</span><span>Reading</span></div></div>
+          <div class="course-card"><div class="course-level level-beginner">Beginner · 20 min</div><h3>How Payments Work (for AI engineers)</h3><p>A quick payments primer for engineers coming from the AI side: cards, ACH, real-time payments, and how authorization works.</p><div class="course-meta"><span>3 lessons</span><span>Reading</span></div></div>
+          <div class="course-card"><div class="course-level level-beginner">Beginner · 25 min</div><h3>Trust and Safety in Agent Payments</h3><p>Why trust matters in agentic systems, the risks of autonomous purchasing, and how AP2 addresses them.</p><div class="course-meta"><span>3 lessons</span><span>Reading</span></div></div>
+          <div class="course-card"><div class="course-level level-beginner">Beginner · 35 min</div><h3>AP2 for Product Managers</h3><p>Practical guidance for PMs building agentic commerce features — what to specify, what to watch out for, and how to work with developers.</p><div class="course-meta"><span>4 lessons</span><span>Reading</span></div></div>
+          <div class="course-card"><div class="course-level level-beginner">Beginner · 15 min</div><h3>AP2 Glossary Walkthrough</h3><p>An interactive tour of the AP2 glossary, explaining the 25 most important terms with examples from real scenarios.</p><div class="course-meta"><span>1 lesson</span><span>Interactive</span></div></div>
+        </div>
+      </div>
+      <div id="learn-intermediate" class="tab-content">
+        <div class="grid-3">
+          <div class="course-card"><div class="course-level level-intermediate">Intermediate · 2h</div><h3>Building Your First AP2 Agent</h3><p>Hands-on guide to building an AP2-capable agent from scratch using the JS SDK — from identity setup to submitting your first payment intent.</p><div class="course-meta"><span>8 lessons</span><span>Code + Tutorial</span></div></div>
+          <div class="course-card"><div class="course-level level-intermediate">Intermediate · 90 min</div><h3>Payment Security Engineering</h3><p>Security patterns for AP2 implementations: key management, scope minimization, revocation handling, and monitoring for anomalies.</p><div class="course-meta"><span>6 lessons</span><span>Technical</span></div></div>
+          <div class="course-card"><div class="course-level level-intermediate">Intermediate · 75 min</div><h3>AP2 Wallet Integration Guide</h3><p>How to add AP2 scope grant issuance and revocation management to an existing wallet application — with complete code examples.</p><div class="course-meta"><span>5 lessons</span><span>Code + Tutorial</span></div></div>
+          <div class="course-card"><div class="course-level level-intermediate">Intermediate · 60 min</div><h3>Merchant AP2 Integration</h3><p>Adding AP2 payment acceptance to your merchant checkout: registration, intent validation, and settlement receipt handling.</p><div class="course-meta"><span>5 lessons</span><span>Tutorial</span></div></div>
+          <div class="course-card"><div class="course-level level-intermediate">Intermediate · 45 min</div><h3>AP2 Risk Scoring Primer</h3><p>Understanding the AP2 risk signal format, how to interpret scores, and how to configure risk thresholds in scope grants.</p><div class="course-meta"><span>4 lessons</span><span>Technical</span></div></div>
+          <div class="course-card"><div class="course-level level-intermediate">Intermediate · 50 min</div><h3>Testing AP2 Integrations</h3><p>Unit testing, integration testing, and end-to-end testing strategies for AP2 implementations, including sandbox usage and CI/CD integration.</p><div class="course-meta"><span>4 lessons</span><span>Code</span></div></div>
+        </div>
+      </div>
+      <div id="learn-advanced" class="tab-content">
+        <div class="grid-3">
+          <div class="course-card"><div class="course-level level-advanced">Advanced · 3h</div><h3>Multi-Agent Delegation Architectures</h3><p>Designing systems where agents delegate to sub-agents, with proper scope narrowing, authorization inheritance, and revocation propagation across agent hierarchies.</p><div class="course-meta"><span>10 lessons</span><span>Technical</span></div></div>
+          <div class="course-card"><div class="course-level level-advanced">Advanced · 2h</div><h3>AP2 at Scale: Infrastructure Design</h3><p>Building high-throughput AP2 infrastructure: registry design, revocation cache architecture, latency optimization, and failure mode handling.</p><div class="course-meta"><span>7 lessons</span><span>Architecture</span></div></div>
+          <div class="course-card"><div class="course-level level-advanced">Advanced · 2.5h</div><h3>Protocol Security Deep Dive</h3><p>Cryptographic primitives in AP2, formal verification of authorization flows, known attack vectors, and the emerging threat landscape for agentic payment systems.</p><div class="course-meta"><span>8 lessons</span><span>Security</span></div></div>
+          <div class="course-card"><div class="course-level level-advanced">Advanced · 90 min</div><h3>AP2 in Regulated Industries</h3><p>Compliance considerations for deploying AP2 in financial services, healthcare, and government — mapping protocol features to regulatory requirements.</p><div class="course-meta"><span>5 lessons</span><span>Compliance</span></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ==================== RESOURCES ==================== -->
+<div id="page-resources" class="page">
+  <div class="page-hero">
+    <span class="section-label">Library</span>
+    <h1>Resource Center</h1>
+    <p>Whitepapers, research reports, technical documents, and case studies from the AP2 ecosystem.</p>
+  </div>
+  <section>
+    <div class="section-inner">
+      <div class="filter-group">
+        <button class="filter-btn active">All</button>
+        <button class="filter-btn" onclick="this.parentElement.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));this.classList.add('active')">Whitepapers</button>
+        <button class="filter-btn" onclick="this.parentElement.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));this.classList.add('active')">Research</button>
+        <button class="filter-btn" onclick="this.parentElement.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));this.classList.add('active')">Case Studies</button>
+        <button class="filter-btn" onclick="this.parentElement.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));this.classList.add('active')">Technical Docs</button>
+        <button class="filter-btn" onclick="this.parentElement.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));this.classList.add('active')">Reports</button>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:0.75rem">
+        <div class="resource-card"><div class="resource-type-icon">📄</div><div class="resource-info"><h4>The Agent Payments Protocol: Principles and Architecture</h4><p>A comprehensive overview of AP2's design goals, architectural decisions, and protocol primitives — intended for technical decision-makers evaluating adoption.</p><div class="resource-meta">Whitepaper · PDF · 48 pages · June 2026</div></div></div>
+        <div class="resource-card"><div class="resource-type-icon">📊</div><div class="resource-info"><h4>State of Agentic Commerce 2026</h4><p>Annual industry report covering transaction volumes, adoption trends, security incidents, and ecosystem growth across the AP2 landscape.</p><div class="resource-meta">Report · PDF · 72 pages · May 2026</div></div></div>
+        <div class="resource-card"><div class="resource-type-icon">🔬</div><div class="resource-info"><h4>Security Analysis of AP2 Authorization Models</h4><p>Independent security research examining formal proofs, known vulnerabilities, and recommended hardening measures for AP2 implementations.</p><div class="resource-meta">Research · PDF · 34 pages · April 2026</div></div></div>
+        <div class="resource-card"><div class="resource-type-icon">📁</div><div class="resource-info"><h4>Enterprise AP2 Adoption: Three Case Studies</h4><p>Detailed case studies from enterprise organizations that have deployed AP2-enabled agentic workflows — covering integration challenges, outcomes, and lessons learned.</p><div class="resource-meta">Case Studies · PDF · 28 pages · March 2026</div></div></div>
+        <div class="resource-card"><div class="resource-type-icon">⚙️</div><div class="resource-info"><h4>AP2 Integration Patterns: A Technical Reference</h4><p>A catalog of common AP2 integration patterns for agents, wallets, merchants, and infrastructure, with architecture diagrams and implementation guidance.</p><div class="resource-meta">Technical Doc · PDF · 56 pages · February 2026</div></div></div>
+        <div class="resource-card"><div class="resource-type-icon">🌍</div><div class="resource-info"><h4>Cross-Border Agent Payments: Regulatory Landscape Report</h4><p>Survey of regulatory requirements for AP2-enabled cross-border transactions across major jurisdictions — the EU, US, UK, Singapore, and Japan.</p><div class="resource-meta">Industry Report · PDF · 40 pages · January 2026</div></div></div>
+        <div class="resource-card"><div class="resource-type-icon">🎬</div><div class="resource-info"><h4>AP2 Developer Workshop Series (Video)</h4><p>Recorded sessions from community developer workshops covering setup, integration, testing, and advanced topics — 8 videos, ~6 hours total.</p><div class="resource-meta">Video Series · 6 hrs · Ongoing · YouTube</div></div></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ==================== CONTACT ==================== -->
+<div id="page-contact" class="page">
+  <div class="page-hero">
+    <span class="section-label">Get In Touch</span>
+    <h1>Contact Us</h1>
+    <p>Questions, contributions, partnership inquiries, or just want to say hi.</p>
+  </div>
+  <section>
+    <div class="section-inner" style="max-width:700px">
+      <div class="grid-2" style="margin-bottom:2.5rem">
+        <div class="card"><div class="card-icon" style="background:rgba(0,229,255,0.08)">✍️</div><h3>General Inquiry</h3><p style="font-size:0.86rem;color:var(--muted)">Questions about the content, feedback on articles, or general enquiries about AP2 Gateway.</p><p style="font-size:13px;margin-top:0.75rem;color:var(--primary)">hello@ap2gateway.store</p></div>
+        <div class="card"><div class="card-icon" style="background:rgba(34,197,94,0.08)">🤝</div><h3>Partnership</h3><p style="font-size:0.86rem;color:var(--muted)">Community partnerships, ecosystem listings, event collaboration, and co-marketing opportunities.</p><p style="font-size:13px;margin-top:0.75rem;color:var(--primary)">partnerships@ap2gateway.store</p></div>
+        <div class="card"><div class="card-icon" style="background:rgba(239,68,68,0.08)">🔐</div><h3>Security</h3><p style="font-size:0.86rem;color:var(--muted)">Security vulnerability disclosures or concerns about content accuracy on security-sensitive topics.</p><p style="font-size:13px;margin-top:0.75rem;color:var(--primary)">security@ap2gateway.store</p></div>
+        <div class="card"><div class="card-icon" style="background:rgba(168,85,247,0.08)">📰</div><h3>Media</h3><p style="font-size:0.86rem;color:var(--muted)">Press inquiries, requests for expert commentary, or interview and speaking engagement requests.</p><p style="font-size:13px;margin-top:0.75rem;color:var(--primary)">media@ap2gateway.store</p></div>
+      </div>
+      <div class="card" style="padding:2rem">
+        <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:600;margin-bottom:1.5rem">Send a Message</h3>
+        <div style="display:flex;flex-direction:column;gap:1rem">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+            <input type="text" placeholder="Name" style="padding:11px 14px;background:var(--card2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:14px;font-family:inherit;outline:none;">
+            <input type="email" placeholder="Email" style="padding:11px 14px;background:var(--card2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:14px;font-family:inherit;outline:none;">
+          </div>
+          <input type="text" placeholder="Subject" style="padding:11px 14px;background:var(--card2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:14px;font-family:inherit;outline:none;">
+          <textarea rows="5" placeholder="Your message..." style="padding:11px 14px;background:var(--card2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:14px;font-family:inherit;outline:none;resize:vertical;"></textarea>
+          <button class="btn-primary" style="width:fit-content" onclick="alert('Message sent! We will get back to you within 2 business days.')">Send Message</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ==================== LEGAL ==================== -->
+<div id="page-legal" class="page">
+  <div class="page-hero">
+    <span class="section-label">Legal</span>
+    <h1>Legal &amp; Policies</h1>
+    <p>Privacy Policy, Terms of Service, Disclaimer, and Cookie Policy for AP2 Gateway.</p>
+  </div>
+  <section>
+    <div class="section-inner" style="max-width:800px">
+      <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab(this,'legal-privacy')">Privacy Policy</button>
+        <button class="tab-btn" onclick="switchTab(this,'legal-terms')">Terms of Service</button>
+        <button class="tab-btn" onclick="switchTab(this,'legal-disclaimer')">Disclaimer</button>
+        <button class="tab-btn" onclick="switchTab(this,'legal-cookies')">Cookies</button>
+      </div>
+      <div id="legal-privacy" class="tab-content active">
+        <div class="doc-section">
+          <h2>Privacy Policy</h2>
+          <p><em>Last updated: June 2026</em></p>
+          <h3>Information We Collect</h3>
+          <p>AP2 Gateway collects minimal personal information. When you subscribe to our newsletter, we collect your email address. When you use our contact form, we collect the information you provide. We do not use cookies for tracking or targeted advertising.</p>
+          <h3>How We Use Information</h3>
+          <p>Email addresses collected for newsletter purposes are used only to send the AP2 Gateway weekly digest. We do not sell, rent, or share your personal information with third parties. Contact form submissions are used only to respond to your inquiry.</p>
+          <h3>Analytics</h3>
+          <p>We use privacy-respecting analytics to understand which content is most valuable to readers. This analytics does not use cookies, does not collect personally identifiable information, and is not shared with advertising networks.</p>
+          <h3>Your Rights</h3>
+          <p>You may request deletion of your email from our newsletter list at any time by clicking the unsubscribe link in any email we send, or by contacting hello@ap2gateway.store. We will process deletion requests within 5 business days.</p>
+        </div>
+      </div>
+      <div id="legal-terms" class="tab-content">
+        <div class="doc-section">
+          <h2>Terms of Service</h2>
+          <p><em>Last updated: June 2026</em></p>
+          <h3>Use of Content</h3>
+          <p>Content on AP2 Gateway is provided for educational purposes. You may read, share links to, and quote portions of our articles with attribution. You may not reproduce substantial portions of our content without permission.</p>
+          <h3>Accuracy</h3>
+          <p>We make reasonable efforts to ensure the accuracy of our educational content. However, AP2 Gateway does not guarantee the accuracy, completeness, or currentness of any information. Always consult official protocol documentation and qualified professionals for implementation guidance.</p>
+          <h3>No Professional Advice</h3>
+          <p>Nothing on AP2 Gateway constitutes legal, financial, security, or professional advice. Information is provided for educational purposes only. For implementation guidance, consult qualified security and payments professionals.</p>
+        </div>
+      </div>
+      <div id="legal-disclaimer" class="tab-content">
+        <div class="doc-section">
+          <h2>Disclaimer</h2>
+          <div class="alert-warning">
+            <strong>Independence Disclaimer:</strong> AP2 Gateway (ap2gateway.store) is an independent educational and community resource. We are not affiliated with Google, AP2 Protocol maintainers, or any official organization. Content represents our independent editorial perspective. Consult official sources for authoritative protocol information.
+          </div>
+          <h3>No Endorsement</h3>
+          <p>Mentions of companies, products, or services in our directory or editorial content do not constitute endorsement. Directory listings are provided as a community service and are not paid placements.</p>
+          <h3>Technical Accuracy</h3>
+          <p>Protocol specifications evolve. Code examples and architectural descriptions on AP2 Gateway may not reflect the latest specification version. Always verify against current official documentation before implementing in production systems.</p>
+        </div>
+      </div>
+      <div id="legal-cookies" class="tab-content">
+        <div class="doc-section">
+          <h2>Cookie Policy</h2>
+          <p>AP2 Gateway uses minimal cookies. We use only essential functional cookies required for basic website operation (such as your theme preference and current page state). We do not use advertising cookies, third-party tracking cookies, or social media tracking pixels.</p>
+          <h3>Analytics</h3>
+          <p>Our privacy-respecting analytics system does not use cookies. Page view data is collected without personal identifiers and cannot be used to track individual users across sessions.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ==================== FOOTER ==================== -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="nav-logo" style="margin-bottom:0.75rem;cursor:pointer" onclick="showPage('home')">
+          <div class="nav-logo-icon">AP2</div>
+          <span class="nav-logo-text">AP2 <span>Gateway</span></span>
+        </div>
+        <p>The independent knowledge hub for Agent Payments Protocol, AI Commerce, and Autonomous Transaction infrastructure.</p>
+        <p style="font-size:12px;">Domain: ap2gateway.store</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <a onclick="showPage('what-is-ap2')">What is AP2</a>
+        <a onclick="showPage('architecture')">Architecture</a>
+        <a onclick="showPage('ecosystem')">Ecosystem</a>
+        <a onclick="showPage('learning')">Learning Center</a>
+        <a onclick="showPage('glossary')">Glossary</a>
+      </div>
+      <div class="footer-col">
+        <h4>Build</h4>
+        <a onclick="showPage('developer-hub')">Developer Hub</a>
+        <a onclick="showPage('docs')">Documentation</a>
+        <a onclick="showPage('security')">Security Center</a>
+        <a onclick="showPage('resources')">Resources</a>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <a onclick="showPage('news')">Industry News</a>
+        <a onclick="showPage('blog')">Blog</a>
+        <a onclick="showPage('directory')">Directory</a>
+        <a onclick="showPage('community')">Community</a>
+        <a onclick="showPage('newsletter')">Newsletter</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a onclick="showPage('about')">About</a>
+        <a onclick="showPage('contact')">Contact</a>
+        <a onclick="showPage('legal')">Privacy Policy</a>
+        <a onclick="showPage('legal')">Terms of Service</a>
+        <a onclick="showPage('legal')">Disclaimer</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-disclaimer">
+        ⚠️ <strong>Independent Resource:</strong> AP2 Gateway is an independent educational and community resource. We are not affiliated with Google, AP2 Protocol maintainers, or any official organization. Always consult official protocol documentation for authoritative information.
+      </div>
+      <div class="footer-copy">© 2026 AP2 Gateway · ap2gateway.store</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // PAGE ROUTING
+  function showPage(pageId) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    const target = document.getElementById('page-' + pageId);
+    if (target) {
+      target.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    // Close mobile nav
+    document.getElementById('navLinks').classList.remove('open');
+    // Trigger fade-ins
+    setTimeout(initFadeIns, 100);
+  }
+
+  // MOBILE NAV
+  function toggleMobileNav() {
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+
+  // FAQ TOGGLE
+  function toggleFaq(el) {
+    el.classList.toggle('open');
+  }
+
+  // TABS
+  function switchTab(btn, contentId) {
+    const container = btn.closest('.section-inner') || btn.closest('.page');
+    container.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    container.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    const content = document.getElementById(contentId);
+    if (content) content.classList.add('active');
+  }
+
+  // SCROLL FADE IN
+  function initFadeIns() {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in').forEach(el => {
+      observer.observe(el);
+    });
+  }
+
+  // NAVBAR SCROLL
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (window.scrollY > 20) {
+      nav.style.boxShadow = '0 4px 40px rgba(0,0,0,0.4)';
+    } else {
+      nav.style.boxShadow = 'none';
+    }
+  });
+
+  // INIT
+  document.addEventListener('DOMContentLoaded', () => {
+    initFadeIns();
+  });
+
+  // Handle why-grid on mobile
+  window.addEventListener('resize', () => {
+    const grid = document.querySelector('.why-grid');
+    if (grid) {
+      if (window.innerWidth < 768) {
+        grid.style.gridTemplateColumns = '1fr';
+      } else {
+        grid.style.gridTemplateColumns = '1fr 1fr';
+      }
+    }
+  });
+  // Run once
+  setTimeout(() => {
+    const grid = document.querySelector('.why-grid');
+    if (grid && window.innerWidth < 768) {
+      grid.style.gridTemplateColumns = '1fr';
+    }
+  }, 100);
+</script>
+</body>
+</html>
