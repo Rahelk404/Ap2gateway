@@ -3,16 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AP2 Gateway — The Knowledge Hub for Agent Payments Protocol</title>
-<meta name="description" content="AP2 Gateway is the independent educational platform for Agent Payments Protocol. Learn AP2, AI Commerce, Autonomous Transactions, and Agentic Payment Infrastructure.">
-<meta property="og:title" content="AP2 Gateway — The Knowledge Hub for Agent Payments Protocol">
-<meta property="og:description" content="Independent educational resource for AP2, AI Commerce, and Autonomous Payments.">
+<title>AP2 Gateway — Agentic Payment Infrastructure for Autonomous Commerce</title>
+<meta name="description" content="AP2 Gateway provides infrastructure for AI agent payments — payment intents, consent management, agent authentication, risk scoring, merchant routing, and settlement. Independent educational resource exploring Agentic Payments and Autonomous Commerce.">
+<meta name="keywords" content="AP2 Gateway, Agent Payments Protocol, Agentic Payments, Autonomous Commerce, AI Agent Payments, Payment Infrastructure, Agent Authentication, Consent Management, Payment Orchestration">
+<meta property="og:title" content="AP2 Gateway — Agentic Payment Infrastructure for Autonomous Commerce">
+<meta property="og:description" content="Infrastructure for AI agents, wallets, merchants, and payment providers to securely authorize, route, verify, and settle autonomous transactions.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://ap2gateway.store">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="AP2 Gateway">
-<meta name="twitter:description" content="The independent resource for Agent Payments Protocol and AI Commerce.">
+<meta name="twitter:title" content="AP2 Gateway — Agentic Payment Infrastructure">
+<meta name="twitter:description" content="The infrastructure layer for autonomous AI agent commerce.">
 <link rel="canonical" href="https://ap2gateway.store">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Organization","name":"AP2 Gateway","url":"https://ap2gateway.store","description":"AP2 Gateway is an independent educational resource exploring Agentic Payments, Autonomous Commerce, AI Agents, and future transaction infrastructure."}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"What is AP2 Gateway?","acceptedAnswer":{"@type":"Answer","text":"AP2 Gateway is an independent educational resource exploring Agentic Payments, Autonomous Commerce, AI Agents, and future transaction infrastructure — including payment intents, consent management, agent authentication, and settlement."}},
+{"@type":"Question","name":"What is Agent Payments Protocol (AP2)?","acceptedAnswer":{"@type":"Answer","text":"AP2 is a specification for how AI agents authenticate, obtain user consent, create payment intents, and settle transactions with cryptographic attribution back to a human principal."}},
+{"@type":"Question","name":"How does consent revocation work in AP2?","acceptedAnswer":{"@type":"Answer","text":"Revocation of a scope grant propagates to AP2 infrastructure within 500ms, cancelling all pending payment intents that reference the revoked scope."}}
+]}
+</script>
 
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@300;400;500;600&display=swap');
@@ -1232,6 +1243,149 @@
   .resource-info h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 0.3rem; }
   .resource-info p { font-size: 0.82rem; color: var(--muted); }
   .resource-info .resource-meta { font-size: 11px; color: var(--muted); margin-top: 0.5rem; }
+
+  /* ========== NEW: PLATFORM STATUS PILLS ========== */
+  .status-row { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
+  .status-pill {
+    display:inline-flex; align-items:center; gap:6px;
+    padding:5px 12px; background:var(--card2); border:1px solid var(--border);
+    border-radius:100px; font-size:11px; color:var(--muted);
+  }
+  .status-pill .sdot { width:6px; height:6px; border-radius:50%; }
+  .sdot-y { background:#fbbf24; }
+  .sdot-g { background:#22C55E; box-shadow:0 0 6px rgba(34,197,94,0.5); }
+  .sdot-b { background:var(--primary); }
+
+  /* ========== NEW: API ENDPOINT BLOCKS ========== */
+  .api-block {
+    background: var(--card2); border: 1px solid var(--border);
+    border-radius: 12px; overflow: hidden; margin-bottom: 1.5rem;
+  }
+  .api-head {
+    display:flex; align-items:center; gap:10px;
+    padding: 1rem 1.25rem; border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+  }
+  .api-path { font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--text); }
+  .api-desc { font-size:12px; color:var(--muted); margin-left:auto; }
+  .api-body { padding: 1.25rem; }
+  .mth {
+    display:inline-block; padding:2px 8px; border-radius:4px;
+    font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:700; margin-right:8px;
+  }
+  .mpost { background: rgba(34,197,94,0.12); color:#22C55E; }
+  .mget  { background: rgba(0,229,255,0.12); color: var(--primary); }
+  .mdel  { background: rgba(239,68,68,0.12); color:#EF4444; }
+  .mput  { background: rgba(251,191,36,0.12); color:#fbbf24; }
+
+  /* ========== NEW: PARAM TABLE ========== */
+  .param-table { width:100%; border-collapse:collapse; font-size:12.5px; margin:0.75rem 0; }
+  .param-table th {
+    text-align:left; padding:8px 12px; font-size:10px; font-weight:700;
+    text-transform:uppercase; letter-spacing:0.07em; color:var(--muted);
+    border-bottom:1px solid var(--border);
+  }
+  .param-table td { padding:9px 12px; border-bottom:1px solid var(--border); vertical-align:top; }
+  .param-table tr:last-child td { border-bottom:none; }
+  .param-name { font-family:'JetBrains Mono',monospace; color:var(--primary); font-size:12px; }
+  .param-type { font-family:'JetBrains Mono',monospace; color:#a855f7; font-size:11px; }
+  .param-req { color:#EF4444; font-size:10px; font-weight:700; }
+  .param-opt { color:var(--muted); font-size:10px; }
+  .param-desc { color:var(--muted); line-height:1.55; }
+
+  /* ========== NEW: STATUS / STATE LIST ========== */
+  .state-list { display:flex; flex-direction:column; gap:3px; background:var(--card2); border:1px solid var(--border); border-radius:10px; padding:1.1rem; margin:1rem 0; }
+  .state-row { display:flex; align-items:center; gap:8px; font-size:13px; padding:8px 0; border-bottom:1px solid var(--border); }
+  .state-row:last-child { border-bottom:none; }
+  .state-dot { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+  .state-name { color:var(--text); font-weight:500; font-family:'JetBrains Mono',monospace; font-size:12px; }
+  .state-val { margin-left:auto; color:var(--muted); font-size:12px; }
+
+  /* ========== NEW: SECURITY LEVEL BARS (using sec- prefix to avoid collision) ========== */
+  .sec-row { display:flex; align-items:center; gap:10px; margin:7px 0; }
+  .sec-lbl { font-size:12px; color:var(--muted); min-width:160px; }
+  .sec-bar { flex:1; height:3px; background:rgba(255,255,255,0.07); border-radius:2px; overflow:hidden; }
+  .sec-fill { height:100%; border-radius:2px; background:linear-gradient(90deg,var(--primary),var(--secondary)); }
+  .sec-val { font-size:11px; color:var(--muted); min-width:28px; text-align:right; font-family:'JetBrains Mono',monospace; }
+
+  /* ========== NEW: PRICING ========== */
+  .pricing-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1.25rem; }
+  .price-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 16px; padding: 2rem; position: relative; transition: all 0.3s;
+  }
+  .price-card:hover { transform: translateY(-4px); box-shadow: 0 20px 50px rgba(0,0,0,0.4); }
+  .price-card.featured { border-color: var(--primary); box-shadow: 0 0 0 1px rgba(0,229,255,0.15), 0 20px 50px rgba(0,229,255,0.08); }
+  .price-badge {
+    position:absolute; top:-12px; left:50%; transform:translateX(-50%);
+    background:var(--primary); color:#000; font-size:10px; font-weight:700;
+    padding:3px 12px; border-radius:100px; letter-spacing:0.05em; text-transform:uppercase; white-space:nowrap;
+  }
+  .price-tier { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--muted); margin-bottom:0.75rem; }
+  .price-amount { font-family:'Space Grotesk',sans-serif; font-size:2.1rem; font-weight:700; letter-spacing:-0.03em; margin-bottom:0.25rem; }
+  .price-amount span { font-size:0.95rem; font-weight:400; color:var(--muted); }
+  .price-desc { font-size:0.84rem; color:var(--muted); margin-bottom:1.5rem; line-height:1.6; }
+  .price-features { list-style:none; padding:0; margin:0 0 1.75rem; }
+  .price-features li { font-size:0.84rem; color:var(--muted); padding:6px 0; display:flex; align-items:flex-start; gap:8px; border-bottom:1px solid rgba(255,255,255,0.03); }
+  .price-features li:last-child { border-bottom:none; }
+  .price-features li::before { content:"✓"; color:#22C55E; font-weight:700; font-size:12px; flex-shrink:0; margin-top:1px; }
+
+  /* ========== NEW: ACQUIRE BOX ========== */
+  .acquire-box {
+    background: linear-gradient(135deg, rgba(0,229,255,0.05), rgba(14,165,233,0.04));
+    border: 1px solid rgba(0,229,255,0.18); border-radius: 20px; padding: 3rem; text-align: center;
+  }
+
+  /* ========== NEW: COMPARE TABLE ========== */
+  .compare-table { width:100%; border-collapse:collapse; font-size:13px; }
+  .compare-table th {
+    text-align:left; padding:10px 14px; font-size:11px; font-weight:700;
+    text-transform:uppercase; letter-spacing:0.07em; color:var(--muted);
+    background:var(--card2); border-bottom:1px solid var(--border);
+  }
+  .compare-table td { padding:10px 14px; border-bottom:1px solid var(--border); color:var(--muted); }
+  .compare-table td:first-child { font-weight:500; color:var(--text); }
+  .compare-table .yes { color:#22C55E; font-weight:600; }
+  .compare-table .no { color:rgba(139,148,164,0.35); }
+
+  /* ========== NEW: TERMINAL ========== */
+  .terminal { background:#070b16; border:1px solid rgba(0,229,255,0.12); border-radius:12px; overflow:hidden; }
+  .term-bar { display:flex; align-items:center; gap:10px; padding:10px 14px; background:rgba(255,255,255,0.025); border-bottom:1px solid rgba(0,229,255,0.07); }
+  .term-dots { display:flex; gap:5px; }
+  .term-dot { width:9px; height:9px; border-radius:50%; }
+  .term-title { font-size:11px; color:var(--muted); font-family:'JetBrains Mono',monospace; margin-left:auto; }
+  .term-body { padding:1.1rem 1.4rem; font-family:'JetBrains Mono',monospace; font-size:12.5px; line-height:1.75; color:#cdd9e5; }
+  .t-prompt { color:#22C55E; }
+  .t-key { color: var(--primary); }
+  .t-val { color:#a5d6ff; }
+
+  /* ========== NEW: PROTOCOL FLOW (extended nodes) ========== */
+  .arch-node.consent { background: rgba(168,85,247,0.1); border-color: rgba(168,85,247,0.3); color:#a855f7; }
+  .arch-node.risk { background: rgba(251,191,36,0.08); border-color: rgba(251,191,36,0.25); color:#fbbf24; }
+  .arch-node.settlement { background: rgba(34,197,94,0.08); border-color: rgba(34,197,94,0.25); color:#22C55E; }
+
+  /* ========== NEW: ARCH STRIP (home lifecycle) ========== */
+  .arch-strip {
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+    background:var(--card2); border:1px solid var(--border); border-radius:14px; overflow:hidden;
+  }
+  .arch-cell { padding:1.25rem 0.75rem; text-align:center; border-right:1px solid var(--border); transition:background 0.2s; position:relative; }
+  .arch-cell:last-child { border-right:none; }
+  .arch-cell:hover { background: rgba(0,229,255,0.03); }
+  .arch-cell::after {
+    content:"→"; position:absolute; right:-9px; top:50%; transform:translateY(-50%);
+    color:rgba(139,148,164,0.2); font-size:12px; z-index:1;
+  }
+  .arch-cell:last-child::after { display:none; }
+  .arch-cell-icon { font-size:20px; margin-bottom:0.5rem; }
+  .arch-cell-name { font-size:11px; font-weight:600; font-family:'Space Grotesk',sans-serif; margin-bottom:2px; }
+  .arch-cell-sub { font-size:10px; color:var(--muted); }
+
+  @media (max-width: 480px) {
+    .arch-strip { grid-template-columns: repeat(3,1fr); }
+    .pricing-grid { grid-template-columns: 1fr; }
+  }
+
 </style>
 </head>
 
@@ -1244,15 +1398,14 @@
     <span class="nav-logo-text">AP2 <span>Gateway</span></span>
   </a>
   <ul class="nav-links" id="navLinks">
-    <li><a onclick="showPage('what-is-ap2')">What is AP2</a></li>
+    <li><a onclick="showPage('platform')">Platform</a></li>
     <li><a onclick="showPage('architecture')">Architecture</a></li>
-    <li><a onclick="showPage('developer-hub')">Dev Hub</a></li>
+    <li><a onclick="showPage('api-docs')">APIs</a></li>
+    <li><a onclick="showPage('developer-hub')">Developers</a></li>
     <li><a onclick="showPage('security')">Security</a></li>
-    <li><a onclick="showPage('news')">News</a></li>
-    <li><a onclick="showPage('blog')">Blog</a></li>
-    <li><a onclick="showPage('glossary')">Glossary</a></li>
+    <li><a onclick="showPage('pricing')">Pricing</a></li>
     <li><a onclick="showPage('faq')">FAQ</a></li>
-    <li><a onclick="showPage('community')" class="nav-cta">Community</a></li>
+    <li><a onclick="showPage('contact')" class="nav-cta">Contact Sales</a></li>
   </ul>
   <div class="hamburger" id="hamburger" onclick="toggleMobileNav()">
     <span></span><span></span><span></span>
@@ -1266,107 +1419,125 @@
     <div class="hero-bg"></div>
     <div class="hero-grid"></div>
     <div class="hero-content fade-in">
-      <div class="hero-badge">Independent Resource Hub · AP2 Protocol</div>
-      <h1>Understanding the Future of<br><span class="gradient-text">Agent Payments</span></h1>
-      <p>Explore AP2, Agent Commerce, AI Payments, Security Models, Developer Resources and Industry Insights — the independent knowledge hub for the agentic economy.</p>
+      <div class="hero-badge">Agentic Payment Infrastructure</div>
+      <h1>Autonomous Payments<br><span class="gradient-text">for AI Agents</span></h1>
+      <p>AP2 Gateway provides the infrastructure layer for AI agents, wallets, merchants, payment providers, and settlement networks to securely authorize, route, verify, and settle autonomous transactions.</p>
       <div class="hero-buttons">
-        <button class="btn-primary" onclick="showPage('what-is-ap2')">Learn AP2</button>
-        <button class="btn-secondary" onclick="showPage('developer-hub')">Developer Hub</button>
-        <button class="btn-secondary" onclick="showPage('news')">Latest News</button>
+        <button class="btn-primary" onclick="showPage('architecture')">Explore Architecture</button>
+        <button class="btn-secondary" onclick="showPage('api-docs')">View APIs</button>
+        <button class="btn-secondary" onclick="showPage('developer-hub')">Developer Docs</button>
+        <button class="btn-secondary" onclick="showPage('contact')">Contact Sales</button>
       </div>
-      <div class="hero-stats">
-        <div class="hero-stat"><div class="num">340+</div><div class="label">Articles Published</div></div>
-        <div class="hero-stat"><div class="num">18K+</div><div class="label">Monthly Readers</div></div>
-        <div class="hero-stat"><div class="num">50+</div><div class="label">Technical Guides</div></div>
-        <div class="hero-stat"><div class="num">12</div><div class="label">Protocol Versions</div></div>
+      <div class="status-row">
+        <span class="status-pill"><span class="sdot sdot-g"></span>Payment Intents · Sandbox Available</span>
+        <span class="status-pill"><span class="sdot sdot-y"></span>Merchant Network · Launching Soon</span>
+        <span class="status-pill"><span class="sdot sdot-b"></span>Agent Wallets · Testnet</span>
+        <span class="status-pill"><span class="sdot sdot-y"></span>Settlement · Preview Environment</span>
       </div>
     </div>
   </section>
 
-  <!-- FEATURES -->
+  <!-- TRANSACTION LIFECYCLE STRIP -->
+  <section style="padding:0 2rem 3.5rem;">
+    <div class="section-inner">
+      <p style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.09em; color:var(--muted); margin-bottom:1rem; text-align:center;">Agentic Transaction Lifecycle</p>
+      <div class="arch-strip fade-in">
+        <div class="arch-cell"><div class="arch-cell-icon">👤</div><div class="arch-cell-name">User</div><div class="arch-cell-sub">Principal</div></div>
+        <div class="arch-cell"><div class="arch-cell-icon">🤖</div><div class="arch-cell-name">AI Agent</div><div class="arch-cell-sub">Initiator</div></div>
+        <div class="arch-cell"><div class="arch-cell-icon">✅</div><div class="arch-cell-name">Consent Layer</div><div class="arch-cell-sub">Authorization</div></div>
+        <div class="arch-cell"><div class="arch-cell-icon">⚡</div><div class="arch-cell-name">AP2 Gateway</div><div class="arch-cell-sub">Core Router</div></div>
+        <div class="arch-cell"><div class="arch-cell-icon">🛡️</div><div class="arch-cell-name">Risk Engine</div><div class="arch-cell-sub">Scoring</div></div>
+        <div class="arch-cell"><div class="arch-cell-icon">🏪</div><div class="arch-cell-name">Merchant</div><div class="arch-cell-sub">Verification</div></div>
+        <div class="arch-cell"><div class="arch-cell-icon">💳</div><div class="arch-cell-name">Payment Provider</div><div class="arch-cell-sub">Processing</div></div>
+        <div class="arch-cell"><div class="arch-cell-icon">📑</div><div class="arch-cell-name">Settlement</div><div class="arch-cell-sub">Audit Receipt</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLATFORM CAPABILITIES -->
   <section class="features-section">
     <div class="section-inner">
       <div class="section-header">
-        <span class="section-label">What We Cover</span>
-        <h2 class="section-title">Everything About Agent Payments</h2>
-        <p class="section-sub">A comprehensive resource for developers, researchers, and fintech professionals navigating the emerging agentic commerce landscape.</p>
+        <span class="section-label">Platform Capabilities</span>
+        <h2 class="section-title">Infrastructure for Agentic Commerce</h2>
+        <p class="section-sub">A unified gateway for AI agent payments — covering identity, consent, risk, routing, and settlement across any merchant or payment network.</p>
       </div>
       <div class="grid-3">
         <div class="card feature-card fade-in">
-          <div class="card-icon">🤖</div>
-          <h3>What is AP2</h3>
-          <p>Deep dives into the Agent Payments Protocol — its specification, design goals, trust architecture, and how it enables AI agents to transact autonomously on behalf of users.</p>
-          <button class="card-link" onclick="showPage('what-is-ap2')">Explore AP2 →</button>
+          <div class="card-icon">📋</div>
+          <h3>Payment Intent Processing</h3>
+          <p>Agents submit structured, signed payment intents describing exactly what they want to purchase. The gateway validates, scores, and routes each intent through to settlement.</p>
+          <button class="card-link" onclick="showPage('api-docs')">API Reference →</button>
         </div>
         <div class="card feature-card fade-in">
-          <div class="card-icon">⚙️</div>
-          <h3>Developer Resources</h3>
-          <p>SDKs, code examples, integration guides, and API documentation to help you build AP2-compatible systems. Quickstart to production in one place.</p>
-          <button class="card-link" onclick="showPage('developer-hub')">View Dev Hub →</button>
+          <div class="card-icon">✅</div>
+          <h3>Consent &amp; Agent Authorization</h3>
+          <p>Every agent transaction traces back to a user-issued ScopeGrant — defining spending limits, merchant categories, time windows, and revocation rights.</p>
+          <button class="card-link" onclick="showPage('platform')">Consent Docs →</button>
         </div>
         <div class="card feature-card fade-in">
-          <div class="card-icon">🔐</div>
-          <h3>Security Center</h3>
-          <p>Authentication patterns, consent frameworks, fraud prevention strategies, and risk scoring models for robust agent payment systems.</p>
-          <button class="card-link" onclick="showPage('security')">Security Guides →</button>
+          <div class="card-icon">🏪</div>
+          <h3>Merchant Routing</h3>
+          <p>Merchants register AP2-compatible endpoints once and receive verified, risk-scored payment intents from any AP2-enabled agent — with full webhook support.</p>
+          <button class="card-link" onclick="showPage('platform')">Merchant Layer →</button>
         </div>
         <div class="card feature-card fade-in">
-          <div class="card-icon">📰</div>
-          <h3>Industry News</h3>
-          <p>Stay current with the latest developments in AI commerce, agentic systems, payment infrastructure, and regulatory landscape — curated and independent.</p>
-          <button class="card-link" onclick="showPage('news')">Read News →</button>
+          <div class="card-icon">🛡️</div>
+          <h3>Risk &amp; Fraud Engine</h3>
+          <p>Real-time behavioral analysis, velocity checks, and anomaly detection produce a 0–100 risk score for every transaction before it reaches settlement.</p>
+          <button class="card-link" onclick="showPage('security')">Risk Engine →</button>
         </div>
         <div class="card feature-card fade-in">
-          <div class="card-icon">🗺️</div>
-          <h3>Ecosystem Directory</h3>
-          <p>A growing directory of wallets, payment providers, agent platforms, merchant systems, and developer tools across the AP2 ecosystem.</p>
-          <button class="card-link" onclick="showPage('directory')">Browse Directory →</button>
+          <div class="card-icon">💳</div>
+          <h3>Settlement Infrastructure</h3>
+          <p>Multi-rail settlement across card networks, bank transfers, and real-time payment systems — with signed, chained receipts for full reconciliation.</p>
+          <button class="card-link" onclick="showPage('platform')">Settlement Layer →</button>
         </div>
         <div class="card feature-card fade-in">
-          <div class="card-icon">📚</div>
-          <h3>Documentation</h3>
-          <p>Protocol basics, integration patterns, advanced configurations, and spec references organized into a navigable documentation center.</p>
-          <button class="card-link" onclick="showPage('docs')">Read Docs →</button>
+          <div class="card-icon">🔌</div>
+          <h3>Developer SDKs &amp; APIs</h3>
+          <p>REST APIs, webhooks, and SDKs for JavaScript, TypeScript, Python, and Go — built for agent identity, payment intents, and settlement events.</p>
+          <button class="card-link" onclick="showPage('developer-hub')">Developer Hub →</button>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- WHY AP2 MATTERS -->
+  <!-- WHY AP2 GATEWAY -->
   <section class="why-section">
     <div class="section-inner">
       <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;" class="why-grid">
         <div>
-          <span class="section-label">Why It Matters</span>
-          <h2 class="section-title">The Infrastructure Layer for AI Commerce</h2>
-          <p class="section-sub" style="margin-bottom:2rem">As AI agents gain the ability to take actions on behalf of users — including financial transactions — AP2 provides the trust, authorization, and verification layer that makes autonomous commerce safe.</p>
+          <span class="section-label">Why an Agentic Gateway</span>
+          <h2 class="section-title">Existing Payment APIs Were Not Built for AI Agents</h2>
+          <p class="section-sub" style="margin-bottom:2rem">Traditional gateways assume a human confirming each transaction. When AI agents act autonomously — making purchases across a task without real-time approval — the authorization, attribution, and audit model breaks down. AP2 Gateway closes that gap.</p>
           <div style="display:flex; flex-direction:column; gap: 0.75rem;">
             <div class="why-item">
-              <div class="why-icon">💱</div>
+              <div class="why-icon">🔑</div>
               <div class="why-text">
-                <h4>Agent Commerce</h4>
-                <p>AI agents purchasing goods, subscribing to services, and managing recurring transactions with explicit user authorization at every step.</p>
+                <h4>No Agent Identity Layer</h4>
+                <p>Standard APIs cannot express "this charge was made by Agent X, acting for User Y, within Scope Z." AP2 introduces cryptographic agent identity from the ground up.</p>
               </div>
             </div>
             <div class="why-item">
-              <div class="why-icon">🏦</div>
+              <div class="why-icon">📐</div>
               <div class="why-text">
-                <h4>Autonomous Purchasing</h4>
-                <p>User-defined spending rules and budget caps that allow agents to operate within clear constraints without requiring real-time approval.</p>
+                <h4>No Scoped Authorization</h4>
+                <p>AP2 ScopeGrants define merchant categories, per-transaction limits, and time windows — so agents can only spend within explicit, user-defined boundaries.</p>
               </div>
             </div>
             <div class="why-item">
-              <div class="why-icon">✅</div>
+              <div class="why-icon">⚡</div>
               <div class="why-text">
-                <h4>Payment Verification</h4>
-                <p>Cryptographic proof chains ensuring every agent-initiated transaction is traceable, auditable, and attributable to a human principal.</p>
+                <h4>No Real-Time Revocation</h4>
+                <p>AP2 mandates revocation propagation across all infrastructure within 500ms — instantly cancelling pending intents the moment consent is withdrawn.</p>
               </div>
             </div>
             <div class="why-item">
-              <div class="why-icon">🛡️</div>
+              <div class="why-icon">📊</div>
               <div class="why-text">
-                <h4>User Authorization</h4>
-                <p>Fine-grained permission systems that give users precise control over what agents can buy, from whom, and under what conditions.</p>
+                <h4>No Machine-Native Risk Signals</h4>
+                <p>Agent behavior differs fundamentally from human behavior in velocity and pattern. AP2's Risk Engine is built around agent-specific signals from day one.</p>
               </div>
             </div>
           </div>
@@ -1376,14 +1547,20 @@
             <h3 style="font-family:'Space Grotesk',sans-serif; font-weight:600; margin-bottom:1.5rem; font-size:1rem;">AP2 Transaction Flow</h3>
             <div class="arch-flow">
               <div class="arch-node user">👤 User (Principal)</div>
-              <div class="arch-arrow">↓<span class="arch-arrow-label">Authorization Scope</span></div>
+              <div class="arch-arrow">↓<span class="arch-arrow-label">Consent Grant</span></div>
               <div class="arch-node agent">🤖 AI Agent</div>
               <div class="arch-arrow">↓<span class="arch-arrow-label">Payment Intent</span></div>
-              <div class="arch-node protocol">⚡ AP2 Protocol</div>
+              <div class="arch-node consent">✅ Consent Layer</div>
+              <div class="arch-arrow">↓<span class="arch-arrow-label">Validated Intent</span></div>
+              <div class="arch-node protocol">⚡ AP2 Gateway</div>
+              <div class="arch-arrow">↓<span class="arch-arrow-label">Risk Assessment</span></div>
+              <div class="arch-node risk">🛡️ Risk Engine</div>
               <div class="arch-arrow">↓<span class="arch-arrow-label">Merchant Request</span></div>
               <div class="arch-node merchant">🏪 Merchant</div>
               <div class="arch-arrow">↓<span class="arch-arrow-label">Settlement</span></div>
               <div class="arch-node payment">💳 Payment Provider</div>
+              <div class="arch-arrow">↓<span class="arch-arrow-label">Audit Receipt</span></div>
+              <div class="arch-node settlement">📑 Settlement Layer</div>
             </div>
           </div>
         </div>
@@ -1391,81 +1568,106 @@
     </div>
   </section>
 
-  <!-- STATS -->
+  <!-- COMPARE TABLE -->
   <section class="stats-section">
     <div class="section-inner">
-      <div class="stats-grid">
-        <div class="stat-item fade-in"><div class="num">$2.4T</div><div class="label">Projected AI Commerce Market by 2030</div></div>
-        <div class="stat-item fade-in"><div class="num">4.2B</div><div class="label">AI Agent Interactions per Day (Projected 2026)</div></div>
-        <div class="stat-item fade-in"><div class="num">67%</div><div class="label">Enterprises Planning Agentic Workflows</div></div>
-        <div class="stat-item fade-in"><div class="num">12ms</div><div class="label">Typical AP2 Authorization Latency</div></div>
-        <div class="stat-item fade-in"><div class="num">99.97%</div><div class="label">AP2 Transaction Verification Accuracy</div></div>
+      <span class="section-label">Why AP2 Gateway</span>
+      <h2 class="section-title">Traditional Gateways vs AP2 Gateway</h2>
+      <div style="margin-top:2rem; border:1px solid var(--border); border-radius:12px; overflow:hidden;">
+        <table class="compare-table">
+          <thead><tr><th>Capability</th><th>Traditional Gateway</th><th>AP2 Gateway</th></tr></thead>
+          <tbody>
+            <tr><td>Initiator Authentication</td><td class="no">Human session / card present</td><td class="yes">Agent keypair + ScopeGrant</td></tr>
+            <tr><td>Authorization Model</td><td class="no">Binary approve / decline</td><td class="yes">Scoped, time-bounded, revocable</td></tr>
+            <tr><td>Transaction Attribution</td><td class="no">Cardholder only</td><td class="yes">Agent + Principal + Task Context</td></tr>
+            <tr><td>Consent Revocation</td><td class="no">Card cancellation (days)</td><td class="yes">Real-time, sub-500ms propagation</td></tr>
+            <tr><td>Audit Trail</td><td class="no">Transaction log only</td><td class="yes">Full lifecycle, signed, chained</td></tr>
+            <tr><td>Risk Signals</td><td class="no">Card network rules</td><td class="yes">Agent-behavioral, velocity, anomaly</td></tr>
+            <tr><td>Machine-to-Machine Support</td><td class="no">Not designed for it</td><td class="yes">Native protocol support</td></tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </section>
 
-  <!-- LATEST ARTICLES -->
+  <!-- QUICK INTEGRATION -->
   <section>
     <div class="section-inner">
       <div class="section-header">
-        <span class="section-label">Latest Coverage</span>
-        <h2 class="section-title">Recent Articles & Insights</h2>
+        <span class="section-label">Quick Integration</span>
+        <h2 class="section-title">Create a Payment Intent in Minutes</h2>
       </div>
-      <div class="grid-3">
-        <div class="card article-card fade-in">
-          <div class="article-tag">Protocol</div>
-          <h3>How AP2 Handles Multi-Step Purchasing Decisions in Agentic Pipelines</h3>
-          <p>A deep technical look at how AP2's payment intent objects chain together to support complex, multi-hop purchasing workflows where agents delegate to sub-agents.</p>
-          <div class="article-meta"><span>June 8, 2026</span><span>Developer Guide</span></div>
+      <div class="tabs" style="display:flex; gap:2px; border-bottom:1px solid var(--border); margin-bottom:1.5rem; overflow-x:auto;">
+        <button class="tab-btn active" onclick="switchTab(this,'home-ts')" style="padding:9px 16px; font-size:13px; font-weight:500; color:var(--muted); cursor:pointer; background:none; border:none; font-family:inherit; border-bottom:2px solid transparent; margin-bottom:-1px; white-space:nowrap;">TypeScript</button>
+        <button class="tab-btn" onclick="switchTab(this,'home-py')" style="padding:9px 16px; font-size:13px; font-weight:500; color:var(--muted); cursor:pointer; background:none; border:none; font-family:inherit; border-bottom:2px solid transparent; margin-bottom:-1px; white-space:nowrap;">Python</button>
+        <button class="tab-btn" onclick="switchTab(this,'home-curl')" style="padding:9px 16px; font-size:13px; font-weight:500; color:var(--muted); cursor:pointer; background:none; border:none; font-family:inherit; border-bottom:2px solid transparent; margin-bottom:-1px; white-space:nowrap;">cURL</button>
+      </div>
+      <div id="home-ts" class="tab-content active">
+        <div class="code-block">
+          <div class="code-header"><div class="code-dots"><span class="r"></span><span class="y"></span><span class="g"></span></div><span class="code-lang">typescript</span></div>
+          <pre><span class="token-keyword">import</span> { AP2Client } <span class="token-keyword">from</span> <span class="token-string">'@ap2/sdk'</span>;
+
+<span class="token-keyword">const</span> client = <span class="token-keyword">new</span> <span class="token-function">AP2Client</span>({ apiKey: process.env.<span class="token-property">AP2_SECRET_KEY</span> });
+
+<span class="token-keyword">const</span> intent = <span class="token-keyword">await</span> client.paymentIntents.<span class="token-function">create</span>({
+  amount: <span class="token-number">4999</span>,
+  currency: <span class="token-string">'USD'</span>,
+  agent: { id: <span class="token-string">'agent_01J8HXKZ'</span>, scopeGrantId: <span class="token-string">'scope_01J8ABCD'</span> },
+  merchant: { id: <span class="token-string">'merch_acme_01'</span>, category: <span class="token-string">'software_subscription'</span> },
+  metadata: { taskId: <span class="token-string">'task_deploy_infra'</span> },
+});
+
+console.<span class="token-function">log</span>(intent.id);      <span class="token-comment">// intent_01J8HXMN</span>
+console.<span class="token-function">log</span>(intent.status);  <span class="token-comment">// 'pending_authorization'</span></pre>
         </div>
-        <div class="card article-card fade-in">
-          <div class="article-tag">Security</div>
-          <h3>Consent Revocation in AP2: Why Terminating Agent Access Is Non-Trivial</h3>
-          <p>Revoking an agent's spending permissions should be instant and irreversible. We explore the revocation challenges that current AP2 implementations face and how to address them.</p>
-          <div class="article-meta"><span>June 5, 2026</span><span>Security Analysis</span></div>
+      </div>
+      <div id="home-py" class="tab-content">
+        <div class="code-block">
+          <div class="code-header"><div class="code-dots"><span class="r"></span><span class="y"></span><span class="g"></span></div><span class="code-lang">python</span></div>
+          <pre><span class="token-keyword">import</span> os
+<span class="token-keyword">from</span> ap2 <span class="token-keyword">import</span> AP2Client
+
+client = <span class="token-function">AP2Client</span>(api_key=os.environ[<span class="token-string">"AP2_SECRET_KEY"</span>])
+
+intent = client.payment_intents.<span class="token-function">create</span>(
+    amount=<span class="token-number">4999</span>, currency=<span class="token-string">"USD"</span>,
+    agent={<span class="token-string">"id"</span>: <span class="token-string">"agent_01J8HXKZ"</span>, <span class="token-string">"scope_grant_id"</span>: <span class="token-string">"scope_01J8ABCD"</span>},
+    merchant={<span class="token-string">"id"</span>: <span class="token-string">"merch_acme_01"</span>, <span class="token-string">"category"</span>: <span class="token-string">"software_subscription"</span>},
+)
+<span class="token-function">print</span>(intent.id, intent.status)</pre>
         </div>
-        <div class="card article-card fade-in">
-          <div class="article-tag">Industry</div>
-          <h3>The First Wave of AP2-Native Wallets: What They Get Right</h3>
-          <p>An independent review of the first digital wallets built with native AP2 support — covering UX, developer tooling, and the critical edge cases each product handles differently.</p>
-          <div class="article-meta"><span>June 1, 2026</span><span>Product Analysis</span></div>
-        </div>
-        <div class="card article-card fade-in">
-          <div class="article-tag">Beginner</div>
-          <h3>AP2 for Product Managers: What You Need to Know Before Your Next Sprint</h3>
-          <p>No cryptography background required. A practical guide for PMs building agentic commerce features, covering the core concepts and gotchas in plain language.</p>
-          <div class="article-meta"><span>May 28, 2026</span><span>Product</span></div>
-        </div>
-        <div class="card article-card fade-in">
-          <div class="article-tag">Fintech</div>
-          <h3>Payment Rail Compatibility: Which Networks Are AP2-Ready in 2026?</h3>
-          <p>A current-state survey of major payment networks and their AP2 compatibility status — from established card networks to real-time payment systems and crypto rails.</p>
-          <div class="article-meta"><span>May 22, 2026</span><span>Industry Report</span></div>
-        </div>
-        <div class="card article-card fade-in">
-          <div class="article-tag">Research</div>
-          <h3>Trust Hierarchies in Multi-Agent Systems: Extending AP2's Authorization Model</h3>
-          <p>When Agent A instructs Agent B to make a purchase, whose authorization scope applies? We examine open research questions in delegated-authority payment systems.</p>
-          <div class="article-meta"><span>May 17, 2026</span><span>Research</span></div>
+      </div>
+      <div id="home-curl" class="tab-content">
+        <div class="code-block">
+          <div class="code-header"><div class="code-dots"><span class="r"></span><span class="y"></span><span class="g"></span></div><span class="code-lang">bash</span></div>
+          <pre><span class="token-function">curl</span> https://api.ap2gateway.store/v1/payment-intents \
+  -H <span class="token-string">"Authorization: Bearer $AP2_SECRET_KEY"</span> \
+  -H <span class="token-string">"Content-Type: application/json"</span> \
+  -d <span class="token-string">'{
+    "amount": 4999, "currency": "USD",
+    "agent": {"id":"agent_01J8HXKZ","scope_grant_id":"scope_01J8ABCD"},
+    "merchant": {"id":"merch_acme_01","category":"software_subscription"}
+  }'</span></pre>
         </div>
       </div>
       <div style="text-align:center; margin-top:2rem;">
-        <button class="btn-secondary" onclick="showPage('blog')">View All Articles →</button>
+        <button class="btn-secondary" onclick="showPage('developer-hub')">Full Developer Documentation →</button>
       </div>
     </div>
   </section>
 
-  <!-- NEWSLETTER -->
+  <!-- ACQUIRE / WEBSITE ACQUISITION -->
   <section class="newsletter-section">
     <div class="section-inner">
-      <span class="section-label">Stay Informed</span>
-      <h2 class="section-title">The AP2 Weekly Digest</h2>
-      <p class="section-sub">Protocol updates, developer guides, and industry news — curated weekly for engineers, researchers, and fintech professionals.</p>
-      <div class="newsletter-form">
-        <input type="email" placeholder="Enter your email address">
-        <button class="btn-primary" onclick="alert('Subscribed! Welcome to the AP2 Gateway digest.')">Subscribe</button>
+      <div class="acquire-box">
+        <span class="section-label">Acquisition</span>
+        <h2 class="section-title">Acquire AP2 Gateway</h2>
+        <p style="color:var(--muted); font-size:0.95rem; max-width:580px; margin:0.75rem auto 2rem; line-height:1.75;">AP2 Gateway source code, branding, domain, documentation, and platform assets are available for acquisition, partnership, or strategic investment discussions.</p>
+        <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+          <button class="btn-primary" onclick="showPage('contact')">Contact Sales</button>
+          <button class="btn-secondary" onclick="showPage('contact')">Acquisition Inquiry</button>
+        </div>
       </div>
-      <p style="font-size:12px; color:var(--muted); margin-top:0.75rem;">No spam. Unsubscribe any time. ~3,400 subscribers.</p>
     </div>
   </section>
 
